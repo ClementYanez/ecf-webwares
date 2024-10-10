@@ -1,8 +1,8 @@
 <template>
   <nav>
-    
+    <div>Pwet</div>
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
