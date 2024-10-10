@@ -1,9 +1,17 @@
 <template>
-  <nav>
-    <div>Pwet</div>
-  </nav>
+  <HeaderHero />
   <router-view />
 </template>
+
+<script>
+import HeaderHero from './components/HeaderHero.vue';
+export default {
+  name: 'App',
+  components: {
+    HeaderHero,
+  },
+};
+</script>
 
 <style>
 #app {
