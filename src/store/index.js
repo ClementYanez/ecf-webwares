@@ -141,7 +141,7 @@ export default createStore({
       },
       {
         id: 16,
-        image: 'deco-1.jpg',
+        image: '@/assets/deco-1.jpg',
         titre: "Vase en bois d'arbre",
         description: "Vase réalisé à base d'arbre venus d'une forêt.",
         prix: 49.99,
@@ -150,7 +150,7 @@ export default createStore({
       },
       {
         id: 17,
-        image: 'deco-2.jpg',
+        image: '@/assets/deco-2.jpg',
         titre: 'Vase imprimé en 3D',
         description: 'Vase imprimé en 3D en plastique recyclable.',
         prix: 49.99,
@@ -159,7 +159,7 @@ export default createStore({
       },
       {
         id: 18,
-        image: 'deco-3.jpg',
+        image: '@/assets/deco-3.jpg',
         titre: 'Vase éthnique en argile',
         description: 'Vase éthnique en argile avec motifs gravés à la main.',
         prix: 49.99,
@@ -168,7 +168,7 @@ export default createStore({
       },
       {
         id: 19,
-        image: 'deco-4.jpg',
+        image: '@/assets/deco-4.jpg',
         titre: 'Vase arrondis',
         description: 'Vase à la forme tout à la fois élégante et rigolote.',
         prix: 69.99,
@@ -177,7 +177,7 @@ export default createStore({
       },
       {
         id: 20,
-        image: 'deco-5.jpg',
+        image: '@/assets/deco-5.jpg',
         titre: 'Vase rectangulaire',
         description:
           'Vase au design futuriste et aux méthodes de réalisation résolument classiques.',
