@@ -1,12 +1,15 @@
 <template>
-  <router-link to="/products-list">Products</router-link>
+  <HeaderHero />
   <router-view />
 </template>
 
 <script>
+import HeaderHero from '@/components/HeaderHero.vue';
 export default {
   name: 'App',
-  components: {},
+  components: {
+    HeaderHero,
+  },
 };
 </script>
 
