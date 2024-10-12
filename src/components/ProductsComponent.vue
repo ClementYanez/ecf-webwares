@@ -4,7 +4,11 @@
     <h4>{{ name }}</h4>
     <p>{{ minQte }} unités minimum</p>
     <p>{{ description }}</p>
-    <ButtonComponent text="Ajouter" color="#D9B596" />
+    <ButtonComponent
+      text="Détails du produit"
+      color="#D9B596"
+      @click="getDetails"
+    />
   </div>
 </template>
 
@@ -12,6 +16,11 @@
 import { mapState } from 'vuex';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 export default {
+  data() {
+    return {
+      productId: this.id,
+    };
+  },
   components: {
     ButtonComponent,
   },
@@ -21,15 +30,18 @@ export default {
     description: String,
     image: String,
     minQte: Number,
+    id: Number,
   },
   name: 'ProductsComponent',
-  data() {
-    return {};
-  },
   computed: {
-    ...mapState(['products']),
+    ...mapState(['productsList']),
   },
-  methods: {},
+  methods: {
+    getDetails() {
+      let prodID = this.id;
+      this.$router.push({ name: 'product-details', params: { id: prodID } });
+    },
+  },
 };
 </script>
 
