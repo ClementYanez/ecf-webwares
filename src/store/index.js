@@ -11,7 +11,7 @@ export default createStore({
     productsList: [
       {
         id: 1,
-        image: '@/assets/mobilier-5.jpg',
+        image: 'mobilier-5.jpg',
         titre: 'Table à manger en bois',
         description: 'Table à manger en bois massif avec finition élégante.',
         prix: 299.99,
@@ -20,7 +20,7 @@ export default createStore({
       },
       {
         id: 2,
-        image: '@/assets/mobilier-4.jpg',
+        image: 'mobilier-4.jpg',
         titre: 'Canapé Krug',
         description: 'Un canapé tout en finesse et élégance.',
         prix: 499.99,
@@ -29,7 +29,7 @@ export default createStore({
       },
       {
         id: 3,
-        image: '@/assets/mobilier-3.jpg',
+        image: 'mobilier-3.jpg',
         titre: 'Canapé Munzen',
         description: 'Un canapé en cuir marron et confortable.',
         prix: 499.99,
@@ -38,7 +38,7 @@ export default createStore({
       },
       {
         id: 4,
-        image: '@/assets/mobilier-2.jpg',
+        image: 'mobilier-2.jpg',
         titre: 'Étagère en bois',
         description: 'Une étagère pratique et minimaliste.',
         prix: 99.99,
@@ -47,7 +47,7 @@ export default createStore({
       },
       {
         id: 5,
-        image: '@/assets/mobilier-1.jpg',
+        image: 'mobilier-1.jpg',
         titre: 'Table de chevet',
         description: 'Table de chevet en bois. Pratique et discrète.',
         prix: 199.99,
@@ -56,7 +56,7 @@ export default createStore({
       },
       {
         id: 6,
-        image: '@/assets/luminaire-1.jpg',
+        image: 'luminaire-1.jpg',
         titre: 'Lampe moderne',
         description: 'Lampe avec un design moderne et éclairage ajustable.',
         prix: 129.99,
@@ -65,7 +65,7 @@ export default createStore({
       },
       {
         id: 7,
-        image: '@/assets/luminaire-2.jpg',
+        image: 'luminaire-2.jpg',
         titre: 'Lampe de cuisine',
         description: "Lampe sobre à l'éclairage ajustable.",
         prix: 119.99,
@@ -74,7 +74,7 @@ export default createStore({
       },
       {
         id: 8,
-        image: '@/assets/luminaire-3.jpg',
+        image: 'luminaire-3.jpg',
         titre: "Lampe d'extérieur",
         description: 'Lampe en bois avec un design moderne.',
         prix: 149.99,
@@ -83,7 +83,7 @@ export default createStore({
       },
       {
         id: 9,
-        image: '@/assets/luminaire-4.jpg',
+        image: 'luminaire-4.jpg',
         titre: 'Lampe industrielle',
         description: 'Lampe au design moderne et industriel.',
         prix: 129.99,
@@ -92,7 +92,7 @@ export default createStore({
       },
       {
         id: 10,
-        image: '@/assets/luminaire-5.jpg',
+        image: 'luminaire-5.jpg',
         titre: 'Lampe en bois',
         description: 'Lampe au design enfantin et simple.',
         prix: 129.99,
@@ -101,7 +101,7 @@ export default createStore({
       },
       {
         id: 11,
-        image: '@/assets/tapis-1.jpg',
+        image: 'tapis-1.jpg',
         titre: 'Tapis en poil de yaourt',
         description: 'Tapis doux en poil de yaourt sauvage.',
         prix: 189.99,
@@ -110,7 +110,7 @@ export default createStore({
       },
       {
         id: 12,
-        image: '@/assets/tapis-2.jpg',
+        image: 'tapis-2.jpg',
         titre: 'Tapis en laine',
         description: 'Tapis doux en laine avec motif géométrique.',
         prix: 99.99,
@@ -119,7 +119,7 @@ export default createStore({
       },
       {
         id: 13,
-        image: '@/assets/tapis-3.jpg',
+        image: 'tapis-3.jpg',
         titre: 'Tapis en laine',
         description:
           'Tapis doux en laine avec motif géométrique mais plus grand.',
@@ -129,7 +129,7 @@ export default createStore({
       },
       {
         id: 14,
-        image: '@/assets/tapis-4.jpg',
+        image: 'tapis-4.jpg',
         titre: 'Tapis en crochet',
         description: "Tapis doux réalisé au crochet avec motif d'éléphant.",
         prix: 89.99,
@@ -138,7 +138,7 @@ export default createStore({
       },
       {
         id: 15,
-        image: '@/assets/tapis-5.jpg',
+        image: 'tapis-5.jpg',
         titre: 'Tapis en moumoute',
         description: 'Tapis en moumoute toute douce et naturelle.',
         prix: 89.99,
@@ -147,7 +147,7 @@ export default createStore({
       },
       {
         id: 16,
-        image: '@/assets/deco-1.jpg',
+        image: 'deco-1.jpg',
         titre: "Vase en bois d'arbre",
         description: "Vase réalisé à base d'arbre venus d'une forêt.",
         prix: 49.99,
@@ -156,7 +156,7 @@ export default createStore({
       },
       {
         id: 17,
-        image: '@/assets/deco-2.jpg',
+        image: 'deco-2.jpg',
         titre: 'Vase imprimé en 3D',
         description: 'Vase imprimé en 3D en plastique recyclable.',
         prix: 49.99,
@@ -165,7 +165,7 @@ export default createStore({
       },
       {
         id: 18,
-        image: '@/assets/deco-3.jpg',
+        image: 'deco-3.jpg',
         titre: 'Vase éthnique en argile',
         description: 'Vase éthnique en argile avec motifs gravés à la main.',
         prix: 49.99,
@@ -174,7 +174,7 @@ export default createStore({
       },
       {
         id: 19,
-        image: '@/assets/deco-4.jpg',
+        image: 'deco-4.jpg',
         titre: 'Vase arrondis',
         description: 'Vase à la forme tout à la fois élégante et rigolote.',
         prix: 69.99,
@@ -183,7 +183,7 @@ export default createStore({
       },
       {
         id: 20,
-        image: '@/assets/deco-5.jpg',
+        image: 'deco-5.jpg',
         titre: 'Vase rectangulaire',
         description:
           'Vase au design futuriste et aux méthodes de réalisation résolument classiques.',
