@@ -1,4 +1,5 @@
 <template>
+  <HeaderComponent />
   <div class="cont-global">
     <CategoriesList />
     <div class="cont-list">
@@ -14,17 +15,22 @@
       </div>
     </div>
   </div>
+  <FooterComponent />
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import ProductsComponent from '@/components/ProductsComponent.vue';
 import CategoriesList from '@/components/CategoriesList.vue';
+import HeaderComponent from '@/components/HeaderComponent.vue';
+import FooterComponent from '@/components/FooterComponent.vue';
 export default {
   name: 'ProductsList',
   components: {
     ProductsComponent,
     CategoriesList,
+    HeaderComponent,
+    FooterComponent,
   },
   computed: {
     ...mapState(['productsList']),
