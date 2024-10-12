@@ -1,15 +1,11 @@
 <template>
-  <HeaderHero />
   <router-view />
 </template>
 
 <script>
-import HeaderHero from '@/components/HeaderHero.vue';
 export default {
   name: 'App',
-  components: {
-    HeaderHero,
-  },
+  components: {},
 };
 </script>
 
