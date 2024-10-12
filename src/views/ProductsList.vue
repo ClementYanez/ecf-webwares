@@ -9,6 +9,7 @@
           :description="product.description"
           :image="product.image"
           :minQte="product.moq"
+          :id="product.id"
         />
       </div>
     </div>
