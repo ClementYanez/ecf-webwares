@@ -1,9 +1,20 @@
 <template>
-  <div></div>
+    <div>
+        <HeaderComponent/>
+
+        <FooterComponent/>
+    </div>
 </template>
 
 <script>
-export default {};
+import HeaderComponent from '@/components/HeaderComponent.vue';
+import FooterComponent from '@/components/FooterComponent.vue';
+    export default {
+        components:{
+            HeaderComponent,
+            FooterComponent,
+        }
+    }
 </script>
 
 <style scoped></style>
