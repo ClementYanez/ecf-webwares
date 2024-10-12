@@ -1,5 +1,4 @@
 <template>
-  <router-link to="/products-list">Products</router-link>
   <router-view />
 </template>
 
