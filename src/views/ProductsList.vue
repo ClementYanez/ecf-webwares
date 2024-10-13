@@ -1,14 +1,17 @@
 <template>
   <HeaderComponent />
   <div class="cont-top">
-    <SearchbarComponent placeholder="Rechercher ..." />
+    <SearchbarComponent
+      placeholder="Rechercher ..."
+      @search="filterProductByQuery"
+    />
   </div>
   <div class="cont-global">
     <CategoriesList />
     <div class="cont-list">
       <div
         class="list"
-        v-for="product in filteredProductsListByCategory"
+        v-for="product in filteredProductsList"
         :key="product.id"
       >
         <ProductsComponent
@@ -26,7 +29,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import SearchbarComponent from '@/components/SearchbarComponent.vue';
 import ProductsComponent from '@/components/ProductsComponent.vue';
 import CategoriesList from '@/components/CategoriesList.vue';
@@ -46,14 +49,24 @@ export default {
       'productsList',
       'filteredProductsListByCategory',
       'filteredCategory',
+      'filteredProductsList',
     ]),
+    ...mapGetters(['filterProductByQuery']),
   },
   methods: {
     ...mapActions(['filterProductsByCategory']),
+    filterProducts(query) {
+      this.filteredUsers = this.users.filter((user) => {
+        return (
+          user.firstName.toLowerCase().includes(query.toLowerCase()) ||
+          user.lastName.toLowerCase().includes(query.toLowerCase()) ||
+          user.email.toLowerCase().includes(query.toLowerCase())
+        );
+      });
+    },
   },
   mounted() {
-    this.$store.dispatch('filterProductsByCategory', null);
-    console.log('caca', this.filteredCategory);
+    this.$store.dispatch('filterProductsByCategory', this.filteredCategory);
   },
 };
 </script>

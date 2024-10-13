@@ -1,11 +1,34 @@
 <template>
-  <input type="text" :placeholder="placeholder" />
+  <input
+    type="text"
+    :placeholder="placeholder"
+    v-model="localSearchQuery"
+    @input="customQuery()"
+  />
 </template>
 
 <script>
+import { mapActions, mapMutations, mapState } from 'vuex';
+
 export default {
+  name: 'SearchbarComponent',
+  data() {
+    return {
+      localSearchQuery: '',
+    };
+  },
   props: {
     placeholder: String,
+  },
+  computed: {
+    ...mapState(['filteredProductsListByCategory', 'searchQuery']),
+    ...mapMutations(['setSearchQuery']),
+  },
+  methods: {
+    ...mapActions(['filterProductsByQuery']),
+    customQuery() {
+      this.$store.commit('setSearchQuery', this.localSearchQuery);
+    },
   },
 };
 </script>

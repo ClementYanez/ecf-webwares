@@ -195,6 +195,8 @@ export default createStore({
 
     filteredCategory: null,
     filteredProductsListByCategory: [],
+    filteredProductsList: [],
+    searchQuery: '',
     cart: [],
   },
   mutations: {
@@ -217,11 +219,12 @@ export default createStore({
     changeCategory(state, category) {
       state.filteredCategory = category;
     },
+    setSearchQuery(state, query) {
+      state.searchQuery = query;
+    },
   },
   actions: {
     filterProductsByCategory(context, category) {
-      console.log('category', context.state.filteredCategory);
-
       // if (category === context.state.filteredCategory) {
       // context.commit('changeCategory', null);
       // } else if (context.state.filteredCategory === null) {
@@ -264,6 +267,26 @@ export default createStore({
       });
 
       return lastImages;
+    },
+    filterProductByQuery(state) {
+      state.filteredProductsList = state.filteredProductsListByCategory;
+
+      if (!state.searchQuery) {
+        return state.filteredProductsListByCategory;
+      }
+      console.log(state.filteredProductsList);
+      state.filteredProductsList = state.filteredProductsListByCategory.filter(
+        (product) => {
+          return (
+            product.titre
+              .toLowerCase()
+              .includes(state.searchQuery.toLowerCase()) ||
+            product.description
+              .toLowerCase()
+              .includes(state.searchQuery.toLowerCase())
+          );
+        }
+      );
     },
   },
   modules: {},
