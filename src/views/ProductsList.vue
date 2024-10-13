@@ -40,6 +40,8 @@ export default {
   computed: {
     ...mapState(['productsList']),
   },
+  mounted(){
+  }
 };
 </script>
 
