@@ -8,7 +8,7 @@
           <input type="text" placeholder="Nom de société" />
           <label for="email">Email</label>
           <input type="email" placeholder="Email" />
-          <ButtonComponent text="Envoyer" color="#D9B596" />
+          <ButtonComponent text="Envoyer" color="#CA8465" />
         </div>
 
         <div>

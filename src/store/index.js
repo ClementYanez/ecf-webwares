@@ -215,6 +215,27 @@ export default createStore({
     },
   },
   actions: {},
-  getters: {},
+  getters: {
+
+    lastImagesByCategory(state) {
+      const lastImages = [];
+  
+      // Boucle sur chaque catégorie
+      state.categories.forEach(category => {
+        // Filtrer les produits par catégorie
+        const productsInCategory = state.productsList.filter(
+          product => product.categorieId === category.id
+        );
+  
+        // Prendre le dernier produit ajouté dans chaque catégorie
+        if (productsInCategory.length > 0) {
+          lastImages.push(productsInCategory[productsInCategory.length - 1]);
+        }
+      });
+  
+      return lastImages;
+    },
+
+  },
   modules: {},
 });
