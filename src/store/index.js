@@ -222,11 +222,11 @@ export default createStore({
     filterProductsByCategory(context, category) {
       console.log('category', context.state.filteredCategory);
 
-      if (category === context.state.filteredCategory) {
-        context.commit('changeCategory', null);
-      } else if (context.state.filteredCategory === null) {
-        context.commit('changeCategory', category);
-      }
+      // if (category === context.state.filteredCategory) {
+      // context.commit('changeCategory', null);
+      // } else if (context.state.filteredCategory === null) {
+      context.commit('changeCategory', category);
+      // }
       const filteredProductsListByCategory = context.state.productsList.filter(
         (product) => product.categorieId === category
       );
@@ -242,7 +242,29 @@ export default createStore({
         );
       }
     },
+    resetCategory(context) {
+      context.commit('changeCategory', null);
+    },
   },
-  getters: {},
+  getters: {
+    lastImagesByCategory(state) {
+      const lastImages = [];
+
+      // Boucle sur chaque catégorie
+      state.categories.forEach((category) => {
+        // Filtrer les produits par catégorie
+        const productsInCategory = state.productsList.filter(
+          (product) => product.categorieId === category.id
+        );
+
+        // Prendre le dernier produit ajouté dans chaque catégorie
+        if (productsInCategory.length > 0) {
+          lastImages.push(productsInCategory[productsInCategory.length - 1]);
+        }
+      });
+
+      return lastImages;
+    },
+  },
   modules: {},
 });

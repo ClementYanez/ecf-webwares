@@ -52,7 +52,7 @@ export default {
     ...mapActions(['filterProductsByCategory']),
   },
   mounted() {
-    this.$store.dispatch('filterProductsByCategory');
+    this.$store.dispatch('filterProductsByCategory', null);
     console.log('caca', this.filteredCategory);
   },
 };
