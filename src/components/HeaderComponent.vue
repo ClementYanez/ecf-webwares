@@ -167,6 +167,8 @@ export default {
 
 <style scoped>
 nav {
+    position: fixed;
+    width: 100%;
     background-color: #592b02;
     padding: 20px 40px;
     display: flex;
