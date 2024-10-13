@@ -193,7 +193,7 @@ export default createStore({
       },
     ],
     // productDetails: {},
-    productDetails:       {
+    productDetails: {
       id: 18,
       image: 'deco-3.jpg',
       titre: 'Vase éthnique en argile',
@@ -203,7 +203,7 @@ export default createStore({
       categorieId: 4,
     },
 
-
+    filteredCategory: '',
     filteredProductsList: [],
     cart: [],
   },
@@ -219,6 +219,9 @@ export default createStore({
     },
     addToCart(state, product) {
       state.cart.push(product);
+    },
+    changeCategory(state, category) {
+      state.filteredCategory = category;
     },
   },
   actions: {},

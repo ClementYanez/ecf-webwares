@@ -1,21 +1,21 @@
 <template>
   <div>
+    <h2>Nous contacter</h2>
     <form action="">
       <div id="form-container">
-      <div>
-      <label for="nom">Nom de société</label>
-      <input type="text" placeholder="Nom de société" />
-      <label for="email">Email</label>
-      <input type="email" placeholder="Email" />
-      <ButtonComponent text="Envoyer" color="#D9B596" />
-    </div>
-    
-      <div>
-        <label for="message">Message</label>
-        <textarea name="message" id="message" cols="50" rows="5"></textarea>
+        <div>
+          <label for="nom">Nom de société</label>
+          <input type="text" placeholder="Nom de société" />
+          <label for="email">Email</label>
+          <input type="email" placeholder="Email" />
+          <ButtonComponent text="Envoyer" color="#D9B596" />
+        </div>
+
+        <div>
+          <label for="message">Message</label>
+          <textarea name="message" id="message" cols="50" rows="5"></textarea>
+        </div>
       </div>
-      
-    </div>
     </form>
   </div>
 </template>
@@ -30,15 +30,16 @@ export default {
 </script>
 
 <style scoped>
-
-div{
+div {
   display: flex;
   flex-direction: column;
-  text-align:left;
+  text-align: left;
   gap: 5px;
 }
-
-#form-container{
+h2 {
+  text-align: center;
+}
+#form-container {
   display: flex;
   justify-content: center;
   align-items: start;
@@ -46,13 +47,14 @@ div{
   gap: 15px;
 }
 
-#form-container input, textarea{
-border-radius: 5px;
-border: none;
-padding-left: 5px;
+#form-container input,
+textarea {
+  border-radius: 5px;
+  border: none;
+  padding-left: 5px;
 }
 
-button{
+button {
   color: black;
 }
 </style>
