@@ -1,37 +1,47 @@
 <template>
-  <div>
-    <!-- headercomponent -->
-    <!-- fil d'arianne  -->
-    <div class="contentproductdetails">
-      <img
-        class="productimage"
-        :src="require(`@/assets/${productImage}`)"
-        alt=""
-      />
-      <div class="contentdetails">
-        <h3 class="producttitre">{{ productTitre }}</h3>
-        <p class="productmoq">à partir de {{ productMoq }} exemplaires</p>
-        <div class="barre"></div>
-        <p class="productdescription">{{ productDescription }}</p>
-      </div>
+    <div>
+        <HeaderComponent/>
+        <!-- fil d'arianne  -->
+        <div class="contentproductdetails">
+            <img class="productimage" v-if="productDetails.image" :src="require(`@/assets/${this.productDetails.image}`)" alt="">
+            <div class="contentdetails">
+                <h3 class="producttitre">{{this.productDetails.titre}}</h3>
+                <p class="productmoq">à partir de {{ this.productDetails.moq }} exemplaires</p>
+                <div class="barre"></div>
+                <p class="productdescription">{{this.productDetails.description}}</p>
+            </div>
+        </div>
+        <FooterComponent/>
     </div>
-    <!-- footercomponent -->
-  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import HeaderComponent from '@/components/HeaderComponent.vue';
+import FooterComponent from '@/components/FooterComponent.vue';
 
-export default {
-  computed: {
-    ...mapState({
-      productTitre: (state) => state.productDetails.titre,
-      productMoq: (state) => state.productDetails.moq,
-      productDescription: (state) => state.productDetails.description,
-      productImage: (state) => state.productDetails.image,
-    }),
-  },
-};
+    export default {
+        data(){
+            return{
+                productDetails: {}
+            }
+        },
+        components:{
+            HeaderComponent,
+            FooterComponent,
+        },
+            computed:{
+            ...mapState([
+                "productsList"
+            ])
+
+        },
+        mounted(){
+            let productId = parseInt(this.$route.params.id);
+            this.productDetails = this.productsList.find((product) => product.id === productId)
+        }
+    }
+
 </script>
 
 <style scoped>
@@ -44,18 +54,17 @@ export default {
   font-family: sans-serif;
 }
 
-.contentproductdetails {
-  padding: 0 50px 0 50px;
-  display: flex;
-  justify-content: center;
-  gap: 5%;
+.contentproductdetails{
+    padding: 150px 50px 50px 50px;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
 }
 
 .productimage {
-  width: auto;
-  height: 500px;
-  object-fit: cover;
-  border-radius: 10px;
+    width: 500px; height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .contentdetails {
