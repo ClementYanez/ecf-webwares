@@ -32,6 +32,7 @@ export default {
   background-position: 100% 80%;
   background-size: cover;
   height: 400px;
+  padding: 310px 0 180px 0;
 }
 h1 {
   font-size: 5rem;

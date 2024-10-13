@@ -2,16 +2,16 @@
   <div class="footer py-4 sticky-footer">
     <div class="container-fluid">
       <div
-        class="row d-flex align-items-center justify-content-center mb-5 h-100 text-center"
+        class="row d-flex align-items-center justify-content-center mb-5 container-fluid"
       >
         <FormulaireComponent />
       </div>
       <div
-        class="row d-flex align-items-start justify-content-center h-100 text-center"
+        class="row d-flex justify-content-around h-100"
       >
         <!-- Ajout de h-100 -->
         <!-- Section des liens légaux -->
-        <div class="col-md-3 mb-3 mb-md-0">
+        <div class="col-md-3 mb-3 mb-md-0 w-auto">
           <h5>Pages Légales</h5>
           <ul class="list-unstyled d-flex flex-column gap-3">
             <li>
@@ -31,7 +31,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-3 mb-3 mb-md-0">
+        <div class="col-md-3 mb-3 mb-md-0 w-auto">
           <h5>Nous contacter</h5>
           <ul
             class="list-unstyled d-flex flex-column justify-content-center gap-3"
@@ -41,7 +41,7 @@
             <li>125 Avenue Jean-Jaurès, 75019 Paris</li>
           </ul>
         </div>
-        <div class="col-md-3 mb-3 mb-md-0">
+        <div class="col-md-3 mb-3 mb-md-0 w-auto">
           <h5>Map</h5>
           <ul
             class="list-unstyled d-flex flex-column justify-content-center gap-3"
@@ -54,7 +54,7 @@
           </ul>
         </div>
         <!-- Section des icônes des réseaux sociaux -->
-        <div class="col-md-3 mb-3 mb-md-0">
+        <div class="col-md-3 mb-3 mb-md-0 w-auto">
           <h5>Nous suivre sur les réseaux</h5>
           <ul class="list-unstyled d-flex justify-content-center gap-3">
             <li>
