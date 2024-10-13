@@ -34,16 +34,28 @@
           />
         </div>
         <div class="categories">
-          <router-link to="/" class="category-link">Catégorie 1</router-link>
-          <router-link to="/" class="category-link">Catégorie 2</router-link>
-          <router-link to="/" class="category-link">Catégorie 3</router-link>
-          <router-link to="/" class="category-link">Catégorie 4</router-link>
+          <router-link to="/products-list/1" class="category-link"
+            >Mobilier d'intérieur</router-link
+          >
+          <router-link to="/products-list/2" class="category-link"
+            >Luminaires</router-link
+          >
+          <router-link to="/products-list/3" class="category-link"
+            >Tapis</router-link
+          >
+          <router-link to="/products-list/4" class="category-link"
+            >Objets de décoration</router-link
+          >
         </div>
       </div>
     </div>
     <div>
-      <router-link to="/" class="btn-navbar">Se connecter</router-link>
-      <router-link to="/" class="btn-navbar">S'inscrire</router-link>
+      <router-link to="/user-connection" class="btn-navbar"
+        >Se connecter</router-link
+      >
+      <router-link to="/user-inscription" class="btn-navbar"
+        >S'inscrire</router-link
+      >
     </div>
     <div class="icon-user-cart">
       <img
@@ -55,7 +67,11 @@
         :src="require('@/assets/icons/user.svg')"
         alt="icône utilisateur"
         class="icon"
+        @click="userDropDown"
       />
+      <div v-if="openUserDropDown" class="deconnect">
+        <button class="btn-navbar">Se déconnecter</button>
+      </div>
     </div>
   </nav>
   <!-- <nav class="mobile">
@@ -159,6 +175,7 @@ export default {
     return {
       openDropDown: false,
       openMenuDropDown: false,
+      openUserDropDown: false,
     };
   },
   methods: {
@@ -175,18 +192,27 @@ export default {
         this.openMenuDropDown = false;
       }
     },
+    userDropDown() {
+      if (this.openUserDropDown === false) {
+        this.openUserDropDown = true;
+      } else {
+        this.openUserDropDown = false;
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
 nav {
+  position: fixed;
+  width: 100%;
   background-color: #592b02;
-  /* margin-bottom: 20px; */
   padding: 20px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 999;
 }
 
 .icon {
@@ -274,6 +300,25 @@ span,
   animation: animate 300ms ease-in-out;
 }
 
+button {
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.deconnect {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #592b02;
+  padding: 20px;
+  border-radius: 10px;
+  position: absolute;
+  top: 80px;
+  right: 5px;
+  z-index: 999;
+}
+
 .btn-navbar {
   background-color: #f1f1f1;
   color: #191919;
@@ -356,6 +401,7 @@ span,
   border-radius: 10px;
   z-index: 999;
 }
+
 svg {
   /* background-color: white; */
   fill: white;
