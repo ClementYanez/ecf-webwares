@@ -39,6 +39,12 @@ import FooterComponent from '@/components/FooterComponent.vue';
         mounted(){
             let productId = parseInt(this.$route.params.id);
             this.productDetails = this.productsList.find((product) => product.id === productId)
+
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "instant"
+            })
         }
     }
 
