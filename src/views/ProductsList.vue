@@ -1,5 +1,8 @@
 <template>
   <HeaderComponent />
+  <div class="cont-top">
+    <SearchbarComponent placeholder="Rechercher ..." />
+  </div>
   <div class="cont-global">
     <CategoriesList />
     <div class="cont-list">
@@ -20,6 +23,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import SearchbarComponent from '@/components/SearchbarComponent.vue';
 import ProductsComponent from '@/components/ProductsComponent.vue';
 import CategoriesList from '@/components/CategoriesList.vue';
 import HeaderComponent from '@/components/HeaderComponent.vue';
@@ -31,6 +35,7 @@ export default {
     CategoriesList,
     HeaderComponent,
     FooterComponent,
+    SearchbarComponent,
   },
   computed: {
     ...mapState(['productsList']),
@@ -53,5 +58,13 @@ export default {
   gap: 50px;
   margin: 50px;
   width: 80%;
+}
+.cont-top {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 0 12%;
+  padding-top: 100px;
 }
 </style>
