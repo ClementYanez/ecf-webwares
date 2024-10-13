@@ -1,26 +1,20 @@
 <template>
-  <HeaderHero />
   <router-view />
-  <router-link to="/product-details">product-details</router-link>
 </template>
 
 <script>
-import HeaderHero from './components/HeaderHero.vue';
-
 export default {
   name: 'App',
-  components: {
-    HeaderHero,
-  },
+  components: {},
 };
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
 }
 
