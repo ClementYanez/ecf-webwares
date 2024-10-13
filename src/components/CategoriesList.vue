@@ -2,17 +2,43 @@
   <div class="cat-list">
     <h4>Catégories</h4>
     <div class="category" v-for="category in categories" :key="category.id">
-      <p>{{ category.name }}</p>
+      <p @click="getProductsByCategory(category.id)">{{ category.name }}</p>
+    </div>
+    <div class="red" v-if="filteredCategory" @click="resetCat">
+      Enlever la catégorie
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 export default {
   computed: {
-    ...mapState(['categories']),
+    ...mapState([
+      'categories',
+      'filteredCategory',
+      'filteredProductsList',
+      'filteredProductsListByCategory',
+    ]),
+    ...mapMutations(['changeCategory']),
   },
+  methods: {
+    ...mapActions(['filterProductsByCategory', 'resetCategory']),
+    getProductsByCategory(id) {
+      // this.$store.commit('changeCategory', id);
+      if (id === this.filteredCategory) {
+        this.$store.dispatch('filterProductsByCategory', null);
+      } else {
+        this.$store.dispatch('filterProductsByCategory', id);
+      }
+    },
+    resetCat() {
+      // this.$store.dispatch('resetCategory');
+      this.$store.dispatch('filterProductsByCategory', null);
+    },
+  },
+
+  mounted() {},
 };
 </script>
 
@@ -23,5 +49,10 @@ export default {
 p {
   border-bottom: 1px solid #818181;
   margin: 10px;
+  cursor: pointer;
+}
+.red {
+  color: red;
+  cursor: pointer;
 }
 </style>

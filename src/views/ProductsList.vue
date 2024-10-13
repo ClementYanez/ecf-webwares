@@ -6,7 +6,11 @@
   <div class="cont-global">
     <CategoriesList />
     <div class="cont-list">
-      <div class="list" v-for="product in productsList" :key="product.id">
+      <div
+        class="list"
+        v-for="product in filteredProductsListByCategory"
+        :key="product.id"
+      >
         <ProductsComponent
           :name="product.titre"
           :price="product.prix"
@@ -22,7 +26,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import SearchbarComponent from '@/components/SearchbarComponent.vue';
 import ProductsComponent from '@/components/ProductsComponent.vue';
 import CategoriesList from '@/components/CategoriesList.vue';
@@ -38,10 +42,19 @@ export default {
     SearchbarComponent,
   },
   computed: {
-    ...mapState(['productsList']),
+    ...mapState([
+      'productsList',
+      'filteredProductsListByCategory',
+      'filteredCategory',
+    ]),
   },
-  mounted(){
-  }
+  methods: {
+    ...mapActions(['filterProductsByCategory']),
+  },
+  mounted() {
+    this.$store.dispatch('filterProductsByCategory', null);
+    console.log('caca', this.filteredCategory);
+  },
 };
 </script>
 
@@ -66,7 +79,7 @@ export default {
   display: flex;
   justify-content: end;
   align-items: center;
-  padding: 0 12%;
+  padding: 0 15%;
   padding-top: 100px;
 }
 </style>

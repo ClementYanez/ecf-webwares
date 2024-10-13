@@ -193,8 +193,8 @@ export default createStore({
       },
     ],
 
-    filteredCategory: '',
-    filteredProductsList: [],
+    filteredCategory: null,
+    filteredProductsListByCategory: [],
     cart: [],
   },
   mutations: {
@@ -203,6 +203,10 @@ export default createStore({
     },
     getFilteredProductsList(state, filteredProductsList) {
       state.filteredProductsList = filteredProductsList;
+    },
+
+    getFilteredProductsListByCategory(state, filteredProductsListByCategory) {
+      state.filteredProductsListByCategory = filteredProductsListByCategory;
     },
     getCart(state, cart) {
       state.cart = cart;
@@ -214,28 +218,53 @@ export default createStore({
       state.filteredCategory = category;
     },
   },
-  actions: {},
-  getters: {
+  actions: {
+    filterProductsByCategory(context, category) {
+      console.log('category', context.state.filteredCategory);
 
+      // if (category === context.state.filteredCategory) {
+      // context.commit('changeCategory', null);
+      // } else if (context.state.filteredCategory === null) {
+      context.commit('changeCategory', category);
+      // }
+      const filteredProductsListByCategory = context.state.productsList.filter(
+        (product) => product.categorieId === category
+      );
+      if (filteredProductsListByCategory.length === 0) {
+        context.commit(
+          'getFilteredProductsListByCategory',
+          context.state.productsList
+        );
+      } else {
+        context.commit(
+          'getFilteredProductsListByCategory',
+          filteredProductsListByCategory
+        );
+      }
+    },
+    resetCategory(context) {
+      context.commit('changeCategory', null);
+    },
+  },
+  getters: {
     lastImagesByCategory(state) {
       const lastImages = [];
-  
+
       // Boucle sur chaque catégorie
-      state.categories.forEach(category => {
+      state.categories.forEach((category) => {
         // Filtrer les produits par catégorie
         const productsInCategory = state.productsList.filter(
-          product => product.categorieId === category.id
+          (product) => product.categorieId === category.id
         );
-  
+
         // Prendre le dernier produit ajouté dans chaque catégorie
         if (productsInCategory.length > 0) {
           lastImages.push(productsInCategory[productsInCategory.length - 1]);
         }
       });
-  
+
       return lastImages;
     },
-
   },
   modules: {},
 });
