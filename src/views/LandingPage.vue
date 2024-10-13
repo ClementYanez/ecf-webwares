@@ -1,15 +1,22 @@
 <template>
-    <div>
-
-    </div>
+  <div>
+    <HeaderComponent />
+    <HeaderHero />
+    <FooterComponent />
+  </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+import HeaderComponent from '@/components/HeaderComponent.vue';
+import FooterComponent from '@/components/FooterComponent.vue';
+import HeaderHero from '@/components/HeaderHero.vue';
+export default {
+  components: {
+    HeaderComponent,
+    FooterComponent,
+    HeaderHero,
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

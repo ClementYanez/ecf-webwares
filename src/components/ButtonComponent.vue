@@ -14,7 +14,9 @@ export default {
 <style scoped>
 button {
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   color: white;
+  border-radius: 10px;
+  font-family: 'Roboto', sans-serif;
 }
 </style>
