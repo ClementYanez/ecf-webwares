@@ -192,7 +192,18 @@ export default createStore({
         categorieId: 4,
       },
     ],
-    productDetails: {},
+    // productDetails: {},
+    productDetails:       {
+      id: 18,
+      image: 'deco-3.jpg',
+      titre: 'Vase éthnique en argile',
+      description: 'Vase éthnique en argile avec motifs gravés à la main.',
+      prix: 49.99,
+      moq: 20,
+      categorieId: 4,
+    },
+
+
     filteredProductsList: [],
     cart: [],
   },
