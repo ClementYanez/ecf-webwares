@@ -193,7 +193,7 @@ export default createStore({
       },
     ],
 
-
+    filteredCategory: '',
     filteredProductsList: [],
     cart: [],
   },
@@ -209,6 +209,9 @@ export default createStore({
     },
     addToCart(state, product) {
       state.cart.push(product);
+    },
+    changeCategory(state, category) {
+      state.filteredCategory = category;
     },
   },
   actions: {},
