@@ -55,11 +55,10 @@ import FooterComponent from '@/components/FooterComponent.vue';
 }
 
 .contentproductdetails{
-    padding: 0 50px 0 50px;
+    padding: 150px 50px 50px 50px;
     display: flex;
     justify-content: center;
     gap: 5%;
-    margin: 30px 0 100px 0;
 }
 
 .productimage {
