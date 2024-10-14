@@ -1,12 +1,19 @@
 <template>
   <HeaderComponent />
   <div class="cont-top">
-    <SearchbarComponent placeholder="Rechercher ..." />
+    <SearchbarComponent
+      placeholder="Rechercher ..."
+      @search="filterProductByQuery"
+    />
   </div>
   <div class="cont-global">
     <CategoriesList />
     <div class="cont-list">
-      <div class="list" v-for="product in productsList" :key="product.id">
+      <div
+        class="list"
+        v-for="product in filteredProductsList"
+        :key="product.id"
+      >
         <ProductsComponent
           :name="product.titre"
           :price="product.prix"
@@ -22,7 +29,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import SearchbarComponent from '@/components/SearchbarComponent.vue';
 import ProductsComponent from '@/components/ProductsComponent.vue';
 import CategoriesList from '@/components/CategoriesList.vue';
@@ -38,10 +45,29 @@ export default {
     SearchbarComponent,
   },
   computed: {
-    ...mapState(['productsList']),
+    ...mapState([
+      'productsList',
+      'filteredProductsListByCategory',
+      'filteredCategory',
+      'filteredProductsList',
+    ]),
+    ...mapGetters(['filterProductByQuery']),
   },
-  mounted(){
-  }
+  methods: {
+    ...mapActions(['filterProductsByCategory']),
+    filterProducts(query) {
+      this.filteredUsers = this.users.filter((user) => {
+        return (
+          user.firstName.toLowerCase().includes(query.toLowerCase()) ||
+          user.lastName.toLowerCase().includes(query.toLowerCase()) ||
+          user.email.toLowerCase().includes(query.toLowerCase())
+        );
+      });
+    },
+  },
+  mounted() {
+    this.$store.dispatch('filterProductsByCategory', this.filteredCategory);
+  },
 };
 </script>
 
@@ -66,7 +92,7 @@ export default {
   display: flex;
   justify-content: end;
   align-items: center;
-  padding: 0 12%;
+  padding: 0 15%;
   padding-top: 100px;
 }
 </style>

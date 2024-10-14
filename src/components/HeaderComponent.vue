@@ -18,11 +18,13 @@
       </g>
     </svg>
     <div class="nav-links">
-      <img
-        :src="require('@/assets/icons/home.svg')"
-        alt="icône accueil"
-        class="icon"
-      />
+      <router-link to="/" class="nav-link">
+        <img
+          :src="require('@/assets/icons/home.svg')"
+          alt="icône accueil"
+          class="icon"
+        />
+      </router-link>
       <router-link to="/products-list" class="nav-link">Produits</router-link>
       <div class="categories-container">
         <div class="categories-btn">

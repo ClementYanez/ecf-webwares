@@ -6,7 +6,7 @@
     <p>{{ description }}</p>
     <ButtonComponent
       text="Détails du produit"
-      color="#D9B596"
+      color="#CA8465"
       @click="getDetails"
     />
   </div>
