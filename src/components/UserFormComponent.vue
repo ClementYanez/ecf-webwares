@@ -77,16 +77,16 @@ export default {
             if (localStorage.getItem("user_list")) {
                 let userList = JSON.parse(localStorage.getItem("user_list"));
                 let index = userList.length - 1;
-                this.userInfo.id = userList[index].id +1;
+                this.userInfo.id = userList[index].id + 1;
                 console.log(userList);
-                
+
                 console.log(this.userInfo.id);
                 return this.userInfo.id
             } else {
                 console.log(this.userInfo.id);
                 return this.userInfo.id
-                
-                
+
+
             }
         },
         submitUser() {
@@ -137,9 +137,9 @@ export default {
                 this.newId();
                 this.successAccount = true;
                 let userDataBase = [];
-                if(localStorage.getItem("user_list")){
+                if (localStorage.getItem("user_list")) {
                     userDataBase = JSON.parse(localStorage.getItem("user_list"));
-                } else{
+                } else {
                     userDataBase = this.$store.state.userDatabase;
                 }
                 userDataBase.push(this.userInfo);
@@ -179,7 +179,7 @@ input {
     margin-bottom: 10px;
     border-radius: 10px;
     border: 1px solid #D9B596;
-    width: 250px;
+    width: calc(250px + 10vw);
     padding: 5px 10px;
 }
 
@@ -194,19 +194,21 @@ input:focus {
 .zip-city {
     display: flex;
     gap: 10px;
+    width: calc(250px + 10vw);
 }
 
 .zip-city .zip {
-    width: 100px;
+    width: 40%;
 }
 
 .zip-city .city {
-    width: 140px;
+    width: 60%;
 }
 
 .mdp-info {
     font-size: 0.7rem;
     color: #592B02;
+    width: calc(250px + 10vw);
 }
 
 .error {
