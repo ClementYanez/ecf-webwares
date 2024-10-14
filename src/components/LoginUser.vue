@@ -1,6 +1,5 @@
 <template>
   <div class="cont">
-    <SidePanel />
     <div class="cont-form">
       <label for="login">Email</label>
       <input type="text" id="email" placeholder="Email" v-model="email" />
@@ -26,7 +25,6 @@
 
 <script>
 import { mapState } from 'vuex';
-import SidePanel from '@/components/SidePanel.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 export default {
   data() {
@@ -38,7 +36,6 @@ export default {
   },
   components: {
     ButtonComponent,
-    SidePanel,
   },
   methods: {
     connectUser() {
@@ -95,7 +92,7 @@ a {
   color: #d9b596;
 }
 
-.cont-info {
+/* .cont-info {
   background-color: #592b02;
   height: 100vh;
   width: 30%;
@@ -126,7 +123,7 @@ a {
 
 .legal {
   font-size: 0.8rem;
-}
+} */
 
 .cont-form {
   display: flex;

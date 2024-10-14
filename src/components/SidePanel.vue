@@ -25,13 +25,7 @@
           />
         </g>
       </svg>
-      <h1>Connectez vous à votre compte WebWares</h1>
-      <p>
-        Vous n'avez pas encore de compte ?
-        <router-link to="/user-inscription" class="btn-navbar"
-          >S'inscrire</router-link
-        >
-      </p>
+      <slot></slot>
     </div>
     <div class="legal">
       <p>
@@ -45,6 +39,10 @@
 
 <script>
 export default {
+  props: {
+    texth1: String,
+    textp: String,
+  },
   methods: {
     goBack() {
       this.$router.go(-1);
@@ -75,7 +73,7 @@ a {
 .cont-info {
   background-color: #592b02;
   height: 100vh;
-  width: 30%;
+  width: 45%;
   padding: 20px;
   position: relative;
   display: flex;
@@ -104,50 +102,5 @@ a {
 
 .legal {
   font-size: 0.8rem;
-}
-
-.cont-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  margin-left: 20%;
-  width: 500px;
-}
-.alert {
-  background-color: rgb(190, 78, 78);
-  color: #f1f1f1;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  font-weight: 600;
-}
-
-.line {
-  width: 100%;
-  border-bottom: 1px solid #8f8f8f;
-  margin-top: 50px;
-}
-
-.no-account {
-  color: black;
-  font-weight: 500;
-  margin-top: 20px;
-}
-button {
-  margin-top: 20px;
-}
-input {
-  padding: 10px 10px 10px 20px;
-  width: 300px;
-  height: 30px;
-  border: 1px solid #d9b596;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-label {
-  font-size: 1.3rem;
-  font-weight: 600;
 }
 </style>

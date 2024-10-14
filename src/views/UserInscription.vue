@@ -25,6 +25,10 @@
             <UserFormComponent />
         </div>
     </div>
+    <div class="container-form">
+      <UserFormComponent />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,66 +40,67 @@ export default {
         SidePanel
     }
 }
+
 </script>
 
 <style scoped>
 *,
 ::before,
 ::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.contain {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 h1,
 p {
-    text-align: center;
-    color: #f1f1f1;
+  text-align: center;
+  color: #f1f1f1;
 }
 
 a {
-    color: #D9B596;
+  color: #d9b596;
 }
 
-.contain-info {
-    background-color: #592B02;
-    height: 100vh;
-    padding: 20px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.container-info {
+  background-color: #592b02;
+  height: 100vh;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.contain-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.container-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .icon {
-    width: 40px;
+  width: 40px;
 }
 
 .logo {
-    fill: #f1f1f1;
-    margin-bottom: 10px;
+  fill: #f1f1f1;
+  margin-bottom: 10px;
 }
 
 .legal {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
-.contain-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.container-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
