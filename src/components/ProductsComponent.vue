@@ -7,6 +7,7 @@
     <ButtonComponent
       text="Détails du produit"
       color="#CA8465"
+      url="Products-List"
       @click="getDetails"
     />
   </div>
