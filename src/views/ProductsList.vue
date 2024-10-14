@@ -21,6 +21,7 @@
           :image="product.image"
           :minQte="product.moq"
           :id="product.id"
+          url="product-details"
         />
       </div>
     </div>
