@@ -1,8 +1,8 @@
 <template>
-    <div class="container">
-        <div class="container-info">
+    <div class="contain">
+        <div class="contain-info">
             <img :src="require('@/assets/icons/arrow_back.svg')" alt="icône arrière" class="icon" />
-            <div class="container-title">
+            <div class="contain-title">
                 <svg class="logo" enable-background="new 0 0 24 24" height="60px" id="Layer_1" version="1.1"
                     viewBox="0 0 24 24" width="60px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -41,7 +41,7 @@ export default {
     padding: 0;
 }
 
-.container {
+.contain {
     width: 100%;
     display: flex;
     align-items: center;
@@ -58,7 +58,7 @@ a {
     color: #D9B596;
 }
 
-.container-info {
+.contain-info {
     background-color: #592B02;
     height: 100vh;
     padding: 20px;
@@ -68,7 +68,7 @@ a {
     justify-content: space-between;
 }
 
-.container-title {
+.contain-title {
     display: flex;
     flex-direction: column;
     align-items: center;
