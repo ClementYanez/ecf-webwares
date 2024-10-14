@@ -246,14 +246,9 @@ export default createStore({
       state.searchQuery = query;
     },
 
-    setUserDatabase(state, userDatabase) {
-      state.userDatabase = userDatabase;
-      localStorage.setItem("userDatabase", JSON.stringify(userDatabase));
-    }
-
-      resetSearch(state) {
-      state.searchQuery = '';
-      state.filteredCategory = null;
+    resetSearch(state) {
+    state.searchQuery = '';
+    state.filteredCategory = null;
     },
   },
   actions: {

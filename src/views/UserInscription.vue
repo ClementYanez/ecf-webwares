@@ -1,6 +1,7 @@
 <template>
     <div class="contain">
-        <div class="contain-info">
+        <SidePanel/>
+        <!-- <div class="contain-info">
             <img :src="require('@/assets/icons/arrow_back.svg')" alt="icône arrière" class="icon" />
             <div class="contain-title">
                 <svg class="logo" enable-background="new 0 0 24 24" height="60px" id="Layer_1" version="1.1"
@@ -19,7 +20,7 @@
                 <p>WebWares.fr - Politique relative aux cookies et Charte de protection des données</p>
                 <p>© Inter WebWares Systems B.V. 1999-2024</p>
             </div>
-        </div>
+        </div> -->
         <div class="container-form">
             <UserFormComponent />
         </div>
@@ -28,9 +29,11 @@
 
 <script>
 import UserFormComponent from '@/components/UserFormComponent.vue';
+import SidePanel from '@/components/SidePanel.vue';
 export default {
     components: {
-        UserFormComponent
+        UserFormComponent,
+        SidePanel
     }
 }
 </script>

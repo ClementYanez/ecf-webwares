@@ -20,9 +20,6 @@
                 <p>© Inter WebWares Systems B.V. 1999-2024</p>
             </div>
         </div>
-        <div class="container-form">
-
-        </div>
     </div>
   <div class="cont">
     <LoginUser />
