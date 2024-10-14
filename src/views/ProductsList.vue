@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex';
 import SearchbarComponent from '@/components/SearchbarComponent.vue';
 import ProductsComponent from '@/components/ProductsComponent.vue';
 import CategoriesList from '@/components/CategoriesList.vue';
@@ -52,6 +52,7 @@ export default {
       'filteredProductsList',
     ]),
     ...mapGetters(['filterProductByQuery']),
+    ...mapMutations(['resetSearch']),
   },
   methods: {
     ...mapActions(['filterProductsByCategory']),
@@ -66,6 +67,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.commit('resetSearch');
     this.$store.dispatch('filterProductsByCategory', this.filteredCategory);
   },
 };
