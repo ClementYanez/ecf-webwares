@@ -245,6 +245,10 @@ export default createStore({
     setSearchQuery(state, query) {
       state.searchQuery = query;
     },
+    resetSearch(state) {
+      state.searchQuery = '';
+      state.filteredCategory = null;
+    },
   },
   actions: {
     filterProductsByCategory(context, category) {
@@ -270,6 +274,12 @@ export default createStore({
     },
     resetCategory(context) {
       context.commit('changeCategory', null);
+    },
+    logOut() {
+      localStorage.removeItem('user');
+    },
+    addToCart(context, product) {
+      context.commit('addToCart', product);
     },
   },
   getters: {
