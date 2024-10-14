@@ -1,42 +1,59 @@
 <template>
-  <div class="container">
-    <SidePanel />
-    <div class="container-form">
-      <UserFormComponent />
+    <div class="contain">
+        <SidePanel>
+            <h1>Créez un compte WebWares</h1>
+            <p>
+                Vous avez déjà un compte ?
+                <router-link to="/user-connection" class="btn-navbar">Se connecter</router-link>
+            </p>
+        </SidePanel>
+        <div class="contain-form">
+            <UserFormComponent />
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import SidePanel from '@/components/SidePanel.vue';
 import UserFormComponent from '@/components/UserFormComponent.vue';
+import SidePanel from '@/components/SidePanel.vue';
 export default {
-  components: {
-    UserFormComponent,
-    SidePanel,
-  },
-};
+    components: {
+        UserFormComponent,
+        SidePanel
+    }
+}
+
 </script>
 
 <style scoped>
 *,
 ::before,
 ::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 20px;
+.contain {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.container-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+h1,
+p {
+    text-align: center;
+    color: #f1f1f1;
+}
+
+a {
+    color: #d9b596;
+}
+
+.contain-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

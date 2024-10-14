@@ -1,81 +1,54 @@
 <template>
   <nav class="desktop">
-    <svg
-      enable-background="new 0 0 24 24"
-      height="24px"
-      id="Layer_1"
-      version="1.1"
-      viewBox="0 0 24 24"
-      width="24px"
-      xml:space="preserve"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-    >
+    <svg enable-background="new 0 0 24 24" height="24px" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24px"
+      xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g>
         <path
-          d="M19.7,0.5H4.3c-2.1,0-3.8,1.7-3.8,3.8v15.4c0,2.1,1.7,3.8,3.8,3.8h15.4c2.1,0,3.8-1.7,3.8-3.8V4.3   C23.5,2.2,21.8,0.5,19.7,0.5z M19.1,16.9c0,0.3-0.2,0.5-0.5,0.5H8.4c-1.9,0-3.5-1.6-3.5-3.5V7.1c0-0.3,0.2-0.5,0.5-0.5h2.8   c0.3,0,0.5,0.2,0.5,0.5v6.1c0,0.1,0,0.1,0.1,0.1h1.5l0-6.2c0-0.3,0.2-0.5,0.5-0.5h2.6c0.3,0,0.5,0.2,0.5,0.5v6.2h1.6V7.1   c0-0.3,0.2-0.5,0.5-0.5h2.8c0.3,0,0.5,0.2,0.5,0.5V16.9z"
-        />
+          d="M19.7,0.5H4.3c-2.1,0-3.8,1.7-3.8,3.8v15.4c0,2.1,1.7,3.8,3.8,3.8h15.4c2.1,0,3.8-1.7,3.8-3.8V4.3   C23.5,2.2,21.8,0.5,19.7,0.5z M19.1,16.9c0,0.3-0.2,0.5-0.5,0.5H8.4c-1.9,0-3.5-1.6-3.5-3.5V7.1c0-0.3,0.2-0.5,0.5-0.5h2.8   c0.3,0,0.5,0.2,0.5,0.5v6.1c0,0.1,0,0.1,0.1,0.1h1.5l0-6.2c0-0.3,0.2-0.5,0.5-0.5h2.6c0.3,0,0.5,0.2,0.5,0.5v6.2h1.6V7.1   c0-0.3,0.2-0.5,0.5-0.5h2.8c0.3,0,0.5,0.2,0.5,0.5V16.9z" />
       </g>
     </svg>
     <div class="nav-links">
-      <router-link to="/" class="nav-link">
-        <img
-          :src="require('@/assets/icons/home.svg')"
-          alt="icône accueil"
-          class="icon"
-        />
-      </router-link>
+      <router-link to="/" class="nav-link">Accueil</router-link>
       <router-link to="/products-list" class="nav-link">Produits</router-link>
-      <div class="categories-container">
+      <div class="categories-contain">
         <div class="categories-btn">
           <span>Catégories</span>
-          <img
-            :src="require('@/assets/icons/arrow-down.svg')"
-            alt="icône flèche vers le bas"
-            class="icon-arrow"
-          />
+          <img :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas" class="icon-arrow" />
         </div>
         <div class="categories">
-          <router-link to="/products-list/1" class="category-link"
-            >Mobilier d'intérieur</router-link
-          >
-          <router-link to="/products-list/2" class="category-link"
-            >Luminaires</router-link
-          >
-          <router-link to="/products-list/3" class="category-link"
-            >Tapis</router-link
-          >
-          <router-link to="/products-list/4" class="category-link"
-            >Objets de décoration</router-link
-          >
+          <router-link to="/products-list/1" class="category-link">Mobilier d'intérieur</router-link>
+          <router-link to="/products-list/2" class="category-link">Luminaires</router-link>
+          <router-link to="/products-list/3" class="category-link">Tapis</router-link>
+          <router-link to="/products-list/4" class="category-link">Objets de décoration</router-link>
+        </div>
+      </div>
+      <div v-if="userRole === 'ADMIN'" class="categories-contain">
+        <div class="line"></div>
+        <div class="categories-btn">
+          <span>Admin</span>
+          <img :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas" class="icon-arrow" />
+        </div>
+        <div class="categories">
+          <router-link to="/admin-panel" class="category-link">Gestion des utilisateurs</router-link>
+          <router-link to="/admin-products" class="category-link">Gestion des produits</router-link>
+          <router-link to="admin-categories" class="category-link">Gestion des catégories</router-link>
+          <router-link to="/admin-orders" class="category-link">Gestion des commandes</router-link>
         </div>
       </div>
     </div>
-    <div>
-      <router-link to="/user-connection" class="btn-navbar"
-        >Se connecter</router-link
-      >
-      <router-link to="/user-inscription" class="btn-navbar"
-        >S'inscrire</router-link
-      >
-      <router-link to="/" class="btn-navbar" @click="logOut"
-        >Se déconnecter</router-link
-      >
+    <div v-if="!user" class="buttons">
+      <router-link to="/user-connection">
+        <ButtonComponent text="Se connecter" color="#f1f1f1" textColor="#191919" />
+      </router-link>
+      <router-link to="/user-inscription">
+        <ButtonComponent text="S'inscrire" color="#f1f1f1" textColor="#191919" />
+      </router-link>
     </div>
-    <div class="icon-user-cart">
-      <img
-        :src="require('@/assets/icons/cart.svg')"
-        alt="icône panier"
-        class="icon"
-      />
-      <img
-        :src="require('@/assets/icons/user.svg')"
-        alt="icône utilisateur"
-        class="icon"
-        @click="userDropDown"
-      />
+    <img v-if="userRole === 'USER'" :src="require('@/assets/icons/cart.svg')" alt="icône panier" class="icon cart" />
+    <div v-if="userRole">
+      <img :src="require('@/assets/icons/user.svg')" alt="icône utilisateur" class="icon" @click="userDropDown" />
       <div v-if="openUserDropDown" class="deconnect">
-        <button class="btn-navbar">Se déconnecter</button>
+        <ButtonComponent text="Se déconnecter" color="#f1f1f1" textColor="#191919" @click="deleteUSer" />
       </div>
     </div>
   </nav>
@@ -175,13 +148,19 @@
 </template>
 
 <script>
+import ButtonComponent from './ButtonComponent.vue';
 import { mapActions } from 'vuex';
 export default {
+  components: {
+    ButtonComponent
+  },
   data() {
     return {
       openDropDown: false,
       openMenuDropDown: false,
       openUserDropDown: false,
+      user: "",
+      userRole: ""
     };
   },
   methods: {
@@ -206,7 +185,18 @@ export default {
       }
     },
     ...mapActions(['logOut']),
+    deleteUSer() {
+      localStorage.removeItem("user");
+      this.user = "";
+      this.userRole = "";
+    }
   },
+  mounted() {
+    if (localStorage.getItem("user")) {
+      this.user = JSON.parse(localStorage.getItem("user"));
+      this.userRole = this.user.role;
+    }
+  }
 };
 </script>
 
@@ -246,17 +236,13 @@ span,
 }
 
 .icon:hover {
-  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg)
-    brightness(120%) contrast(80%);
+  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg) brightness(120%) contrast(80%);
 }
 
-.icon-user-cart {
-  display: flex;
-  gap: 20px;
-}
-
-.categories-container {
+.categories-contain {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .categories {
@@ -266,7 +252,7 @@ span,
   justify-content: center;
   background-color: #592b02;
   padding: 20px 0;
-  width: 240px;
+  width: 280px;
   border-radius: 10px;
   position: absolute;
   top: 40px;
@@ -293,8 +279,7 @@ span,
 }
 
 .categories-btn:hover img {
-  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg)
-    brightness(120%) contrast(80%);
+  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg) brightness(120%) contrast(80%);
 }
 
 .category-link:hover {
@@ -302,15 +287,13 @@ span,
   color: #191919;
 }
 
-.categories-container:hover .categories {
+.categories-contain:hover .categories {
   display: flex;
   animation: animate 300ms ease-in-out;
 }
 
-button {
-  border: none;
-  font-weight: 600;
-  font-size: 1rem;
+.buttons {
+  display: flex;
 }
 
 .deconnect {
@@ -336,6 +319,18 @@ button {
 
 .btn-navbar:hover {
   background-color: #d9b596;
+}
+
+.line {
+  width: 3px;
+  height: 50px;
+  background-color: #f1f1f1;
+  margin-left: 20px;
+}
+
+.cart {
+  position: absolute;
+  right: 110px;
 }
 
 @keyframes animate {
@@ -380,8 +375,7 @@ button {
 
 .icons-mobile:hover {
   color: #d9b596;
-  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg)
-    brightness(120%) contrast(80%);
+  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg) brightness(120%) contrast(80%);
 }
 
 .icon-arrow-mobile {
