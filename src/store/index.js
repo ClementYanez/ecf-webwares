@@ -245,9 +245,15 @@ export default createStore({
     setSearchQuery(state, query) {
       state.searchQuery = query;
     },
+
     setUserDatabase(state, userDatabase) {
       state.userDatabase = userDatabase;
       localStorage.setItem("userDatabase", JSON.stringify(userDatabase));
+    }
+
+      resetSearch(state) {
+      state.searchQuery = '';
+      state.filteredCategory = null;
     },
   },
   actions: {
@@ -274,6 +280,12 @@ export default createStore({
     },
     resetCategory(context) {
       context.commit("changeCategory", null);
+    },
+    logOut() {
+      localStorage.removeItem('user');
+    },
+    addToCart(context, product) {
+      context.commit('addToCart', product);
     },
   },
   getters: {
