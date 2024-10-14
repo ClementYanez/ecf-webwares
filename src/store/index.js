@@ -245,6 +245,10 @@ export default createStore({
     setSearchQuery(state, query) {
       state.searchQuery = query;
     },
+    resetSearch(state) {
+      state.searchQuery = '';
+      state.filteredCategory = null;
+    },
   },
   actions: {
     filterProductsByCategory(context, category) {
