@@ -271,6 +271,12 @@ export default createStore({
     resetCategory(context) {
       context.commit('changeCategory', null);
     },
+    logOut() {
+      localStorage.removeItem('user');
+    },
+    addToCart(context, product) {
+      context.commit('addToCart', product);
+    },
   },
   getters: {
     lastImagesByCategory(state) {
