@@ -4,6 +4,7 @@
       :src="require('@/assets/icons/arrow_back.svg')"
       alt="icône arrière"
       class="icon"
+      @click="goBack"
     />
     <div class="cont-title">
       <svg
@@ -43,7 +44,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -85,6 +92,7 @@ a {
 
 .icon {
   width: 40px;
+  cursor: pointer;
 }
 
 .logo {
