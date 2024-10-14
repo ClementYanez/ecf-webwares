@@ -49,7 +49,7 @@ export default {
     data() {
         return {
             userInfo: {
-                id: 1,
+                id: 3,
                 role: 'USER'
             },
             regexRaisonSociale: /^[a-zA-Z0-9\s.,-]{3,}$/,
@@ -74,13 +74,22 @@ export default {
     },
     methods: {
         newId() {
-            let index = this.$store.state.userDatabase.length - 1;
-            this.userInfo.id += this.$store.state.userDatabase[index].id;
-            console.log(this.userInfo.id);
-            return this.userInfo.id
+            if (localStorage.getItem("user_list")) {
+                let userList = JSON.parse(localStorage.getItem("user_list"));
+                let index = userList.length - 1;
+                this.userInfo.id = userList[index].id +1;
+                console.log(userList);
+                
+                console.log(this.userInfo.id);
+                return this.userInfo.id
+            } else {
+                console.log(this.userInfo.id);
+                return this.userInfo.id
+                
+                
+            }
         },
         submitUser() {
-            console.log(this.$store.state.userDatabase);
             if (this.regexRaisonSociale.test(this.userInfo.raisonSociale) && this.userInfo.raisonSociale) {
                 this.verifError.raisonSociale = true
             } else {
@@ -127,7 +136,14 @@ export default {
             } else {
                 this.newId();
                 this.successAccount = true;
-                this.$store.state.userDatabase.push(this.userInfo)
+                let userDataBase = [];
+                if(localStorage.getItem("user_list")){
+                    userDataBase = JSON.parse(localStorage.getItem("user_list"));
+                } else{
+                    userDataBase = this.$store.state.userDatabase;
+                }
+                userDataBase.push(this.userInfo);
+                localStorage.setItem("user_list", JSON.stringify(userDataBase));
             }
         }
     }
