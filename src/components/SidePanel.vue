@@ -25,13 +25,7 @@
           />
         </g>
       </svg>
-      <h1>Connectez vous à votre compte WebWares</h1>
-      <p>
-        Vous n'avez pas encore de compte ?
-        <router-link to="/user-inscription" class="btn-navbar"
-          >S'inscrire</router-link
-        >
-      </p>
+      <slot></slot>
     </div>
     <div class="legal">
       <p>
@@ -45,6 +39,10 @@
 
 <script>
 export default {
+  props: {
+    texth1: String,
+    textp: String,
+  },
   methods: {
     goBack() {
       this.$router.go(-1);
@@ -75,7 +73,7 @@ a {
 .cont-info {
   background-color: #592b02;
   height: 100vh;
-  width: 30%;
+  width: 45%;
   padding: 20px;
   position: relative;
   display: flex;
