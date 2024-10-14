@@ -1,5 +1,5 @@
 <template>
-  <button :style="{ backgroundColor: color }">{{ text }}</button>
+  <button :style="{ backgroundColor: color, color: textColor }">{{ text }}</button>
 </template>
 
 <script>
@@ -7,6 +7,7 @@ export default {
   props: {
     text: String,
     color: String,
+    textColor: String,
     url: String,
   },
 };
@@ -20,6 +21,10 @@ button {
   border-radius: 10px;
   font-family: 'Roboto', sans-serif;
 }
+
+/*button:hover {
+transform: scale(1.02);
+}*/
 
 button:active {
   box-shadow: 0px 0px 10px #57575770;
