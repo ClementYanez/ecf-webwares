@@ -261,6 +261,7 @@ export default {
       localStorage.removeItem('user');
       this.user = '';
       this.userRole = '';
+      location.reload();
     },
   },
   mounted() {
