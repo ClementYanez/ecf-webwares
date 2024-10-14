@@ -105,49 +105,4 @@ a {
 .legal {
   font-size: 0.8rem;
 }
-
-.cont-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  margin-left: 20%;
-  width: 500px;
-}
-.alert {
-  background-color: rgb(190, 78, 78);
-  color: #f1f1f1;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  font-weight: 600;
-}
-
-.line {
-  width: 100%;
-  border-bottom: 1px solid #8f8f8f;
-  margin-top: 50px;
-}
-
-.no-account {
-  color: black;
-  font-weight: 500;
-  margin-top: 20px;
-}
-button {
-  margin-top: 20px;
-}
-input {
-  padding: 10px 10px 10px 20px;
-  width: 300px;
-  height: 30px;
-  border: 1px solid #d9b596;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-label {
-  font-size: 1.3rem;
-  font-weight: 600;
-}
 </style>
