@@ -1,7 +1,7 @@
 <template>
   <HeaderComponent />
   <div class="contain-list">
-    <div class="list" v-for="product in cart" :key="product.id">
+    <div class="list" v-for="product in this.cart" :key="product.id">
       <LineInfos
         :image="product.image"
         :title="product.titre"

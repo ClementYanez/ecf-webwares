@@ -8,7 +8,13 @@
         <span class="title-item">{{ title }}</span>
         <div class="qte">
           <span class="text-qte">Qté : </span>
-          <input type="number" :min="minQte" v-model="productQuantity" />
+          <input
+            type="number"
+            :min="minQte"
+            v-model="productQuantity"
+            v-if="productQte"
+          />
+          <span v-if="qte">{{ qte }}</span>
         </div>
         <span class="price-one">{{ priceOne }} € /u</span>
         <div class="prix-ht-line">
@@ -33,13 +39,15 @@ export default {
     priceOne: Number,
     productQte: Number,
     product: Object,
+    qte: Number,
+    lineValue: Number,
   },
   data() {
     return {
       prixHT: '',
-      productQuantity: this.productQte,
+      productQuantity: 0,
       totalLine: '',
-      prod: this.product,
+      prod: {},
     };
   },
   mounted() {
@@ -48,6 +56,12 @@ export default {
     this.prod.value = this.totalLine;
     let user = JSON.parse(localStorage.getItem('user'));
     let panier = JSON.parse(localStorage.getItem(`panier_${user.id}`));
+    if (this.productQte) {
+      this.productQuantity = this.productQte;
+    } else if (this.lineValue) {
+      this.productQuantity = this.qte;
+    }
+    this.prod = this.product;
     panier.forEach((element) => {
       if (element.id === this.prod.id) {
         element.quantity = this.productQuantity;
