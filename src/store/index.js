@@ -1,72 +1,72 @@
-import { createStore } from 'vuex';
+import { createStore } from "vuex";
 
 export default createStore({
   state: {
     categories: [
       { id: 1, name: "Mobilier d'intérieur" },
-      { id: 2, name: 'Luminaires' },
-      { id: 3, name: 'Tapis' },
-      { id: 4, name: 'Objets de décorations' },
+      { id: 2, name: "Luminaires" },
+      { id: 3, name: "Tapis" },
+      { id: 4, name: "Objets de décorations" },
     ],
     productsList: [
       {
         id: 1,
-        image: 'mobilier-5.jpg',
-        titre: 'Table à manger en bois',
-        description: 'Table à manger en bois massif avec finition élégante.',
+        image: "mobilier-5.jpg",
+        titre: "Table à manger en bois",
+        description: "Table à manger en bois massif avec finition élégante.",
         prix: 299.99,
         moq: 5,
         categorieId: 1,
       },
       {
         id: 2,
-        image: 'mobilier-4.jpg',
-        titre: 'Canapé Krug',
-        description: 'Un canapé tout en finesse et élégance.',
+        image: "mobilier-4.jpg",
+        titre: "Canapé Krug",
+        description: "Un canapé tout en finesse et élégance.",
         prix: 499.99,
         moq: 5,
         categorieId: 1,
       },
       {
         id: 3,
-        image: 'mobilier-3.jpg',
-        titre: 'Canapé Munzen',
-        description: 'Un canapé en cuir marron et confortable.',
+        image: "mobilier-3.jpg",
+        titre: "Canapé Munzen",
+        description: "Un canapé en cuir marron et confortable.",
         prix: 499.99,
         moq: 5,
         categorieId: 1,
       },
       {
         id: 4,
-        image: 'mobilier-2.jpg',
-        titre: 'Étagère en bois',
-        description: 'Une étagère pratique et minimaliste.',
+        image: "mobilier-2.jpg",
+        titre: "Étagère en bois",
+        description: "Une étagère pratique et minimaliste.",
         prix: 99.99,
         moq: 15,
         categorieId: 1,
       },
       {
         id: 5,
-        image: 'mobilier-1.jpg',
-        titre: 'Table de chevet',
-        description: 'Table de chevet en bois. Pratique et discrète.',
+        image: "mobilier-1.jpg",
+        titre: "Table de chevet",
+        description: "Table de chevet en bois. Pratique et discrète.",
         prix: 199.99,
         moq: 15,
         categorieId: 1,
       },
       {
         id: 6,
-        image: 'luminaire-1.jpg',
-        titre: 'Lampe moderne',
-        description: 'Lampe avec un design moderne et éclairage ajustable.',
+        image: "luminaire-1.jpg",
+        titre: "Lampe moderne",
+        description: "Lampe avec un design moderne et éclairage ajustable.",
         prix: 129.99,
         moq: 10,
         categorieId: 2,
       },
       {
         id: 7,
-        image: 'luminaire-2.jpg',
-        titre: 'Lampe de cuisine',
+        image: "luminaire-2.jpg",
+        titre: "Lampe de cuisine",
         description: "Lampe sobre à l'éclairage ajustable.",
         prix: 119.99,
         moq: 10,
@@ -74,63 +74,63 @@ export default createStore({
       },
       {
         id: 8,
-        image: 'luminaire-3.jpg',
+        image: "luminaire-3.jpg",
         titre: "Lampe d'extérieur",
-        description: 'Lampe en bois avec un design moderne.',
+        description: "Lampe en bois avec un design moderne.",
         prix: 149.99,
         moq: 10,
         categorieId: 2,
       },
       {
         id: 9,
-        image: 'luminaire-4.jpg',
-        titre: 'Lampe industrielle',
-        description: 'Lampe au design moderne et industriel.',
+        image: "luminaire-4.jpg",
+        titre: "Lampe industrielle",
+        description: "Lampe au design moderne et industriel.",
         prix: 129.99,
         moq: 10,
         categorieId: 2,
       },
       {
         id: 10,
-        image: 'luminaire-5.jpg',
-        titre: 'Lampe en bois',
-        description: 'Lampe au design enfantin et simple.',
+        image: "luminaire-5.jpg",
+        titre: "Lampe en bois",
+        description: "Lampe au design enfantin et simple.",
         prix: 129.99,
         moq: 10,
         categorieId: 2,
       },
       {
         id: 11,
-        image: 'tapis-1.jpg',
-        titre: 'Tapis en poil de yaourt',
-        description: 'Tapis doux en poil de yaourt sauvage.',
+        image: "tapis-1.jpg",
+        titre: "Tapis en poil de yaourt",
+        description: "Tapis doux en poil de yaourt sauvage.",
         prix: 189.99,
         moq: 10,
         categorieId: 3,
       },
       {
         id: 12,
-        image: 'tapis-2.jpg',
-        titre: 'Tapis en laine',
-        description: 'Tapis doux en laine avec motif géométrique.',
+        image: "tapis-2.jpg",
+        titre: "Tapis en laine",
+        description: "Tapis doux en laine avec motif géométrique.",
         prix: 99.99,
         moq: 20,
         categorieId: 3,
       },
       {
         id: 13,
-        image: 'tapis-3.jpg',
-        titre: 'Tapis en laine',
+        image: "tapis-3.jpg",
+        titre: "Tapis en laine",
         description:
-          'Tapis doux en laine avec motif géométrique mais plus grand.',
+          "Tapis doux en laine avec motif géométrique mais plus grand.",
         prix: 89.99,
         moq: 20,
         categorieId: 3,
       },
       {
         id: 14,
-        image: 'tapis-4.jpg',
-        titre: 'Tapis en crochet',
+        image: "tapis-4.jpg",
+        titre: "Tapis en crochet",
         description: "Tapis doux réalisé au crochet avec motif d'éléphant.",
         prix: 89.99,
         moq: 20,
@@ -138,16 +138,16 @@ export default createStore({
       },
       {
         id: 15,
-        image: 'tapis-5.jpg',
-        titre: 'Tapis en moumoute',
-        description: 'Tapis en moumoute toute douce et naturelle.',
+        image: "tapis-5.jpg",
+        titre: "Tapis en moumoute",
+        description: "Tapis en moumoute toute douce et naturelle.",
         prix: 89.99,
         moq: 20,
         categorieId: 3,
       },
       {
         id: 16,
-        image: 'deco-1.jpg',
+        image: "deco-1.jpg",
         titre: "Vase en bois d'arbre",
         description: "Vase réalisé à base d'arbre venus d'une forêt.",
         prix: 49.99,
@@ -156,37 +156,37 @@ export default createStore({
       },
       {
         id: 17,
-        image: 'deco-2.jpg',
-        titre: 'Vase imprimé en 3D',
-        description: 'Vase imprimé en 3D en plastique recyclable.',
+        image: "deco-2.jpg",
+        titre: "Vase imprimé en 3D",
+        description: "Vase imprimé en 3D en plastique recyclable.",
         prix: 49.99,
         moq: 40,
         categorieId: 4,
       },
       {
         id: 18,
-        image: 'deco-3.jpg',
-        titre: 'Vase éthnique en argile',
-        description: 'Vase éthnique en argile avec motifs gravés à la main.',
+        image: "deco-3.jpg",
+        titre: "Vase éthnique en argile",
+        description: "Vase éthnique en argile avec motifs gravés à la main.",
         prix: 49.99,
         moq: 20,
         categorieId: 4,
       },
       {
         id: 19,
-        image: 'deco-4.jpg',
-        titre: 'Vase arrondis',
-        description: 'Vase à la forme tout à la fois élégante et rigolote.',
+        image: "deco-4.jpg",
+        titre: "Vase arrondis",
+        description: "Vase à la forme tout à la fois élégante et rigolote.",
         prix: 69.99,
         moq: 10,
         categorieId: 4,
       },
       {
         id: 20,
-        image: 'deco-5.jpg',
-        titre: 'Vase rectangulaire',
+        image: "deco-5.jpg",
+        titre: "Vase rectangulaire",
         description:
-          'Vase au design futuriste et aux méthodes de réalisation résolument classiques.',
+          "Vase au design futuriste et aux méthodes de réalisation résolument classiques.",
         prix: 49.99,
         moq: 20,
         categorieId: 4,
@@ -195,31 +195,31 @@ export default createStore({
     userDatabase: [
       {
         id: 1,
-        raisonSociale: 'Entreprise A',
-        siret: '12345678901234',
-        adresse: '123 Rue de la République',
-        codePostal: '75001',
-        ville: 'Paris',
-        email: 'entrepriseA@example.com',
-        motDePasse: 'motdepasseA',
-        role: 'USER',
+        raisonSociale: "Entreprise A",
+        siret: "12345678901234",
+        adresse: "123 Rue de la République",
+        codePostal: "75001",
+        ville: "Paris",
+        email: "entrepriseA@example.com",
+        motDePasse: "motdepasseA",
+        role: "USER",
       },
       {
         id: 2,
-        raisonSociale: 'WebWares',
-        siret: '56789012345678',
-        adresse: '456 Avenue des Champs-Élysées',
-        codePostal: '75008',
-        ville: 'Paris',
-        email: 'web.wares@gmail.com',
-        motDePasse: 'motdepasseB12_',
-        role: 'ADMIN',
+        raisonSociale: "WebWares",
+        siret: "56789012345678",
+        adresse: "456 Avenue des Champs-Élysées",
+        codePostal: "75008",
+        ville: "Paris",
+        email: "web.wares@gmail.com",
+        motDePasse: "motdepasseB12_",
+        role: "ADMIN",
       },
     ],
     filteredCategory: null,
     filteredProductsListByCategory: [],
     filteredProductsList: [],
-    searchQuery: '',
+    searchQuery: "",
     cart: [],
   },
   mutations: {
@@ -245,18 +245,15 @@ export default createStore({
     setSearchQuery(state, query) {
       state.searchQuery = query;
     },
-
-    setUserDatabase(state, userDatabase) {
-      state.userDatabase = userDatabase;
-      localStorage.setItem('userDatabase', JSON.stringify(userDatabase));
-    },
-
     resetSearch(state) {
-      state.searchQuery = '';
+      state.searchQuery = "";
       // state.filteredCategory = null;
     },
     resetCategory(state) {
       state.filteredCategory = null;
+    },
+    setUserDatabase(state, userDatabase) {
+      state.userDatabase = userDatabase;
     },
   },
   actions: {
@@ -264,32 +261,38 @@ export default createStore({
       // if (category === context.state.filteredCategory) {
       // context.commit('changeCategory', null);
       // } else if (context.state.filteredCategory === null) {
-      context.commit('changeCategory', category);
+      context.commit("changeCategory", category);
       // }
       const filteredProductsListByCategory = context.state.productsList.filter(
         (product) => product.categorieId === category
       );
       if (filteredProductsListByCategory.length === 0) {
         context.commit(
-          'getFilteredProductsListByCategory',
+          "getFilteredProductsListByCategory",
           context.state.productsList
         );
       } else {
         context.commit(
-          'getFilteredProductsListByCategory',
+          "getFilteredProductsListByCategory",
           filteredProductsListByCategory
         );
       }
     },
     resetCategory(context) {
-      context.commit('changeCategory', null);
+      context.commit("changeCategory", null);
     },
     logOut() {
-      localStorage.removeItem('user');
+      localStorage.removeItem("user");
     },
     addToCart(context, product) {
-      context.commit('addToCart', product);
+      context.commit("addToCart", product);
     },
+  },
+  loadUserDatabase({ commit }) {
+    if (localStorage.getItem("user_list")) {
+      let storeDatabase = JSON.parse(localStorage.getItem("user_list"));
+      commit("setUserDatabase", storeDatabase);
+    }
   },
   getters: {
     lastImagesByCategory(state) {

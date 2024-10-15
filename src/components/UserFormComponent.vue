@@ -22,8 +22,8 @@
             <p v-if="!verifError.codePostal" class="error">Veuillez entrer un code postal valide</p>
             <p v-if="!verifError.ville" class="error">Veuillez entrer une ville valide</p>
             <label for="">Adresse email</label>
-            <input type="email" placeholder="Adresse email" v-model="userInfo.email"
-                :class="{ 'input-error': !verifError.email }">
+            <input type="text" placeholder="Adresse email" v-model="userInfo.email"
+                :class="{ 'input-error': !verifError.email }" />
             <p v-if="!verifError.email" class="error">Veuillez entrer un email valide</p>
             <label for="">Mot de passe</label>
             <input type="password" placeholder="Mot de passe" v-model="userInfo.motDePasse"
@@ -54,8 +54,9 @@ export default {
             },
             regexRaisonSociale: /^[a-zA-Z0-9\s.,-]{3,}$/,
             regexSiret: /^[0-9]{14}$/,
-            regexAdresse: /^[\dA-Za-zÀ-ÖØ-öø-ÿ'-.,\s]+$/,
-            regexCodePostal: /[0-9]/,
+            regexAdresse: /^[\dA-Za-zÀ-ÖØ-öø-ÿ'-.,\s]{8,}$/,
+            regexCodePostal: /^[0-9]{5}$/,
+            regexVille: /^[\dA-Za-zÀ-ÖØ-öø-ÿ'-.,\s]{1,}$/,
             regexEmail: /^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             regexPassword: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&/])[A-Za-z\d@$!%*#?&/]{8,}$/,
             confirmPassword: "",
@@ -110,7 +111,7 @@ export default {
             } else {
                 this.verifError.codePostal = false
             }
-            if (this.regexAdresse.test(this.userInfo.ville) && this.userInfo.ville) {
+            if (this.regexVille.test(this.userInfo.ville) && this.userInfo.ville) {
                 this.verifError.ville = true
             } else {
                 this.verifError.ville = false
@@ -145,7 +146,10 @@ export default {
                 userDataBase.push(this.userInfo);
                 localStorage.setItem("user_list", JSON.stringify(userDataBase));
             }
-        }
+        },
+    },
+    created() {
+        this.$store.dispatch("loadUserDatabase")
     }
 }
 
