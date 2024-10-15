@@ -22,10 +22,6 @@ button {
   font-family: 'Roboto', sans-serif;
 }
 
-/*button:hover {
-transform: scale(1.02);
-}*/
-
 button:active {
   box-shadow: 0px 0px 10px #57575770;
 }
