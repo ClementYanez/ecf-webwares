@@ -69,15 +69,30 @@ export default {
   },
   methods: {
     addProductToCart(product) {
-      let user = JSON.parse(localStorage.getItem('user'));
-      let userName = user.id;
+      // let user = JSON.parse(localStorage.getItem('user'));
+      // let userName = user.id;
+      this.panier = JSON.parse(localStorage.getItem(`panier_${this.user.id}`));
       product.quantity = this.minQuantity;
-      this.$store.commit('addToCart', product);
-      localStorage.setItem(
-        `panier_${userName}`,
-        JSON.stringify(this.$store.state.cart)
-      );
+      this.panier.push(product);
+      console.log(this.panier);
+
+      // this.$store.commit('addToCart', product);
+      // localStorage.setItem(
+      //   `panier_${this.user.id}`,
+      //   JSON.stringify([...this.panier])
+      // );
       this.selected = true;
+    },
+  },
+  watch: {
+    panier: {
+      handler() {
+        localStorage.setItem(
+          `panier_${this.user.id}`,
+          JSON.stringify(this.panier)
+        );
+      },
+      deep: true,
     },
   },
   mounted() {
