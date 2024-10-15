@@ -37,8 +37,10 @@ export default {
         textp: String,
     },
     beforeMount() {
-        let user = JSON.parse(localStorage.getItem("user"));
-        this.raisonSocial = user.raisonSociale;
+        if (localStorage.getItem("user")) {
+            let user = JSON.parse(localStorage.getItem("user"));
+            this.raisonSocial = user.raisonSociale;
+        }
     }
 };
 </script>
