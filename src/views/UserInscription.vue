@@ -24,10 +24,10 @@
 import UserFormComponent from '@/components/UserFormComponent.vue';
 import SidePanel from '@/components/SidePanel.vue';
 export default {
-    components: {
-        UserFormComponent,
-        SidePanel
-    }
+  components: {
+      UserFormComponent,
+      SidePanel
+  }
 }
 
 </script>
@@ -42,9 +42,9 @@ export default {
 }
 
 .contain {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 h1,
@@ -58,10 +58,10 @@ a {
 }
 
 .contain-form {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .legal {
