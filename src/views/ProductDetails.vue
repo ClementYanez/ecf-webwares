@@ -71,30 +71,33 @@ export default {
     addProductToCart(product) {
       // let user = JSON.parse(localStorage.getItem('user'));
       // let userName = user.id;
-      this.panier = JSON.parse(localStorage.getItem(`panier_${this.user.id}`));
+      if (localStorage.getItem(`panier_${this.user.id}`)) {
+        this.panier = JSON.parse(
+          localStorage.getItem(`panier_${this.user.id}`)
+        );
+      }
       product.quantity = this.minQuantity;
       this.panier.push(product);
-      console.log(this.panier);
 
-      // this.$store.commit('addToCart', product);
-      // localStorage.setItem(
-      //   `panier_${this.user.id}`,
-      //   JSON.stringify([...this.panier])
-      // );
+      this.$store.commit('addToCart', product);
+      localStorage.setItem(
+        `panier_${this.user.id}`,
+        JSON.stringify([...this.panier])
+      );
       this.selected = true;
     },
   },
-  watch: {
-    panier: {
-      handler() {
-        localStorage.setItem(
-          `panier_${this.user.id}`,
-          JSON.stringify(this.panier)
-        );
-      },
-      deep: true,
-    },
-  },
+  // watch: {
+  //   panier: {
+  //     handler() {
+  //       localStorage.setItem(
+  //         `panier_${this.user.id}`,
+  //         JSON.stringify(this.panier)
+  //       );
+  //     },
+  //     deep: true,
+  //   },
+  // },
   mounted() {
     let productId = parseInt(this.$route.params.id);
     this.productDetails = this.productsList.find(
@@ -104,7 +107,6 @@ export default {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.userLevel = this.user.role;
       this.prixHt = (this.productDetails.prix / 1.2).toFixed(2);
-      console.log(this.userLevel);
     }
     if (localStorage.getItem(`panier_${this.user.id}`)) {
       this.panier = JSON.parse(localStorage.getItem(`panier_${this.user.id}`));
