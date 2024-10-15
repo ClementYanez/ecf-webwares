@@ -88,6 +88,8 @@ export default {
         );
       }
       product.quantity = this.minQuantity;
+      console.log(this.minQuantity);
+
       this.panier.push(product);
 
       this.$store.commit('addToCart', product);
@@ -122,6 +124,7 @@ export default {
         }
       });
     }
+    this.minQuantity = this.minQte;
   },
 };
 </script>

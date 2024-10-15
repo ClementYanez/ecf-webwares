@@ -221,6 +221,7 @@ export default createStore({
     filteredProductsList: [],
     searchQuery: '',
     cart: [],
+    cartvalue: '',
   },
   mutations: {
     getProductDetails(state, productDetails) {
