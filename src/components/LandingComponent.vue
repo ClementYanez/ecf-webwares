@@ -1,7 +1,7 @@
 <template>
   <div class="cont-global">
         <div class="cont-image">
-          <div v-for="product in lastImages" :key="product.id" class="image-product">
+          <div v-for="product in lastImages" :key="product.id" class="image-product" >
             <img :src="getImagePath(product.image)" :alt="product.titre" class="image-unique">
             <img />
           </div>
@@ -10,8 +10,8 @@
 
         <div class="cont-info">
           <h3>Inscrivez-vous dès maintenant et commencez à remplir vos stocks !</h3>
-          <ButtonComponent text="Inscrivez-vous" color="#CA8465" />
-          <p>Ou connectez-vous <u style="cursor: pointer">ici</u> et commencez vos achats immédiatement !</p>
+          <ButtonComponent text="Inscrivez-vous" color="#CA8465" @click="redirectToSignup" />
+          <p>Ou connectez-vous <u style="cursor: pointer" @click="redirectToLogin">ici</u> et commencez vos achats immédiatement !</p>
         </div>
   </div>
 </template>
@@ -33,6 +33,12 @@ export default {
     getImagePath(image) {
       // Dynamique avec require pour les assets
       return require(`@/assets/${image}`);
+    },
+    redirectToSignup() {
+      this.$router.push('/user-inscription'); // Route vers la page d'inscription
+    },
+    redirectToLogin() {
+      this.$router.push('/user-connection'); // Route vers la page de connexion
     },
     // getOpacityStyle(index) {
     //   const totalImages = this.lastImages.length;

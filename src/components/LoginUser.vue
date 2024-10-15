@@ -18,7 +18,7 @@
         Vous n'avez pas de compte ? <br />
         Créez-en un maintenant.
       </p>
-      <ButtonComponent text="Créer un compte" color="grey" />
+      <ButtonComponent text="Créer un compte" color="grey" @click="redirectToSignIn"/>
     </div>
   </div>
 </template>
@@ -59,6 +59,9 @@ export default {
         }
       });
     },
+    redirectToSignIn(){
+      this.$router.push('/user-inscription');
+    }
   },
   computed: {
     ...mapState(['userDatabase']),
