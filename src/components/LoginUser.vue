@@ -63,6 +63,9 @@ export default {
   computed: {
     ...mapState(['userDatabase']),
   },
+  created() {
+        this.$store.dispatch("loadUserDatabase")
+    }
 };
 </script>
 

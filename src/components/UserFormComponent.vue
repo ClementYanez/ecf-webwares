@@ -91,6 +91,7 @@ export default {
             }
         },
         submitUser() {
+            console.log(this.$store.state.userDatabase);
             if (this.regexRaisonSociale.test(this.userInfo.raisonSociale) && this.userInfo.raisonSociale) {
                 this.verifError.raisonSociale = true
             } else {
@@ -137,14 +138,14 @@ export default {
             } else {
                 this.newId();
                 this.successAccount = true;
-                let userDataBase = [];
-                if (localStorage.getItem("user_list")) {
-                    userDataBase = JSON.parse(localStorage.getItem("user_list"));
-                } else {
-                    userDataBase = this.$store.state.userDatabase;
-                }
-                userDataBase.push(this.userInfo);
-                localStorage.setItem("user_list", JSON.stringify(userDataBase));
+                 // Récupération de la liste des utilisateurs dans le localStorage
+                let userList = JSON.parse(localStorage.getItem("user_list")) || this.$store.state.userDatabase;
+                
+                userList.push(this.userInfo);
+                localStorage.setItem("user_list", JSON.stringify(userList));
+
+                // Appel de l'action pour mettre à jour le store
+                this.$store.dispatch('loadUserDatabase');
             }
         },
     },

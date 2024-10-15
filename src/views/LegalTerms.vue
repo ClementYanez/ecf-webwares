@@ -56,7 +56,7 @@
       <div class="mb-4">
         <h2 class="h5">Propriété intellectuelle</h2>
         <p>
-          Tous les éléments du site, y compris les textes, les images, les sons et les vidéos, sont la propriété de [nom de l'entreprise]. 
+          Tous les éléments du site, y compris les textes, les images, les sons et les vidéos, sont la propriété de WebWares. 
           Vous n'avez pas le droit de copier, de modifier, de reproduire ou de diffuser ces éléments sans notre autorisation écrite préalable.
         </p>
       </div>
@@ -79,8 +79,8 @@
       <div class="mb-4">
         <h2 class="h5">Loi applicable et juridiction</h2>
         <p>
-          Les présentes conditions d'utilisation sont soumises au droit [nom du pays]. 
-          Toute contestation relative à l'interprétation ou à l'exécution des présentes conditions d'utilisation sera soumise aux tribunaux compétents du [nom du pays].
+          Les présentes conditions d'utilisation sont soumises au droit Français. 
+          Toute contestation relative à l'interprétation ou à l'exécution des présentes conditions d'utilisation sera soumise aux tribunaux compétents de France.
         </p>
       </div>
   

@@ -287,12 +287,18 @@ export default createStore({
     addToCart(context, product) {
       context.commit("addToCart", product);
     },
-  },
-  loadUserDatabase({ commit }) {
-    if (localStorage.getItem("user_list")) {
-      let storeDatabase = JSON.parse(localStorage.getItem("user_list"));
-      commit("setUserDatabase", storeDatabase);
-    }
+    // updateUserDatabase({ commit }) {
+    //   const userList = JSON.parse(localStorage.getItem("user_list")) || [];
+    //   commit('setUserDatabase', userList);
+    // }
+    loadUserDatabase({ commit }) {
+      if (localStorage.getItem("user_list")) {
+        let storeDatabase = JSON.parse(localStorage.getItem("user_list"));
+        commit("setUserDatabase", storeDatabase);
+      } else {
+        return;
+      }
+    },
   },
   getters: {
     lastImagesByCategory(state) {
