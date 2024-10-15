@@ -91,12 +91,13 @@
         />
       </router-link>
     </div>
-    <img
-      v-if="userRole === 'USER'"
-      :src="require('@/assets/icons/cart.svg')"
-      alt="icône panier"
-      class="icon cart"
-    />
+    <router-link class="cart" to="/user-cart" v-if="userRole === 'USER'">
+      <img
+        :src="require('@/assets/icons/cart.svg')"
+        alt="icône panier"
+        class="icon"
+      />
+    </router-link>
     <div v-if="userRole">
       <img
         :src="require('@/assets/icons/user.svg')"
@@ -105,6 +106,7 @@
         @click="userDropDown"
       />
       <div v-if="openUserDropDown" class="deconnect">
+        <p>{{ user.raisonSociale }}</p>
         <ButtonComponent
           text="Se déconnecter"
           color="#f1f1f1"
@@ -498,5 +500,10 @@ svg {
   fill: white;
   width: 60px;
   height: 60px;
+}
+
+.deconnect p {
+  color: white;
+  text-align: center;
 }
 </style>
