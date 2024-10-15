@@ -18,15 +18,14 @@
       </g>
     </svg>
     <div class="nav-links">
-      <router-link to="/" class="nav-link">
-        <img
-          :src="require('@/assets/icons/home.svg')"
-          alt="icône accueil"
-          class="icon"
-        />
-      </router-link>
-      <router-link to="/products-list" class="nav-link">Produits</router-link>
-      <div class="categories-container">
+      <router-link to="/" class="nav-link">Accueil</router-link>
+      <router-link
+        to="/products-list"
+        class="nav-link"
+        @click="goToProductsList"
+        >Produits</router-link
+      >
+      <div class="categories-contain">
         <div class="categories-btn">
           <span>Catégories</span>
           <img
@@ -36,38 +35,69 @@
           />
         </div>
         <div class="categories">
-          <router-link to="/products-list/1" class="category-link"
-            >Mobilier d'intérieur</router-link
+          <p to="/products-list" class="category-link" @click="setCategory(1)">
+            Mobilier d'intérieur
+          </p>
+          <p to="/products-list" class="category-link" @click="setCategory(2)">
+            Luminaires
+          </p>
+          <p to="/products-list" class="category-link" @click="setCategory(3)">
+            Tapis
+          </p>
+          <p to="/products-list" class="category-link" @click="setCategory(4)">
+            Objets de décoration
+          </p>
+        </div>
+      </div>
+      <div v-if="userRole === 'ADMIN'" class="categories-contain">
+        <div class="line"></div>
+        <div class="categories-btn">
+          <span>Admin</span>
+          <img
+            :src="require('@/assets/icons/arrow-down.svg')"
+            alt="icône flèche vers le bas"
+            class="icon-arrow"
+          />
+        </div>
+        <div class="categories">
+          <router-link to="/admin-panel" class="category-link"
+            >Gestion des utilisateurs</router-link
           >
-          <router-link to="/products-list/2" class="category-link"
-            >Luminaires</router-link
+          <router-link to="/admin-products" class="category-link"
+            >Gestion des produits</router-link
           >
-          <router-link to="/products-list/3" class="category-link"
-            >Tapis</router-link
+          <router-link to="admin-categories" class="category-link"
+            >Gestion des catégories</router-link
           >
-          <router-link to="/products-list/4" class="category-link"
-            >Objets de décoration</router-link
+          <router-link to="/admin-orders" class="category-link"
+            >Gestion des commandes</router-link
           >
         </div>
       </div>
     </div>
-    <div>
-      <router-link to="/user-connection" class="btn-navbar"
-        >Se connecter</router-link
-      >
-      <router-link to="/user-inscription" class="btn-navbar"
-        >S'inscrire</router-link
-      >
-      <router-link to="/" class="btn-navbar" @click="logOut"
-        >Se déconnecter</router-link
-      >
+    <div v-if="!user" class="buttons">
+      <router-link to="/user-connection">
+        <ButtonComponent
+          text="Se connecter"
+          color="#f1f1f1"
+          textColor="#191919"
+        />
+      </router-link>
+      <router-link to="/user-inscription">
+        <ButtonComponent
+          text="S'inscrire"
+          color="#f1f1f1"
+          textColor="#191919"
+        />
+      </router-link>
     </div>
-    <div class="icon-user-cart">
-      <img
-        :src="require('@/assets/icons/cart.svg')"
-        alt="icône panier"
-        class="icon"
-      />
+    <img
+      v-if="userRole === 'USER'"
+      :src="require('@/assets/icons/cart.svg')"
+      alt="icône panier"
+      class="icon cart"
+    />
+    <div v-if="userRole">
       <img
         :src="require('@/assets/icons/user.svg')"
         alt="icône utilisateur"
@@ -75,7 +105,12 @@
         @click="userDropDown"
       />
       <div v-if="openUserDropDown" class="deconnect">
-        <button class="btn-navbar">Se déconnecter</button>
+        <ButtonComponent
+          text="Se déconnecter"
+          color="#f1f1f1"
+          textColor="#191919"
+          @click="deleteUSer"
+        />
       </div>
     </div>
   </nav>
@@ -175,16 +210,32 @@
 </template>
 
 <script>
+import ButtonComponent from './ButtonComponent.vue';
 import { mapActions } from 'vuex';
 export default {
+  components: {
+    ButtonComponent,
+  },
   data() {
     return {
       openDropDown: false,
       openMenuDropDown: false,
       openUserDropDown: false,
+      user: '',
+      userRole: '',
     };
   },
   methods: {
+    goToProductsList() {
+      this.$store.commit('changeCategory', '');
+      this.$store.dispatch('filterProductsByCategory', null);
+      this.$router.push('/products-list');
+    },
+    setCategory(id) {
+      this.$store.commit('changeCategory', id);
+      this.$store.dispatch('filterProductsByCategory', id);
+      this.$router.push('/products-list');
+    },
     dropDown() {
       this.openDropDown = true;
     },
@@ -206,11 +257,27 @@ export default {
       }
     },
     ...mapActions(['logOut']),
+    deleteUSer() {
+      localStorage.removeItem('user');
+      this.user = '';
+      this.userRole = '';
+      location.reload();
+    },
+  },
+  mounted() {
+    if (localStorage.getItem('user')) {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.userRole = this.user.role;
+    }
   },
 };
 </script>
 
 <style scoped>
+.router-link-active {
+  color: #d9b596;
+}
+
 nav {
   position: fixed;
   width: 100%;
@@ -228,6 +295,10 @@ nav {
 
 .icon-arrow {
   width: 40px;
+}
+
+a:hover {
+  cursor: pointer;
 }
 
 a,
@@ -250,13 +321,10 @@ span,
     brightness(120%) contrast(80%);
 }
 
-.icon-user-cart {
-  display: flex;
-  gap: 20px;
-}
-
-.categories-container {
+.categories-contain {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .categories {
@@ -266,7 +334,7 @@ span,
   justify-content: center;
   background-color: #592b02;
   padding: 20px 0;
-  width: 240px;
+  width: 280px;
   border-radius: 10px;
   position: absolute;
   top: 40px;
@@ -279,12 +347,17 @@ span,
   padding: 10px;
   width: 100%;
   text-align: center;
+  color: #f1f1f1;
+  cursor: pointer;
 }
 
 .nav-links,
 .categories-btn {
   display: flex;
   align-items: center;
+  color: white;
+  font-weight: 500;
+  font-size: 1.3rem;
 }
 
 .nav-link:hover,
@@ -302,15 +375,13 @@ span,
   color: #191919;
 }
 
-.categories-container:hover .categories {
+.categories-contain:hover .categories {
   display: flex;
   animation: animate 300ms ease-in-out;
 }
 
-button {
-  border: none;
-  font-weight: 600;
-  font-size: 1rem;
+.buttons {
+  display: flex;
 }
 
 .deconnect {
@@ -336,6 +407,18 @@ button {
 
 .btn-navbar:hover {
   background-color: #d9b596;
+}
+
+.line {
+  width: 3px;
+  height: 50px;
+  background-color: #f1f1f1;
+  margin-left: 20px;
+}
+
+.cart {
+  position: absolute;
+  right: 110px;
 }
 
 @keyframes animate {

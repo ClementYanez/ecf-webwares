@@ -29,9 +29,9 @@ export default {
 *,
 ::before,
 ::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 .contain {
@@ -42,12 +42,12 @@ export default {
 
 h1,
 p {
-  text-align: center;
-  color: #f1f1f1;
+    text-align: center;
+    color: #f1f1f1;
 }
 
 a {
-  color: #d9b596;
+    color: #d9b596;
 }
 
 .contain-form {

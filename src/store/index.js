@@ -253,6 +253,9 @@ export default createStore({
 
     resetSearch(state) {
       state.searchQuery = '';
+      // state.filteredCategory = null;
+    },
+    resetCategory(state) {
       state.filteredCategory = null;
     },
   },
