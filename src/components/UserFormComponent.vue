@@ -146,16 +146,6 @@ export default {
 
                 // Appel de l'action pour mettre à jour le store
                 this.$store.dispatch('loadUserDatabase');
-                
-                
-                // let userDataBase = [];
-                // if (localStorage.getItem("user_list")) {
-                //     userDataBase = JSON.parse(localStorage.getItem("user_list"));
-                // } else {
-                //     userDataBase = this.$store.state.userDatabase;
-                // }
-                // userDataBase.push(this.userInfo);
-                // localStorage.setItem("user_list", JSON.stringify(userDataBase));
             }
         },
     },
