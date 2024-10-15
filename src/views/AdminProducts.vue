@@ -16,10 +16,13 @@ export default {
     TitleComponent,
   },
   mounted() {
-    if (
-      !localStorage.getItem('user') ||
-      localStorage.getItem('userLevel') !== 'ADMIN'
-    ) {
+    let userLevel;
+    if (localStorage.getItem('user')) {
+      userLevel = JSON.parse(localStorage.getItem('user'));
+      userLevel = userLevel.role;
+    }
+
+    if (!userLevel || userLevel !== 'ADMIN') {
       this.$router.push('/');
     }
   },
