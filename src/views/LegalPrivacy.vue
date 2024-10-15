@@ -77,7 +77,7 @@
       <h2 class="mt-4">Contact</h2>
       <p>
         Si vous avez des questions ou des préoccupations relatives à cette politique de confidentialité, 
-        vous pouvez nous contacter à l'adresse [adresse e-mail] ou au numéro de téléphone [numéro de téléphone].
+        vous pouvez nous contacter à l'adresse web.wares@gmail.com ou au numéro de téléphone 0145454545.
       </p>
   
       <h2 class="mt-4">Date de mise en vigueur</h2>
