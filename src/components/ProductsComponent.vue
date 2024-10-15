@@ -7,11 +7,19 @@
       <p>{{ description }}</p>
       <div class="btns">
         <ButtonComponent text="Détails" color="#CA8465" @click="getDetails" />
-        <input type="number" :value="minQte" />
+        <input type="number" :min="minQte" v-model="minQuantity" />
         <img
+          v-if="!selected"
           :src="require('@/assets/icons/cart.svg')"
           alt="icône panier"
           class="icon"
+          @click="addProductToCart(product)"
+        />
+        <img
+          v-if="selected"
+          :src="require('@/assets/icons/cart.svg')"
+          alt="icône panier"
+          class="icon-selected"
         />
       </div>
     </div>
@@ -30,7 +38,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 export default {
   data() {
@@ -38,6 +46,9 @@ export default {
       productId: this.id,
       user: '',
       userLevel: '',
+      panier: [],
+      minQuantity: this.minQte,
+      selected: false,
     };
   },
   components: {
@@ -51,6 +62,7 @@ export default {
     minQte: Number,
     id: Number,
     url: String,
+    product: Object,
   },
   name: 'ProductsComponent',
   computed: {
@@ -65,12 +77,32 @@ export default {
         this.$router.push({ name: this.url });
       }
     },
+    ...mapActions(['addToCart']),
+    ...mapMutations(['addToCart', 'setCarttoLocalStorage']),
+    addProductToCart(product) {
+      let user = JSON.parse(localStorage.getItem('user'));
+      let userName = user.id;
+      product.quantity = this.minQuantity;
+      this.$store.commit('addToCart', product);
+      localStorage.setItem(
+        `panier_${userName}`,
+        JSON.stringify(this.$store.state.cart)
+      );
+      this.selected = true;
+    },
   },
   mounted() {
     if (localStorage.getItem('user')) {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.userLevel = this.user.role;
-      console.log(this.userLevel);
+    }
+    if (localStorage.getItem(`panier_${this.user.id}`)) {
+      this.panier = JSON.parse(localStorage.getItem(`panier_${this.user.id}`));
+      this.panier.forEach((element) => {
+        if (element.id === this.productId) {
+          this.selected = true;
+        }
+      });
     }
   },
 };
@@ -117,6 +149,14 @@ input {
   width: 45px;
   height: 45px;
   background-color: #ca8465;
+  padding: 5px;
+  border-radius: 8px;
+  transform: translate(0, 10%);
+}
+.icon-selected {
+  width: 45px;
+  height: 45px;
+  background-color: #a3a3a3;
   padding: 5px;
   border-radius: 8px;
   transform: translate(0, 10%);

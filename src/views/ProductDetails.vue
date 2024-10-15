@@ -25,8 +25,15 @@
           <p>Prix HT : {{ this.prixHt }}€</p>
           <label for="qte">Quantité : </label>
           <input id="qte" type="number" :value="this.productDetails.moq" />
-          <div class="btns">
-            <ButtonComponent text="Ajouter au panier" color="#CA8465" />
+          <div class="btns" v-if="!selected">
+            <ButtonComponent
+              text="Ajouter au panier"
+              color="#CA8465"
+              @click="addProductToCart(productDetails)"
+            />
+          </div>
+          <div class="btns" v-if="selected">
+            <ButtonComponent text="Déjà dans le panier" color="#9c9c9c" />
           </div>
         </div>
       </div>
@@ -48,6 +55,8 @@ export default {
       user: '',
       userLevel: '',
       prixHt: '',
+      panier: [],
+      selected: false,
     };
   },
   components: {
@@ -57,6 +66,19 @@ export default {
   },
   computed: {
     ...mapState(['productsList']),
+  },
+  methods: {
+    addProductToCart(product) {
+      let user = JSON.parse(localStorage.getItem('user'));
+      let userName = user.id;
+      product.quantity = this.minQuantity;
+      this.$store.commit('addToCart', product);
+      localStorage.setItem(
+        `panier_${userName}`,
+        JSON.stringify(this.$store.state.cart)
+      );
+      this.selected = true;
+    },
   },
   mounted() {
     let productId = parseInt(this.$route.params.id);
@@ -68,6 +90,14 @@ export default {
       this.userLevel = this.user.role;
       this.prixHt = (this.productDetails.prix / 1.2).toFixed(2);
       console.log(this.userLevel);
+    }
+    if (localStorage.getItem(`panier_${this.user.id}`)) {
+      this.panier = JSON.parse(localStorage.getItem(`panier_${this.user.id}`));
+      this.panier.forEach((element) => {
+        if (element.id === this.productDetails.id) {
+          this.selected = true;
+        }
+      });
     }
     window.scrollTo({
       top: 0,

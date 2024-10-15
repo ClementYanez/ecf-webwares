@@ -1,6 +1,7 @@
 <template>
   <HeaderComponent />
   <div class="cont-top">
+    <!-- <FilAriane cat1="Produits" /> -->
     <SearchbarComponent
       placeholder="Rechercher ..."
       @search="filterProductByQuery"
@@ -21,6 +22,7 @@
           :image="product.image"
           :minQte="product.moq"
           :id="product.id"
+          :product="product"
           url="product-details"
         />
       </div>
@@ -36,6 +38,7 @@ import ProductsComponent from '@/components/ProductsComponent.vue';
 import CategoriesList from '@/components/CategoriesList.vue';
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
+// import FilAriane from '@/components/FilAriane.vue';
 export default {
   name: 'ProductsList',
   components: {
@@ -44,6 +47,7 @@ export default {
     HeaderComponent,
     FooterComponent,
     SearchbarComponent,
+    // FilAriane,
   },
   computed: {
     ...mapState([
