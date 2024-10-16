@@ -49,6 +49,7 @@
           </p>
         </div>
       </div>
+      <!-- Section Admin visible si userRole est ADMIN -->
       <div v-if="userRole === 'ADMIN'" class="categories-contain">
         <div class="line"></div>
         <div class="categories-btn">
@@ -75,6 +76,7 @@
         </div>
       </div>
     </div>
+    <!-- Gestion de l'utilisateur et du panier -->
     <div v-if="!user" class="buttons">
       <router-link to="/user-connection">
         <ButtonComponent
@@ -271,6 +273,9 @@ export default {
     if (localStorage.getItem('user')) {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.userRole = this.user.role;
+    } else {
+      this.user = '';
+      this.userLevel = '';
     }
   },
 };
