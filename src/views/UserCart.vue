@@ -1,7 +1,7 @@
 <template>
   <HeaderComponent />
   <div class="contain-list">
-    <div class="titles-line">
+    <div class="titles-line" v-show="oui">
       <div class="titles">
         <span>Produits</span>
         <span class="tot">Total</span>
@@ -9,12 +9,23 @@
       <span class="sup">Supprimer</span>
     </div>
     <div class="list" v-for="product in this.cart" :key="product.id">
-      <LineInfos :image="product.image" :title="product.titre" :minQte="product.moq" :priceOne="product.prix"
-        :productQte="product.quantity" :product="product" @total="totalPanier" />
-      <img :src="require('@/assets/icons/deleteicon.svg')" class="icon" @click="deleteProduct(product.id)" />
+      <LineInfos
+        :image="product.image"
+        :title="product.titre"
+        :minQte="product.moq"
+        :priceOne="product.prix"
+        :productQte="product.quantity"
+        :product="product"
+        @total="totalPanier"
+      />
+      <img
+        :src="require('@/assets/icons/deleteicon.svg')"
+        class="icon"
+        @click="deleteProduct(product.id)"
+      />
     </div>
   </div>
-  <div class="total-final" v-if="!oui">Votre panier est vide</div>
+  <div class="total-final-vide" v-if="!oui">Votre panier est vide</div>
   <div class="total-final" v-else>
     <div>
       <span>Total HT :</span>
@@ -154,6 +165,12 @@ export default {
 .list {
   display: flex;
   flex-direction: row;
+}
+
+.total-final-vide {
+  margin-top: 400px;
+  text-align: center;
+  font-weight: 600;
 }
 
 .total-final div {
