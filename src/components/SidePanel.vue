@@ -103,4 +103,11 @@ a {
     display: none;
   }
 }
+
+@media screen and (max-width: 389px) {
+  .cont-info {
+    width: 100vw;
+    height: 300px;
+  }
+}
 </style>
