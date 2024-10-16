@@ -78,6 +78,24 @@ methods: {
       return;
     }
 
+
+    // Récupérer et/ou push orderlist admin dans le LS (avec la commande faite) et renvoie à l'accueil
+    let orderList = [];
+    let user = {};
+    let userOrder = {};
+    let commandeElement = [];
+    if (localStorage.getItem('adminOrderList')) {
+      orderList = JSON.parse(localStorage.getItem('adminOrderList'));
+    }
+    user = JSON.parse(localStorage.getItem('user'));
+    userOrder = JSON.parse(localStorage.getItem(`panier_${user.id}`));
+    commandeElement.push(userOrder, user)
+    orderList.push(commandeElement);
+    localStorage.setItem('adminOrderList', JSON.stringify(orderList));
+
+    localStorage.removeItem(`panier_${user.id}`)
+
+    this.$router.push('/')
   },
 }
 
