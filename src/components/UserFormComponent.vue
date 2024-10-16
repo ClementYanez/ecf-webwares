@@ -146,6 +146,9 @@ export default {
 
                 // Appel de l'action pour mettre à jour le store
                 this.$store.dispatch('loadUserDatabase');
+                setTimeout(() => {
+                    this.$router.push('/user-connection');
+                }, 3000);
             }
         },
     },
