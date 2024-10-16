@@ -76,7 +76,9 @@ export default {
           localStorage.getItem(`panier_${this.user.id}`)
         );
       }
-      product.quantity = this.minQuantity;
+      product.quantity = product.moq;
+      console.log(this.minQuantity);
+
       this.panier.push(product);
 
       this.$store.commit('addToCart', product);
