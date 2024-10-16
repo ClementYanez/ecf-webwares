@@ -91,7 +91,7 @@ a {
 @media screen and (max-width: 850px) {
   .cont-info {
     width: 100vw;
-    height: 250px;
+    height: 300px;
   }
 
   .logo {
@@ -108,6 +108,13 @@ a {
   .cont-info {
     width: 100vw;
     height: 300px;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .cont-info {
+    width: 100vw;
+    height: 310px;
   }
 }
 </style>

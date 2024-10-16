@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="cont-global">
         <form v-if="!successAccount" @submit.prevent="submitUser">
             <label for="">Raison Sociale</label>
             <input type="text" placeholder="Raison Sociale" v-model="userInfo.raisonSociale"
@@ -227,5 +227,11 @@ input:focus {
 
 .input-error {
     border: 1px solid #bf0e0e;
+}
+
+@media screen and (max-width: 850px) {
+  .cont-global{
+    margin-top: 50px;
+  }
 }
 </style>

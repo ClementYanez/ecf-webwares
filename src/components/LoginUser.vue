@@ -137,7 +137,7 @@ a {
   gap: 10px;
   align-items: center;
   justify-content: center;
-  margin-left: 20%;
+  margin: 0 auto 0 auto;
   width: 500px;
 }
 .alert {
@@ -174,5 +174,14 @@ input {
 label {
   font-size: 1.3rem;
   font-weight: 600;
+}
+
+@media screen and (max-width: 850px){
+  .line{
+    width: 50%;
+  }
+  .cont{
+    margin-top: 50px;
+  }
 }
 </style>
