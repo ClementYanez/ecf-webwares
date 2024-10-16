@@ -1,36 +1,32 @@
 <template>
   <HeaderComponent />
   <div class="contain-list">
+    <div class="titles-line">
+      <div class="titles">
+        <span>Produits</span>
+        <span class="tot">Total</span>
+      </div>
+      <span class="sup">Supprimer</span>
+    </div>
     <div class="list" v-for="product in this.cart" :key="product.id">
-      <LineInfos
-        :image="product.image"
-        :title="product.titre"
-        :minQte="product.moq"
-        :priceOne="product.prix"
-        :productQte="product.quantity"
-        :product="product"
-        @total="totalPanier"
-      />
-      <img
-        :src="require('@/assets/icons/deleteicon.svg')"
-        class="icon"
-        @click="deleteProduct(product.id)"
-      />
+      <LineInfos :image="product.image" :title="product.titre" :minQte="product.moq" :priceOne="product.prix"
+        :productQte="product.quantity" :product="product" @total="totalPanier" />
+      <img :src="require('@/assets/icons/deleteicon.svg')" class="icon" @click="deleteProduct(product.id)" />
     </div>
   </div>
-  <div class="totalFinal" v-if="!oui">Votre panier est vide</div>
-  <div class="totalFinal" v-else>
+  <div class="total-final" v-if="!oui">Votre panier est vide</div>
+  <div class="total-final" v-else>
+    <div>
+      <span>Total HT :</span>
+      <span>{{ totalHt }}€</span>
+    </div>
+    <div>
+      <span>Total TTC :</span>
+      <span>{{ totalTtc }}€</span>
+    </div>
     <router-link to="/order-payement">
       <ButtonComponent text="Procéder au paiement" color="#CA8465" />
     </router-link>
-    <div>
-      <span>Total HT :</span>
-      <span>Total TTC :</span>
-    </div>
-    <div>
-      <span>{{ totalHt }}€</span>
-      <span>{{ totalTtc }}€</span>
-    </div>
   </div>
 </template>
 
@@ -109,40 +105,77 @@ export default {
 </script>
 
 <style scoped>
-.contain-list {
+.titles-line {
   padding-top: 200px;
+  display: flex;
+  font-weight: 600;
+}
+
+.titles {
+  display: flex;
+  justify-content: space-between;
+  width: 75vw;
+  padding: 0 20px;
+}
+
+.tot {
+  width: 20%;
+  text-align: center;
+}
+
+.contain-list {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.totalFinal {
-  margin-top: 20px;
-  margin-right: calc(30vw + 50px);
+.total-final {
+  width: 80vw;
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
   justify-content: end;
   font-weight: 600;
   font-size: 1.3rem;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
-.icon {
+
+.icon,
+.sup {
   width: 40px;
   margin: 0 20px;
 }
+
+.icon {
+  cursor: pointer;
+}
+
 .list {
   display: flex;
   flex-direction: row;
 }
-.totalFinal div {
+
+.total-final div {
   display: flex;
-  flex-direction: column;
   align-items: flex-end;
   gap: 10px;
   margin-right: 20px;
 }
+
 button {
-  margin-bottom: 10px;
-  margin-right: 50px;
+  margin: 20px 0;
+}
+
+@media screen and (max-width: 950px) {
+  .tot {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .tot {
+    display: none;
+  }
 }
 </style>

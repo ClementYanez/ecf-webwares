@@ -8,12 +8,7 @@
         <span class="title-item">{{ title }}</span>
         <div class="qte">
           <span class="text-qte">Qté : </span>
-          <input
-            type="number"
-            :min="minQte"
-            v-model="productQuantity"
-            v-if="productQte"
-          />
+          <input type="number" :min="minQte" v-model="productQuantity" v-if="productQte" />
           <span v-if="qte">{{ qte }}</span>
         </div>
         <span class="price-one">{{ priceOne }} € /u</span>
@@ -105,20 +100,22 @@ export default {
 .contain-global {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 10px;
   padding: 10px 20px;
   margin: 5px 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px #33333348;
-  width: fit-content;
+  width: 75vw
 }
 
 .contain-infos-line {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
+  width: 65%;
 }
 
 img {
@@ -134,7 +131,7 @@ img {
 
 .title-item {
   font-weight: 600;
-  width: calc(10vw + 20px);
+  width: 20%;
 }
 
 .text-qte {
@@ -156,7 +153,7 @@ img {
 .price-one,
 .prix-ht-line,
 .prix-ttc-line {
-  width: calc(7vw + 20px);
+  width: 20%;
   text-align: center;
 }
 
@@ -179,13 +176,14 @@ img {
   margin: 0 20px;
 }
 
-@media screen and (max-width: 750px) {
-  .contain-global {
-    width: 70vw;
-  }
+@media screen and (max-width: 950px) {
 
   .contain-infos-line {
     flex-direction: column;
+  }
+
+  .img {
+    width: 20%;
   }
 
   .price-one,
@@ -193,12 +191,49 @@ img {
   .prix-ttc-line,
   .title-item,
   .qte {
-    width: 150px;
+    width: 60%;
     text-align: start;
   }
 
   .qte {
     display: inline-block;
+  }
+
+  .prix-ttc-line {
+    width: 20%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .contain-global {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .img {
+    display: none;
+  }
+
+  .contain-infos-line {
+    width: 100%;
+  }
+
+  .price-one,
+  .prix-ht-line,
+  .prix-ttc-line,
+  .title-item,
+  .qte {
+    width: 100%;
+    text-align: start;
+  }
+
+  .prix-ttc-line {
+    text-align: start;
+  }
+
+  .tot {
+    display: none;
   }
 }
 </style>
