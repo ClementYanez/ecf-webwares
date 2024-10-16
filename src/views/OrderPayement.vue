@@ -3,8 +3,14 @@
   <div class="global-container">
     <div>
       <div v-for="product in cart" :key="product.id">
-        <LineInfos :image="product.image" :title="product.titre" :priceOne="product.prix" :qte="product.quantity"
-          :product="product" :lineValue="product.value" />
+        <LineInfos
+          :image="product.image"
+          :title="product.titre"
+          :priceOne="product.prix"
+          :qte="product.quantity"
+          :product="product"
+          :lineValue="product.value"
+        />
       </div>
       <div class="total-final">
         <div>
@@ -95,7 +101,7 @@ export default {
   margin-bottom: 50px;
 }
 
-.totalFinal div {
+.total-final div {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
