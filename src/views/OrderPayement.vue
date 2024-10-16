@@ -3,16 +3,10 @@
   <div class="global-container">
     <div>
       <div v-for="product in cart" :key="product.id">
-        <LineInfos
-          :image="product.image"
-          :title="product.titre"
-          :priceOne="product.prix"
-          :qte="product.quantity"
-          :product="product"
-          :lineValue="product.value"
-        />
+        <LineInfos :image="product.image" :title="product.titre" :priceOne="product.prix" :qte="product.quantity"
+          :product="product" :lineValue="product.value" />
       </div>
-      <div class="totalFinal">
+      <div class="total-final">
         <div>
           <span>Total HT :</span>
           <span>Total TTC :</span>
@@ -81,14 +75,16 @@ export default {
 .livraison-container {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Ajusté pour aligner le contenu en haut */
+  justify-content: center;
+  /* Ajusté pour aligner le contenu en haut */
   align-items: center;
   width: 40%;
   padding: 40px;
   margin: 0 auto;
   box-shadow: 0 0 10px #d9b596;
 }
-.totalFinal {
+
+.total-final {
   margin-right: calc(30vw + 50px);
   display: flex;
   align-items: flex-end;
@@ -98,6 +94,7 @@ export default {
   margin-top: 50px;
   margin-bottom: 50px;
 }
+
 .totalFinal div {
   display: flex;
   flex-direction: column;
