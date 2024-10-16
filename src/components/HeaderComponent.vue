@@ -265,8 +265,11 @@ export default {
       localStorage.removeItem('user');
       this.user = '';
       this.userRole = '';
-      // location.reload();
-      this.$router.push('/');
+      if (this.$route.name === 'home') {
+        location.reload();
+      } else {
+        this.$router.push('/');
+      }
     },
   },
   mounted() {

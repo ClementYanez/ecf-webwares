@@ -8,7 +8,12 @@
         <span class="title-item">{{ title }}</span>
         <div class="qte">
           <span class="text-qte">Qté : </span>
-          <input type="number" :min="minQte" v-model="productQuantity" v-if="productQte" />
+          <input
+            type="number"
+            :min="minQte"
+            v-model="productQuantity"
+            v-if="productQte"
+          />
           <span v-if="qte">{{ qte }}</span>
         </div>
         <span class="price-one">{{ priceOne }} € /u</span>
@@ -46,11 +51,15 @@ export default {
     };
   },
   mounted() {
+    let panier;
+    let user;
+    if (localStorage.getItem('user')) {
+      user = JSON.parse(localStorage.getItem('user'));
+      panier = JSON.parse(localStorage.getItem(`panier_${user.id}`));
+    }
     this.prixHT = (this.priceOne / 1.2).toFixed(2);
     this.totalLine = (this.productQuantity * this.priceOne).toFixed(2);
     this.prod.value = this.totalLine;
-    let user = JSON.parse(localStorage.getItem('user'));
-    let panier = JSON.parse(localStorage.getItem(`panier_${user.id}`));
     if (this.productQte) {
       this.productQuantity = this.productQte;
     } else if (this.lineValue) {
@@ -65,6 +74,7 @@ export default {
       }
     });
   },
+
   watch: {
     productQuantity: {
       handler() {
@@ -106,7 +116,7 @@ export default {
   margin: 5px 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px #33333348;
-  width: 75vw
+  width: 75vw;
 }
 
 .contain-infos-line {
@@ -177,7 +187,6 @@ img {
 }
 
 @media screen and (max-width: 950px) {
-
   .contain-infos-line {
     flex-direction: column;
   }
