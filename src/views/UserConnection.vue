@@ -58,4 +58,25 @@ p {
 a {
   color: #d9b596;
 }
+
+@media screen and (max-width: 850px) {
+    .contain {
+        flex-direction: column;
+        width: 100vw;
+    }
+
+    .legal {
+        display: block;
+        margin: 30px 100px;
+    }
+
+    .legal p {
+        color: #626262;
+
+    }
+
+    .cont {
+      display: flex;
+    }
+}
 </style>
