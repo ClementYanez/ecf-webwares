@@ -84,12 +84,15 @@ methods: {
     let user = {};
     let userOrder = {};
     let commandeElement = [];
+    let orderValue = "";
+    let orderStatut = "En cours";
     if (localStorage.getItem('adminOrderList')) {
       orderList = JSON.parse(localStorage.getItem('adminOrderList'));
     }
     user = JSON.parse(localStorage.getItem('user'));
     userOrder = JSON.parse(localStorage.getItem(`panier_${user.id}`));
-    commandeElement.push(userOrder, user)
+    orderValue = localStorage.getItem('value')
+    commandeElement.push(userOrder, user, orderValue, orderStatut)
     orderList.push(commandeElement);
     localStorage.setItem('adminOrderList', JSON.stringify(orderList));
 

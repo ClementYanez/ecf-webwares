@@ -83,10 +83,9 @@ a.router-link-exact-active {
 a:hover {
     color: #d9b596;
 }
-
+ 
 .cont-side {
     background-color: #592b02;
-    height: 100vh;
     width: 30%;
     padding: 20px;
     display: flex;
