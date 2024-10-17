@@ -4,10 +4,10 @@
   <div class="contain">
     <SidePanelAdmin />
     <div class="list">
-      <AdminSearch
-        placeholder="Rechercher un utilisateur"
-        localstorage="userList"
-      />
+      <div class="leading">
+        <FilAriane cat1="Gestion des utilisateurs" />
+        <AdminSearch placeholder="Rechercher un utilisateur" />
+      </div>
       <div class="titles">
         <span>Utilisateurs</span>
         <div class="title-icons">
@@ -178,6 +178,7 @@ import HeaderComponent from '@/components/HeaderComponent.vue';
 import SidePanelAdmin from '@/components/SidePanelAdmin.vue';
 import TitleComponent from '@/components/TitleComponent.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
+import FilAriane from '@/components/FilAriane.vue';
 import AdminSearch from '@/components/AdminSearch.vue';
 export default {
   components: {
@@ -185,7 +186,8 @@ export default {
     SidePanelAdmin,
     TitleComponent,
     ButtonComponent,
-    AdminSearch,
+    FilAriane,
+    AdminSearch
   },
   data() {
     return {
@@ -294,9 +296,16 @@ p {
   display: flex;
 }
 
+.leading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .list {
   width: 100vw;
-  padding: 0 100px;
+  padding: 20px 100px;
+  margin-bottom: 40px;
 }
 
 .titles {
