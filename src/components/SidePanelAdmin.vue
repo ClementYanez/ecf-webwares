@@ -148,12 +148,12 @@ a:hover {
 }
 
 .cont-side {
-  background-color: #592b02;
-  width: 450px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    background-color: #592b02;
+    width: 320px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .icon {
