@@ -1,15 +1,19 @@
 <template>
   <div class="cat-list">
     <h4>Catégories</h4>
-    <div class="category" v-for="category in categories" :key="category.id">
+    <div
+      class="category"
+      v-for="category in this.localCategories"
+      :key="category.id"
+    >
       <span class="cat" @click="getProductsByCategory(category.id)">{{
         category.name
       }}</span>
       <span v-if="category.id === filteredCategory">✔️</span>
     </div>
-    <div class="red" v-if="filteredCategory" @click="resetCat">
+    <!-- <div class="red" v-if="filteredCategory !== null" @click="resetCat">
       Enlever la catégorie
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -19,6 +23,8 @@ export default {
   data() {
     return {
       disp: 'none',
+      localCategories: [],
+      // categories: [],
     };
   },
   computed: {
@@ -46,7 +52,20 @@ export default {
     },
   },
 
-  mounted() {},
+  mounted() {
+    if (
+      !localStorage.getItem('categories') ||
+      localStorage.getItem('categories') === ''
+    ) {
+      this.localCategories = this.categories;
+      localStorage.setItem('categories', JSON.stringify(this.localCategories));
+      this.$store.dispatch('filterProductsByCategory', null);
+    } else {
+      this.localCategories = JSON.parse(localStorage.getItem('categories'));
+      this.$store.dispatch('filterProductsByCategory', null);
+      // this.categories = JSON.parse(localStorage.getItem('categories'));
+    }
+  },
 };
 </script>
 

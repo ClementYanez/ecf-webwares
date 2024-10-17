@@ -11,6 +11,7 @@
     <CategoriesList />
     <div class="cont-list">
       <div
+        v-show="filteredProductsList.length !== 0"
         class="list"
         v-for="product in filteredProductsList"
         :key="product.id"
@@ -25,6 +26,9 @@
           :product="product"
           url="product-details"
         />
+      </div>
+      <div class="no-result" v-show="filteredProductsList.length === 0">
+        Aucun produit ne correspond à votre recherche
       </div>
     </div>
   </div>
@@ -72,8 +76,16 @@ export default {
     },
   },
   mounted() {
+    if (localStorage.getItem('productsList')) {
+      this.$store.dispatch(
+        'filterProductsByCategory',
+        JSON.parse(localStorage.getItem('productsList'))
+      );
+    } else {
+      this.$store.dispatch('filterProductsByCategory', this.productsList);
+      localStorage.setItem('productsList', JSON.stringify(this.productsList));
+    }
     this.$store.commit('resetSearch');
-    this.$store.dispatch('filterProductsByCategory', this.filteredCategory);
   },
 };
 </script>
@@ -101,5 +113,8 @@ export default {
   align-items: center;
   padding: 0 15%;
   padding-top: 100px;
+}
+.no-result {
+  font-weight: 600;
 }
 </style>

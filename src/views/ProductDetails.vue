@@ -102,9 +102,15 @@ export default {
   // },
   mounted() {
     let productId = parseInt(this.$route.params.id);
-    this.productDetails = this.productsList.find(
-      (product) => product.id === productId
-    );
+    if (localStorage.getItem('productList')) {
+      this.productDetails = JSON.parse(
+        localStorage.getItem('productList')
+      ).find((product) => product.id === productId);
+    } else {
+      this.productDetails = this.productsList.find(
+        (product) => product.id === productId
+      );
+    }
     if (localStorage.getItem('user')) {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.userLevel = this.user.role;

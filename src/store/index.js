@@ -242,6 +242,8 @@ export default createStore({
     searchQuery: '',
     cart: [],
     cartvalue: '',
+    adminSearchResult: [],
+    adminSearchQuery: '',
   },
   mutations: {
     getProductDetails(state, productDetails) {
@@ -278,6 +280,21 @@ export default createStore({
     },
     setLocalStorageToCart(state, user) {
       state.cart = localStorage.getItem(`panier_${user.id}`);
+    },
+    updateCategories(state, categories) {
+      state.categories = categories;
+    },
+    setAdminSearchResult(state, result) {
+      state.adminSearchResult = result;
+    },
+    setAdminSearchQuery(state, query) {
+      state.adminSearchQuery = query;
+    },
+    setProductsList(state, productsList) {
+      state.productsList = productsList;
+    },
+    removeProduct(state, productId) {
+      state.productsList = state.productsList.filter(product => product.id !== productId);
     },
   },
   actions: {
@@ -328,6 +345,27 @@ export default createStore({
         return;
       }
     },
+    loadProductsList({ commit }) {
+      if (localStorage.getItem('productsList')) {
+      let localStorageProductsList = JSON.parse(localStorage.getItem('productsList'));
+        commit('setProductsList', localStorageProductsList);
+      } else {
+          return;
+        }
+    },
+    deleteProduct({ commit }, productId) {
+      if(localStorage.getItem('productsList')) {
+      commit('removeProduct', productId);
+      const updatedProductsList = JSON.parse(localStorage.getItem('productsList'));
+    
+    // Filtrer pour exclure le produit supprimé
+    const newProductsList = updatedProductsList.filter(product => product.id !== productId);
+    
+    // Mettre à jour le local storage avec la nouvelle liste
+    localStorage.setItem('productsList', JSON.stringify(newProductsList));
+      }
+      
+    },
   },
   getters: {
     lastImagesByCategory(state) {
@@ -354,7 +392,6 @@ export default createStore({
       if (!state.searchQuery) {
         return state.filteredProductsListByCategory;
       }
-      console.log(state.filteredProductsList);
       state.filteredProductsList = state.filteredProductsListByCategory.filter(
         (product) => {
           return (
@@ -367,6 +404,12 @@ export default createStore({
           );
         }
       );
+    },
+    searchLocalDatabase(state, query) {
+      state.adminSearchResult = state.adminSearchResult.filter((search) => {
+        return search.name.toLowerCase().includes(query.toLowerCase());
+      });
+      this.$store.commit('setAdminSearchResult', [...this.localDatabaseResult]);
     },
   },
   modules: {},
