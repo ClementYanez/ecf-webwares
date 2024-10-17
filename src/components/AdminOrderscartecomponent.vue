@@ -278,13 +278,13 @@ export default {
     font-weight: bold;
 }
 
-@media screen and (max-width: 1066px) {
+@media screen and (max-width: 1230px) {
     
     .cont-info-carte{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 500px;
+    width: 50vw;
     }
 
     .voir-details{

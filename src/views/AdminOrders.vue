@@ -2,7 +2,9 @@
   <HeaderComponent />
   <TitleComponent title="Gestion des commandes" />
 <div class="cont-content">
-    <SidePanelAdmin />
+  <div class="panel">
+      <SidePanelAdmin />
+    </div>
     <AdminOrderscore />
 </div>
   <div></div>
@@ -37,6 +39,10 @@ export default {
 
 <style scoped>
 .cont-content{
+  display: flex;
+}
+
+.panel {
   display: flex;
 }
 
