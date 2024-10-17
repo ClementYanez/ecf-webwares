@@ -294,7 +294,9 @@ export default createStore({
       state.productsList = productsList;
     },
     removeProduct(state, productId) {
-      state.productsList = state.productsList.filter(product => product.id !== productId);
+      state.productsList = state.productsList.filter(
+        (product) => product.id !== productId
+      );
     },
   },
   actions: {
@@ -304,14 +306,28 @@ export default createStore({
       // } else if (context.state.filteredCategory === null) {
       context.commit('changeCategory', category);
       // }
-      const filteredProductsListByCategory = context.state.productsList.filter(
-        (product) => product.categorieId === category
-      );
-      if (filteredProductsListByCategory.length === 0) {
-        context.commit(
-          'getFilteredProductsListByCategory',
-          context.state.productsList
+      let filteredProductsListByCategory;
+      if (localStorage.getItem('productsList')) {
+        filteredProductsListByCategory = JSON.parse(
+          localStorage.getItem('productsList')
+        ).filter((product) => product.categorieId === category);
+      } else {
+        filteredProductsListByCategory = context.state.productsList.filter(
+          (product) => product.categorieId === category
         );
+      }
+      if (filteredProductsListByCategory.length === 0) {
+        if (localStorage.getItem('productsList')) {
+          context.commit(
+            'getFilteredProductsListByCategory',
+            JSON.parse(localStorage.getItem('productsList'))
+          );
+        } else {
+          context.commit(
+            'getFilteredProductsListByCategory',
+            context.state.productsList
+          );
+        }
       } else {
         context.commit(
           'getFilteredProductsListByCategory',
@@ -347,24 +363,29 @@ export default createStore({
     },
     loadProductsList({ commit }) {
       if (localStorage.getItem('productsList')) {
-      let localStorageProductsList = JSON.parse(localStorage.getItem('productsList'));
+        let localStorageProductsList = JSON.parse(
+          localStorage.getItem('productsList')
+        );
         commit('setProductsList', localStorageProductsList);
       } else {
-          return;
-        }
+        return;
+      }
     },
     deleteProduct({ commit }, productId) {
-      if(localStorage.getItem('productsList')) {
-      commit('removeProduct', productId);
-      const updatedProductsList = JSON.parse(localStorage.getItem('productsList'));
-    
-    // Filtrer pour exclure le produit supprimé
-    const newProductsList = updatedProductsList.filter(product => product.id !== productId);
-    
-    // Mettre à jour le local storage avec la nouvelle liste
-    localStorage.setItem('productsList', JSON.stringify(newProductsList));
+      if (localStorage.getItem('productsList')) {
+        commit('removeProduct', productId);
+        const updatedProductsList = JSON.parse(
+          localStorage.getItem('productsList')
+        );
+
+        // Filtrer pour exclure le produit supprimé
+        const newProductsList = updatedProductsList.filter(
+          (product) => product.id !== productId
+        );
+
+        // Mettre à jour le local storage avec la nouvelle liste
+        localStorage.setItem('productsList', JSON.stringify(newProductsList));
       }
-      
     },
   },
   getters: {

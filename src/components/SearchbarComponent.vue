@@ -30,7 +30,7 @@ export default {
       this.$store.commit('setSearchQuery', this.localSearchQuery);
     },
   },
-  onMounted() {},
+  mounted() {},
 };
 </script>
 

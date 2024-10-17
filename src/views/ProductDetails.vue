@@ -102,9 +102,9 @@ export default {
   // },
   mounted() {
     let productId = parseInt(this.$route.params.id);
-    if (localStorage.getItem('productList')) {
+    if (localStorage.getItem('productsList')) {
       this.productDetails = JSON.parse(
-        localStorage.getItem('productList')
+        localStorage.getItem('productsList')
       ).find((product) => product.id === productId);
     } else {
       this.productDetails = this.productsList.find(
