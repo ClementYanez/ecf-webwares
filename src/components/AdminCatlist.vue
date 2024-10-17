@@ -23,7 +23,6 @@
       </div>
     </div>
     <div
-      v-show="this.adminSearchResult.length !== 0"
       class="category"
       v-for="category in this.adminSearchResult"
       :key="category.id"
@@ -165,6 +164,7 @@ export default {
     } else {
       this.localCategories = this.categories;
       localStorage.setItem('categories', JSON.stringify(this.categories));
+      location.reload();
     }
     // localStorage.setItem('categories', JSON.stringify(this.categories));
     // let categories = JSON.parse(localStorage.getItem('categories'));

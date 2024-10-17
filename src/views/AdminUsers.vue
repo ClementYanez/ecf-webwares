@@ -187,7 +187,7 @@ export default {
     TitleComponent,
     ButtonComponent,
     FilAriane,
-    AdminSearch
+    AdminSearch,
   },
   data() {
     return {
