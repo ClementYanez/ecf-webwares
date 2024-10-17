@@ -290,6 +290,12 @@ export default createStore({
     setAdminSearchQuery(state, query) {
       state.adminSearchQuery = query;
     },
+    setProductsList(state, productsList) {
+      state.productsList = productsList;
+    },
+    removeProduct(state, productId) {
+      state.productsList = state.productsList.filter(product => product.id !== productId);
+    },
   },
   actions: {
     filterProductsByCategory(context, category) {
@@ -338,6 +344,27 @@ export default createStore({
       } else {
         return;
       }
+    },
+    loadProductsList({ commit }) {
+      if (localStorage.getItem('productsList')) {
+      let localStorageProductsList = JSON.parse(localStorage.getItem('productsList'));
+        commit('setProductsList', localStorageProductsList);
+      } else {
+          return;
+        }
+    },
+    deleteProduct({ commit }, productId) {
+      if(localStorage.getItem('productsList')) {
+      commit('removeProduct', productId);
+      const updatedProductsList = JSON.parse(localStorage.getItem('productsList'));
+    
+    // Filtrer pour exclure le produit supprimé
+    const newProductsList = updatedProductsList.filter(product => product.id !== productId);
+    
+    // Mettre à jour le local storage avec la nouvelle liste
+    localStorage.setItem('productsList', JSON.stringify(newProductsList));
+      }
+      
     },
   },
   getters: {
