@@ -23,6 +23,7 @@
       </div>
     </div>
     <div
+      v-show="this.adminSearchResult.length !== 0"
       class="category"
       v-for="category in this.adminSearchResult"
       :key="category.id"
@@ -73,6 +74,9 @@
         </span>
       </div>
     </div>
+    <!-- <div class="no-result" v-show="this.adminSearchResult.length === 0">
+      Aucune catégories trouvée
+    </div> -->
     <div class="edit" v-if="edit">
       <h5>Edition de la catégorie</h5>
       <input
@@ -156,7 +160,12 @@ export default {
   },
   mounted() {
     // localStorage.setItem('categories', JSON.stringify(this.categories));
-    this.localCategories = JSON.parse(localStorage.getItem('categories'));
+    if (localStorage.getItem('categories')) {
+      this.localCategories = JSON.parse(localStorage.getItem('categories'));
+    } else {
+      this.localCategories = this.categories;
+      localStorage.setItem('categories', JSON.stringify(this.categories));
+    }
     // localStorage.setItem('categories', JSON.stringify(this.categories));
     // let categories = JSON.parse(localStorage.getItem('categories'));
     // this.$store.commit('updateCategories', categories);
@@ -276,5 +285,10 @@ input {
   border: 1px solid #d9b596;
   border-radius: 5px;
   font-size: 1rem;
+}
+.no-result {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 50px;
 }
 </style>
