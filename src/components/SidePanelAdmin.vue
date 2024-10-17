@@ -5,21 +5,37 @@
             <h3>Admin</h3>
         </div>
         <ul>
-            <li>
+            <li class="link">
                 <img :src="require('@/assets/icons/1user.svg')" alt="icône utilisateur" class="icon" />
                 <router-link to="/admin-users" class="category-link">Gestion des utilisateurs</router-link>
             </li>
-            <li>
+            <li class="mobile-link">
+                <img :src="require('@/assets/icons/1user.svg')" alt="icône utilisateur" class="icon" />
+                <router-link to="/admin-users" class="category-link">Utilisateurs</router-link>
+            </li>
+            <li class="link">
                 <img :src="require('@/assets/icons/product.svg')" alt="icône produit" class="icon icon-product" />
                 <router-link to="/admin-products" class="category-link">Gestion des produits</router-link>
             </li>
-            <li>
+            <li class="mobile-link">
+                <img :src="require('@/assets/icons/product.svg')" alt="icône produit" class="icon icon-product" />
+                <router-link to="/admin-products" class="category-link">Produits</router-link>
+            </li>
+            <li class="link">
                 <img :src="require('@/assets/icons/categories.svg')" alt="icône catégories" class="icon" />
                 <router-link to="admin-categories" class="category-link">Gestion des catégories</router-link>
             </li>
-            <li>
+            <li class="mobile-link">
+                <img :src="require('@/assets/icons/categories.svg')" alt="icône catégories" class="icon" />
+                <router-link to="admin-categories" class="category-link">Catégories</router-link>
+            </li>
+            <li class="link">
                 <img :src="require('@/assets/icons/order.svg')" alt="icône commande" class="icon" />
                 <router-link to="/admin-orders" class="category-link">Gestion des commandes</router-link>
+            </li>
+            <li class="mobile-link">
+                <img :src="require('@/assets/icons/order.svg')" alt="icône commande" class="icon" />
+                <router-link to="/admin-orders" class="category-link">Commandes</router-link>
             </li>
         </ul>
     </div>
@@ -60,7 +76,6 @@ h3 {
 }
 
 .raison-sociale {
-    margin-top: 120px;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -87,7 +102,7 @@ a:hover {
 .cont-side {
     background-color: #592b02;
     height: 100vh;
-    width: 30%;
+    width: 450px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -103,6 +118,10 @@ a:hover {
 .icon-product {
     width: 30px;
     margin: 7px 10px 0 9px;
+}
+
+.mobile-link {
+    display: none;
 }
 
 @media screen and (max-width: 950px) {
@@ -124,6 +143,14 @@ a:hover {
     .logo {
         width: 100px;
         height: 100px;
+    }
+
+    .link {
+        display: none;
+    }
+
+    .mobile-link {
+        display: inline;
     }
 }
 </style>
