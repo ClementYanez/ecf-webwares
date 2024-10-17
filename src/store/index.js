@@ -242,6 +242,8 @@ export default createStore({
     searchQuery: '',
     cart: [],
     cartvalue: '',
+    adminSearchResult: [],
+    adminSearchQuery: '',
   },
   mutations: {
     getProductDetails(state, productDetails) {
@@ -278,6 +280,15 @@ export default createStore({
     },
     setLocalStorageToCart(state, user) {
       state.cart = localStorage.getItem(`panier_${user.id}`);
+    },
+    updateCategories(state, categories) {
+      state.categories = categories;
+    },
+    setAdminSearchResult(state, result) {
+      state.adminSearchResult = result;
+    },
+    setAdminSearchQuery(state, query) {
+      state.adminSearchQuery = query;
     },
   },
   actions: {
@@ -354,7 +365,6 @@ export default createStore({
       if (!state.searchQuery) {
         return state.filteredProductsListByCategory;
       }
-      console.log(state.filteredProductsList);
       state.filteredProductsList = state.filteredProductsListByCategory.filter(
         (product) => {
           return (
@@ -367,6 +377,12 @@ export default createStore({
           );
         }
       );
+    },
+    searchLocalDatabase(state, query) {
+      state.adminSearchResult = state.adminSearchResult.filter((search) => {
+        return search.name.toLowerCase().includes(query.toLowerCase());
+      });
+      this.$store.commit('setAdminSearchResult', [...this.localDatabaseResult]);
     },
   },
   modules: {},

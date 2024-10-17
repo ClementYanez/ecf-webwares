@@ -1,7 +1,11 @@
 <template>
   <div class="cat-list">
     <h4>Catégories</h4>
-    <div class="category" v-for="category in categories" :key="category.id">
+    <div
+      class="category"
+      v-for="category in this.categories"
+      :key="category.id"
+    >
       <span class="cat" @click="getProductsByCategory(category.id)">{{
         category.name
       }}</span>
@@ -19,6 +23,7 @@ export default {
   data() {
     return {
       disp: 'none',
+      categories: [],
     };
   },
   computed: {
@@ -46,7 +51,9 @@ export default {
     },
   },
 
-  mounted() {},
+  mounted() {
+    this.categories = JSON.parse(localStorage.getItem('categories'));
+  },
 };
 </script>
 
