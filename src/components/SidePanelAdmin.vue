@@ -146,7 +146,7 @@ a.router-link-exact-active {
 a:hover {
   color: #d9b596;
 }
-
+ 
 .cont-side {
     background-color: #592b02;
     width: 320px;

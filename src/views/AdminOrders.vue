@@ -1,7 +1,10 @@
 <template>
   <HeaderComponent />
   <TitleComponent title="Gestion des commandes" />
-  <SidePanelAdmin />
+<div class="cont-content">
+    <SidePanelAdmin />
+    <AdminOrderscore />
+</div>
   <div></div>
 </template>
 
@@ -9,11 +12,14 @@
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import SidePanelAdmin from '@/components/SidePanelAdmin.vue';
 import TitleComponent from '@/components/TitleComponent.vue';
+import AdminOrderscore from '@/components/AdminOrderscore.vue';
+
 export default {
   components: {
     HeaderComponent,
     SidePanelAdmin,
     TitleComponent,
+    AdminOrderscore,
   },
   mounted() {
     let userLevel;
@@ -29,4 +35,15 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.cont-content{
+  display: flex;
+}
+
+@media screen and (max-width: 950px) {
+    .cont-content{
+        flex-direction: column;
+    }
+}
+
+</style>
