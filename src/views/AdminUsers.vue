@@ -204,7 +204,7 @@ export default {
     },
     changeAdmin(i) {
       this.notAdmin[i] = false;
-      this.userList[i].role = 'ADMIN';
+      this.resultSearch[i].role = 'ADMIN';
       localStorage.setItem('user_list', JSON.stringify(this.userList));
       this.$store.dispatch('loadUserDatabase');
     },
@@ -212,7 +212,7 @@ export default {
       let admin = this.userList.filter((user) => user.role === 'ADMIN');
       if (admin.length > 1 || user.role === 'USER') {
         this.notAdmin[i] = false;
-        this.userList[i].role = 'USER';
+        this.resultSearch[i].role = 'USER';
         localStorage.setItem('user_list', JSON.stringify(this.userList));
         this.$store.dispatch('loadUserDatabase');
       } else {
