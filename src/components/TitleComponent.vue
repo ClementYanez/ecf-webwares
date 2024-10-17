@@ -25,9 +25,9 @@ export default {
     background-image: url('../assets/heropage.png');
     background-position: 100% 80%;
     background-size: cover;
-    height: 200px;
+    height: 300px;
     position: relative;
-    top: 100px;
+    padding-top: 100px;
 }
 
 h1 {
