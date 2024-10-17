@@ -2,7 +2,9 @@
   <HeaderComponent />
   <TitleComponent title="Gestion des catégories" />
   <div class="cont-global">
-    <SidePanelAdmin />
+    <div class="panel">
+      <SidePanelAdmin />
+    </div>
     <div class="cont-liste">
       <div class="searchbar">
         <div class="ariane">
@@ -52,13 +54,19 @@ export default {
 .cont-global {
   display: flex;
   flex-direction: row;
+  min-height: 70vh;
+  /* height: 100%; */
   /* justify-content: center; */
   /* align-items: center; */
+}
+.panel {
+  display: flex;
 }
 .cont-liste {
   /* padding-top: 100px; */
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
   /* justify-content: center; */
   /* margin-left: 10%; */
   width: 80%;

@@ -94,6 +94,7 @@ export default {
       'setAdminSearchResult',
       JSON.parse(localStorage.getItem(this.localstorage))
     );
+    console.log(this.adminSearchResult);
   },
 };
 </script>
