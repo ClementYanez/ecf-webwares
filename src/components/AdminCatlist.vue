@@ -23,7 +23,7 @@
       </div>
     </div>
     <div
-      v-show="adminSearchResult.length !== 0"
+      v-show="this.adminSearchResult.length !== 0"
       class="category"
       v-for="category in this.adminSearchResult"
       :key="category.id"
@@ -74,9 +74,9 @@
         </span>
       </div>
     </div>
-    <div class="no-result" v-show="adminSearchResult.length === 0">
+    <!-- <div class="no-result" v-show="this.adminSearchResult.length === 0">
       Aucune catégories trouvée
-    </div>
+    </div> -->
     <div class="edit" v-if="edit">
       <h5>Edition de la catégorie</h5>
       <input
