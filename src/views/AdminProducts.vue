@@ -8,11 +8,13 @@
     <div class="flex-need">
       <SidePanelAdmin style="height: auto"/>
       
+
+
       <div class="products-container">
 
         <div class="product-list">
 
-          <ButtonComponent text="Ajouter un produit" color="#CA8465" @click="toggleForm" />
+          
 
 
           <!-- Formulaire d'ajout de produit -->
@@ -40,6 +42,12 @@
           </div>
 
           <div class="product-item">
+            <div class="leading">
+        <FilAriane cat1="Administration / Gestion des produits" />
+        <input type="text" class="searchbar" placeholder="Rechercher un produit" v-model="search"
+          @input="searchProduct">
+      </div>
+      
             <div class="titles">
         <span>Liste des produits</span>
         <div class="title-icons">
@@ -47,7 +55,9 @@
           <span>Supprimer</span>
         </div>
       </div>
-            <div v-for="(product, index) in productsList" :key="index" >
+      <div><ButtonComponent text="Ajouter un produit" color="green" @click="toggleForm" /></div>
+      <div v-for="(product, index) in resultSearch.length ? resultSearch : productsList" :key="index">
+
               <div  v-if="editingProduct && editingProduct.id === product.id" class="product-update">
     <!-- Formulaire de modification -->
     <h3>Modifier le produit</h3>
@@ -128,10 +138,19 @@ import SidePanelAdmin from '@/components/SidePanelAdmin.vue';
 import TitleComponent from '@/components/TitleComponent.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 import { mapActions } from 'vuex';
+import FilAriane from '@/components/FilAriane.vue';
 export default {
+  components: {
+    HeaderComponent,
+    SidePanelAdmin,
+    TitleComponent,
+    ButtonComponent,
+    FilAriane,
+  },
   data() {
     return {
-      
+      search: "",
+      resultSearch: [],
       selectedProduct: null, 
       showModal: false, 
       showAddForm: false,  
@@ -147,15 +166,23 @@ export default {
       productToDelete: null,
     };
   },
-  components: {
-    HeaderComponent,
-    SidePanelAdmin,
-    TitleComponent,
-    ButtonComponent,
-  },
   methods: {
   ...mapActions(['loadProductsList']),
   
+  searchProduct() {
+  if (this.search !== "") {
+    this.resultSearch = this.productsList.filter((product) => {
+      const titleMatches = product.titre && product.titre.toLowerCase().includes(this.search.toLowerCase());
+      const descriptionMatches = product.description && product.description.toLowerCase().includes(this.search.toLowerCase());
+      const categoryMatches = product.categorieId && product.categorieId.toString().toLowerCase().includes(this.search.toLowerCase());
+
+      return titleMatches || descriptionMatches || categoryMatches;
+    });
+  } else {
+    this.resultSearch = this.productsList;
+  }
+  console.log(this.resultSearch);
+},
 
 
   toggleForm() {
@@ -247,23 +274,23 @@ export default {
 mounted() {
   let userLevel;
 
-  // Vérifiez si l'utilisateur est connecté et récupérez son rôle
+ 
   const user = localStorage.getItem('user');
   if (user) {
     userLevel = JSON.parse(user).role;
   }
 
-  // Redirigez si l'utilisateur n'est pas ADMIN
+  
   if (!userLevel || userLevel !== 'ADMIN') {
     this.$router.push('/');
-    return; // Ajoutez un retour pour éviter le chargement des produits si redirection
+    return; 
   }
 
-  // Charger la liste des produits depuis le local storage
+ 
   const storedProducts = localStorage.getItem('productsList');
-  if (storedProducts) {
+  if (localStorage.getItem('productsList')) {
     const productsList = JSON.parse(storedProducts);
-    this.$store.commit('setProductsList', productsList); // Assurez-vous d'avoir une mutation setProductsList pour cela
+    this.$store.commit('setProductsList', productsList); 
   } else {
     this.$store.commit('setProductsList', []);
   }
@@ -295,9 +322,25 @@ mounted() {
 
 .button-container {
   margin-top: 20px;
- 
   align-self: center;
  
+}
+
+.leading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.searchbar {
+  padding: 10px 10px 10px 20px;
+  margin: 30px 10px;
+  width: 300px;
+  height: 30px;
+  border: 1px solid #d9b596;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 button {
@@ -525,6 +568,4 @@ textarea {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000; /* Pour que la boîte de dialogue soit au-dessus du contenu */
 }
-
-
 </style>
