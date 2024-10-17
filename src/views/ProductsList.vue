@@ -76,7 +76,7 @@ export default {
     },
   },
   mounted() {
-    if (localStorage.getItem('products')) {
+    if (localStorage.getItem('productsList')) {
       this.$store.dispatch(
         'filterProductsByCategory',
         JSON.parse(localStorage.getItem('productsList'))
