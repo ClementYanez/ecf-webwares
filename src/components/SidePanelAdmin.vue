@@ -101,8 +101,7 @@ a:hover {
 
 .cont-side {
     background-color: #592b02;
-    height: 100vh;
-    width: 450px;
+    width: 320px;
     padding: 20px;
     display: flex;
     flex-direction: column;
