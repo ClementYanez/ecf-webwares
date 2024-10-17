@@ -41,23 +41,50 @@ export default {
         'setAdminSearchResult',
         JSON.parse(localStorage.getItem(this.localstorage))
       );
-      console.log(this.adminSearchQuery);
 
-      if (this.localSearchQuery === '') {
-        this.$store.commit(
-          'setAdminSearchResult',
-          JSON.parse(localStorage.getItem(this.localstorage))
-        );
-      } else {
-        this.localDatabaseResult = this.adminSearchResult.filter((search) => {
-          return search.name
-            .toLowerCase()
-            .includes(this.localSearchQuery.toLowerCase());
-        });
+      if (this.localstorage === 'categories') {
+        if (this.localSearchQuery === '') {
+          this.$store.commit(
+            'setAdminSearchResult',
+            JSON.parse(localStorage.getItem(this.localstorage))
+          );
+        } else {
+          this.localDatabaseResult = this.adminSearchResult.filter((search) => {
+            return search.name
+              .toLowerCase()
+              .includes(this.localSearchQuery.toLowerCase());
+          });
 
-        this.$store.commit('setAdminSearchResult', [
-          ...this.localDatabaseResult,
-        ]);
+          this.$store.commit('setAdminSearchResult', [
+            ...this.localDatabaseResult,
+          ]);
+        }
+      }
+      if (this.localstorage === 'user_list') {
+        if (this.localSearchQuery === '') {
+          this.$store.commit(
+            'setAdminSearchResult',
+            JSON.parse(localStorage.getItem(this.localstorage))
+          );
+        } else {
+          this.localDatabaseResult = this.adminSearchResult.filter((search) => {
+            return (
+              search.raisonSociale
+                .toLowerCase()
+                .includes(this.localSearchQuery.toLowerCase()) ||
+              search.siret
+                .toLowerCase()
+                .includes(this.localSearchQuery.toLowerCase()) ||
+              search.email
+                .toLowerCase()
+                .includes(this.localSearchQuery.toLowerCase())
+            );
+          });
+
+          this.$store.commit('setAdminSearchResult', [
+            ...this.localDatabaseResult,
+          ]);
+        }
       }
     },
   },
