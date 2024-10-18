@@ -52,22 +52,33 @@ import FilAriane from './FilAriane.vue';
 }
 .filarianne{
     align-self: flex-start;
+    justify-self: flex-start;
     margin-left: 5%;
+    position: absolute;
+    top: 0px;
 }
 
 .cont-list{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     margin: 50px auto 50px auto;
     gap: 15px;
     width: 100%;
+    position: relative;
+    padding: 40px
 }
 
 @media screen and (max-width : 950px){
     .filarianne{
     margin-left: 10%;
+}
+}
+
+@media screen and (max-width: 382px){
+    .cont-list{
+    padding: 40px;
+    padding-top: 70px;
 }
 }
 </style>
