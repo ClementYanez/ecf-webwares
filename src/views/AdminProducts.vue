@@ -6,8 +6,9 @@
 
     
     <div class="flex-need">
-      <SidePanelAdmin style="height: auto"/>
       
+      <SidePanelAdmin class="side-panel"/>
+    
 
 
       <div class="products-container">
@@ -31,7 +32,7 @@
               <input type="text" v-model="newProduct.categorieId" id="categorie" required>
 
               <label for="prix">Prix:</label>
-              <input type="number" v-model="newProduct.prix" id="prix" required>
+              <input type="number" v-model="newProduct.prix" id="prix" step="0.01" required>
 
               <label for="moq">Quantité minimum (MOQ):</label>
               <input type="number" v-model="newProduct.moq" id="moq" required>
@@ -96,9 +97,9 @@
   <div v-else>
               <div class="infos-actions">
                 <div class="product-info">
-                  <img v-if="product.image" :src="require(`@/assets/${product.image}`)" alt="Product Image"
+                  <img :src="require(`@/assets/${product.image}`)" alt="Product Image"
                     class="product-image" />
-                  <p v-else>Aucune image disponible</p>
+                  <!-- <p v-else>Aucune image disponible</p> -->
                   <h5>{{ product.titre }}</h5>
                   <p>{{ getFirstSevenWords(product.description) }}</p>
                   <p><strong>Catégorie</strong> : {{ product.categorieId }}</p>
@@ -120,9 +121,12 @@
             </div>
             <!-- Div de confirmation de suppression -->
 <div v-if="productToDelete" class="confirmation-dialog">
-  <p>Êtes-vous sûr de vouloir supprimer ce produit ?</p>
-  <button @click="handleDeleteConfirmation">Oui, supprimer</button>
-  <button @click="cancelDelete">Annuler</button>
+  <p>Êtes-vous sûr de vouloir supprimer <strong>{{ productToDelete.titre }}</strong> ?</p>
+
+  <div class="delete-buttons">
+  <button class="bton-delete-modal delete-modal-confirm" @click="handleDeleteConfirmation">Oui, supprimer</button>
+  <button class="bton-delete-modal delete-modal-cancel" @click="cancelDelete">Non, annuler</button>
+</div>
 </div>
           </div>
         </div>
@@ -160,6 +164,7 @@ export default {
         categorieId: '',
         prix: null,
         moq: null,
+        image: "no-image.png",
       },
       showForm: false,
       editingProduct: null,
@@ -306,20 +311,53 @@ mounted() {
 }
 
 
+.side-panel{
+  min-height: 100vh;
+}
+
+.products-container {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: column;
+}
+
 .infos-actions {
   display: flex;
   justify-content: center;
   align-items: center;  
 }
+.product-image {
+  width: 50px;
+  height: auto;
+}
 
-.products-container {
+.product-info {
   display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 10px #33333361;  
+  border-radius: 8px;
+  background-color: #fff;
+  max-width: 90%;
+  width: 100%;
+  justify-content: space-between;
 }
-
-.product-list {
-  margin: 40px;
-}
-
 .button-container {
   margin-top: 20px;
   align-self: center;
@@ -343,6 +381,30 @@ mounted() {
   font-size: 1rem;
 }
 
+
+.delete-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.bton-delete-modal{
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+.delete-modal-confirm{
+  background-color: rgb(206, 29, 29);
+}
+
+.delete-modal-cancel{
+  background-color: rgb(51, 51, 51);
+}
+
 button {
   width: auto;
   
@@ -350,10 +412,7 @@ button {
   margin-bottom: 20px;
 }
 
-.product-item {
-  display: flex;
-  flex-direction: column;
-}
+
 
 .product-image-container {
 
@@ -377,26 +436,6 @@ button {
   align-items: center;
 }
 
-.product-image {
-  width: 50px;
-  height: auto;
-}
-
-.product-info {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0px 0px 10px #33333361;  
-  border-radius: 8px;
-  background-color: #fff;
-  max-width: 90%;
-  width: 100%;
-  justify-content: space-between;
-}
 
 p, h5 {
   margin: 0;
@@ -404,13 +443,12 @@ p, h5 {
 
 .product-actions {
   display: flex;
-
+  justify-content: space-between;
 }
 
 .product-update{
   display: flex;
-
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
@@ -513,6 +551,10 @@ textarea {
 @media screen and (max-width: 950px) {
   .flex-need {
     flex-direction: column;
+  }
+
+  .side-panel{
+    height: 10vh;
   }
 }
 .add-product-form {
