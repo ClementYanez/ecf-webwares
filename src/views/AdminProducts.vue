@@ -29,16 +29,22 @@
               <textarea v-model="newProduct.description" id="description" required></textarea>
 
               <label for="categorie">Catégorie:</label>
-              <input type="text" v-model="newProduct.categorieId" id="categorie" required>
-
+              <select v-model="newProduct.categorieId" id="categorie" required>
+                <option value="" disabled>Sélectionnez une catégorie</option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">
+                  {{ category.name }}
+                </option>
+              </select> 
               <label for="prix">Prix:</label>
               <input type="number" v-model="newProduct.prix" id="prix" step="0.01" required>
 
               <label for="moq">Quantité minimum (MOQ):</label>
               <input type="number" v-model="newProduct.moq" id="moq" required>
 
-              <button type="submit">Enregistrer le produit</button>
-              <button type="button" @click="toggleForm">Annuler</button>
+              <div class="add-product-buttons">
+              <button class="ajout-prod-btn-enregistrer" type="submit">Enregistrer le produit</button>
+              <button class="ajout-prod-btn-annuler" type="button" @click="toggleForm">Annuler</button>
+            </div>
             </form>
           </div>
 
@@ -75,7 +81,13 @@
     
     <div class="form-group">
       <label for="edit-categorie">Catégorie :</label>
-      <input type="text" v-model="editingProduct.categorieId" class="input-field">
+      <select v-model="editingProduct.categorieId" class="input-field">
+                <option value="" disabled>Sélectionnez une catégorie</option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">
+                  {{ category.name }}
+                </option>
+              </select> 
+      
     </div>
     
     <div class="form-group">
@@ -102,7 +114,7 @@
                   <!-- <p v-else>Aucune image disponible</p> -->
                   <h5>{{ product.titre }}</h5>
                   <p>{{ getFirstSevenWords(product.description) }}</p>
-                  <p><strong>Catégorie</strong> : {{ product.categorieId }}</p>
+                  <p><strong>Catégorie</strong> : {{ getCategoryName(product.categorieId) }}</p>
                   <p><strong>Prix TTC /u</strong> : {{ product.prix }}€</p>
                   <p><strong>Quantité minimum</strong> : {{ product.moq }}</p>
                 </div>
@@ -169,6 +181,7 @@ export default {
       showForm: false,
       editingProduct: null,
       productToDelete: null,
+      categories: [],
     };
   },
   methods: {
@@ -266,6 +279,12 @@ export default {
       this.editingProduct = null;
     }
   },
+
+  getCategoryName(categorieId) {
+    const category = this.categories.find(cat => cat.id === categorieId);
+    return category ? category.name : 'Non spécifié'; // Retourne 'Non spécifié' si aucune catégorie n'est trouvée
+  },
+
   },
 
   computed: {
@@ -299,6 +318,12 @@ mounted() {
   } else {
     this.$store.commit('setProductsList', []);
   }
+
+  const storedCategories = localStorage.getItem('categories');
+  if (storedCategories) {
+    this.categories = JSON.parse(storedCategories);
+  }
+
 }
 
 };
@@ -308,11 +333,6 @@ mounted() {
 .flex-need {
   display: flex;
 
-}
-
-
-.side-panel{
-  min-height: 100vh;
 }
 
 .products-container {
@@ -381,7 +401,6 @@ mounted() {
   font-size: 1rem;
 }
 
-
 .delete-buttons{
   display: flex;
   justify-content: center;
@@ -411,8 +430,6 @@ button {
   padding: 10px 20px;
   margin-bottom: 20px;
 }
-
-
 
 .product-image-container {
 
@@ -495,7 +512,7 @@ p, h5 {
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: none;
-  max-height: 40px; /* Limite à 2 lignes pour les input */
+  max-height: 40px; 
   overflow: hidden;
 }
 
@@ -505,8 +522,8 @@ p, h5 {
 }
 
 textarea {
-  max-height: 80px; /* Limite à 2 lignes pour les textarea */
-  min-height: 40px; /* Taille minimale */
+  max-height: 80px;
+  min-height: 40px; 
 }
 
 .form-actions {
@@ -548,14 +565,17 @@ textarea {
   margin: 0 20px;
 }
 
+@media screen and (max-width: 480px) {
+  .titles{
+    display: none;
+  }
+}
+
 @media screen and (max-width: 950px) {
   .flex-need {
     flex-direction: column;
   }
 
-  .side-panel{
-    height: 10vh;
-  }
 }
 .add-product-form {
   margin: 20px 0;
@@ -587,16 +607,12 @@ textarea {
 
 .add-product-form button {
   padding: 10px 15px;
-  background-color: #CA8465;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.add-product-form button:hover {
-  background-color: #b27257;
-}
 
 .confirmation-dialog {
   position: fixed;
@@ -609,5 +625,14 @@ textarea {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000; /* Pour que la boîte de dialogue soit au-dessus du contenu */
+}
+
+.ajout-prod-btn-enregistrer{
+  background-color: green;
+  margin-right: 10px;
+}
+
+.ajout-prod-btn-annuler{
+  background-color: rgb(51, 51, 51);
 }
 </style>
