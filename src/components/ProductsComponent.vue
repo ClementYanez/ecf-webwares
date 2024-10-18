@@ -1,6 +1,8 @@
 <template>
   <div class="merdum">
-    <img :src="require(`@/assets/${image}`)" />
+    <!-- <img :src="require(`@/assets/${image}`)" v-if="!bool" />
+    <img :src="image" v-if="bool" /> -->
+    <img :src="localImage" alt="" />
     <h4>{{ name }}</h4>
     <div v-if="userLevel">
       <p>{{ price }}€/u pour {{ minQte }} unités minimum</p>
@@ -49,6 +51,8 @@ export default {
       panier: [],
       minQuantity: this.minQte,
       selected: false,
+      bool: false,
+      localImage: '',
     };
   },
   components: {
@@ -88,7 +92,6 @@ export default {
         );
       }
       product.quantity = this.minQuantity;
-      console.log(this.minQuantity);
 
       this.panier.push(product);
 
@@ -125,6 +128,23 @@ export default {
       });
     }
     this.minQuantity = this.minQte;
+    if (this.image.includes('base64')) {
+      // const temp = this.image.replace(/^url\('|'\)$/g, '');
+      // const temp = this.image.replace(/data:image\/jpeg;base64,([^,]+)/, '$1');
+      // const reader = new FileReader();
+      // reader.onload = (e) => {
+      //   this.localImage = e.target.result;
+      // };
+      // reader.readAsDataURL(new Blob([temp], { type: 'image/jpeg' }));
+      // this.localImage = this.image;
+      this.localImage = this.image;
+      this.bool = true;
+      console.log(this.image);
+    } else {
+      this.localImage = require(`@/assets/${this.image}`);
+      this.bool = false;
+      console.log(this.image);
+    }
   },
 };
 </script>
