@@ -6,13 +6,16 @@
 
     
     <div class="flex-need">
-      <SidePanelAdmin style="height: auto"/>
       
+      <SidePanelAdmin class="side-panel"/>
+    
+
+
       <div class="products-container">
 
         <div class="product-list">
 
-          <ButtonComponent text="Ajouter un produit" color="#CA8465" @click="toggleForm" />
+          
 
 
           <!-- Formulaire d'ajout de produit -->
@@ -29,7 +32,7 @@
               <input type="text" v-model="newProduct.categorieId" id="categorie" required>
 
               <label for="prix">Prix:</label>
-              <input type="number" v-model="newProduct.prix" id="prix" required>
+              <input type="number" v-model="newProduct.prix" id="prix" step="0.01" required>
 
               <label for="moq">Quantité minimum (MOQ):</label>
               <input type="number" v-model="newProduct.moq" id="moq" required>
@@ -40,6 +43,12 @@
           </div>
 
           <div class="product-item">
+            <div class="leading">
+        <FilAriane cat1="Administration / Gestion des produits" />
+        <input type="text" class="searchbar" placeholder="Rechercher un produit" v-model="search"
+          @input="searchProduct">
+      </div>
+      
             <div class="titles">
         <span>Liste des produits</span>
         <div class="title-icons">
@@ -47,7 +56,9 @@
           <span>Supprimer</span>
         </div>
       </div>
-            <div v-for="(product, index) in productsList" :key="index" >
+      <div><ButtonComponent text="Ajouter un produit" color="green" @click="toggleForm" /></div>
+      <div v-for="(product, index) in resultSearch.length ? resultSearch : productsList" :key="index">
+
               <div  v-if="editingProduct && editingProduct.id === product.id" class="product-update">
     <!-- Formulaire de modification -->
     <h3>Modifier le produit</h3>
@@ -86,9 +97,9 @@
   <div v-else>
               <div class="infos-actions">
                 <div class="product-info">
-                  <img v-if="product.image" :src="require(`@/assets/${product.image}`)" alt="Product Image"
+                  <img :src="require(`@/assets/${product.image}`)" alt="Product Image"
                     class="product-image" />
-                  <p v-else>Aucune image disponible</p>
+                  <!-- <p v-else>Aucune image disponible</p> -->
                   <h5>{{ product.titre }}</h5>
                   <p>{{ getFirstSevenWords(product.description) }}</p>
                   <p><strong>Catégorie</strong> : {{ product.categorieId }}</p>
@@ -110,9 +121,12 @@
             </div>
             <!-- Div de confirmation de suppression -->
 <div v-if="productToDelete" class="confirmation-dialog">
-  <p>Êtes-vous sûr de vouloir supprimer ce produit ?</p>
-  <button @click="handleDeleteConfirmation">Oui, supprimer</button>
-  <button @click="cancelDelete">Annuler</button>
+  <p>Êtes-vous sûr de vouloir supprimer <strong>{{ productToDelete.titre }}</strong> ?</p>
+
+  <div class="delete-buttons">
+  <button class="bton-delete-modal delete-modal-confirm" @click="handleDeleteConfirmation">Oui, supprimer</button>
+  <button class="bton-delete-modal delete-modal-cancel" @click="cancelDelete">Non, annuler</button>
+</div>
 </div>
           </div>
         </div>
@@ -128,10 +142,19 @@ import SidePanelAdmin from '@/components/SidePanelAdmin.vue';
 import TitleComponent from '@/components/TitleComponent.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 import { mapActions } from 'vuex';
+import FilAriane from '@/components/FilAriane.vue';
 export default {
+  components: {
+    HeaderComponent,
+    SidePanelAdmin,
+    TitleComponent,
+    ButtonComponent,
+    FilAriane,
+  },
   data() {
     return {
-      
+      search: "",
+      resultSearch: [],
       selectedProduct: null, 
       showModal: false, 
       showAddForm: false,  
@@ -141,21 +164,30 @@ export default {
         categorieId: '',
         prix: null,
         moq: null,
+        image: "no-image.png",
       },
       showForm: false,
       editingProduct: null,
       productToDelete: null,
     };
   },
-  components: {
-    HeaderComponent,
-    SidePanelAdmin,
-    TitleComponent,
-    ButtonComponent,
-  },
   methods: {
   ...mapActions(['loadProductsList']),
   
+  searchProduct() {
+  if (this.search !== "") {
+    this.resultSearch = this.productsList.filter((product) => {
+      const titleMatches = product.titre && product.titre.toLowerCase().includes(this.search.toLowerCase());
+      const descriptionMatches = product.description && product.description.toLowerCase().includes(this.search.toLowerCase());
+      const categoryMatches = product.categorieId && product.categorieId.toString().toLowerCase().includes(this.search.toLowerCase());
+
+      return titleMatches || descriptionMatches || categoryMatches;
+    });
+  } else {
+    this.resultSearch = this.productsList;
+  }
+  console.log(this.resultSearch);
+},
 
 
   toggleForm() {
@@ -247,23 +279,23 @@ export default {
 mounted() {
   let userLevel;
 
-  // Vérifiez si l'utilisateur est connecté et récupérez son rôle
+ 
   const user = localStorage.getItem('user');
   if (user) {
     userLevel = JSON.parse(user).role;
   }
 
-  // Redirigez si l'utilisateur n'est pas ADMIN
+  
   if (!userLevel || userLevel !== 'ADMIN') {
     this.$router.push('/');
-    return; // Ajoutez un retour pour éviter le chargement des produits si redirection
+    return; 
   }
 
-  // Charger la liste des produits depuis le local storage
+ 
   const storedProducts = localStorage.getItem('productsList');
-  if (storedProducts) {
+  if (localStorage.getItem('productsList')) {
     const productsList = JSON.parse(storedProducts);
-    this.$store.commit('setProductsList', productsList); // Assurez-vous d'avoir une mutation setProductsList pour cela
+    this.$store.commit('setProductsList', productsList); 
   } else {
     this.$store.commit('setProductsList', []);
   }
@@ -279,25 +311,98 @@ mounted() {
 }
 
 
+.side-panel{
+  min-height: 100vh;
+}
+
+.products-container {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: column;
+}
+
 .infos-actions {
   display: flex;
   justify-content: center;
   align-items: center;  
 }
+.product-image {
+  width: 50px;
+  height: auto;
+}
 
-.products-container {
+.product-info {
   display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 10px #33333361;  
+  border-radius: 8px;
+  background-color: #fff;
+  max-width: 90%;
+  width: 100%;
+  justify-content: space-between;
 }
-
-.product-list {
-  margin: 40px;
-}
-
 .button-container {
   margin-top: 20px;
- 
   align-self: center;
  
+}
+
+.leading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.searchbar {
+  padding: 10px 10px 10px 20px;
+  margin: 30px 10px;
+  width: 300px;
+  height: 30px;
+  border: 1px solid #d9b596;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+
+.delete-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.bton-delete-modal{
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+.delete-modal-confirm{
+  background-color: rgb(206, 29, 29);
+}
+
+.delete-modal-cancel{
+  background-color: rgb(51, 51, 51);
 }
 
 button {
@@ -307,10 +412,7 @@ button {
   margin-bottom: 20px;
 }
 
-.product-item {
-  display: flex;
-  flex-direction: column;
-}
+
 
 .product-image-container {
 
@@ -334,26 +436,6 @@ button {
   align-items: center;
 }
 
-.product-image {
-  width: 50px;
-  height: auto;
-}
-
-.product-info {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0px 0px 10px #33333361;  
-  border-radius: 8px;
-  background-color: #fff;
-  max-width: 90%;
-  width: 100%;
-  justify-content: space-between;
-}
 
 p, h5 {
   margin: 0;
@@ -361,13 +443,12 @@ p, h5 {
 
 .product-actions {
   display: flex;
-
+  justify-content: space-between;
 }
 
 .product-update{
   display: flex;
-
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
@@ -471,6 +552,10 @@ textarea {
   .flex-need {
     flex-direction: column;
   }
+
+  .side-panel{
+    height: 10vh;
+  }
 }
 .add-product-form {
   margin: 20px 0;
@@ -525,6 +610,4 @@ textarea {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000; /* Pour que la boîte de dialogue soit au-dessus du contenu */
 }
-
-
 </style>

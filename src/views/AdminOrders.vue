@@ -2,7 +2,9 @@
   <HeaderComponent />
   <TitleComponent title="Gestion des commandes" />
 <div class="cont-content">
-    <SidePanelAdmin />
+  <div class="panel">
+      <SidePanelAdmin />
+    </div>
     <AdminOrderscore />
 </div>
   <div></div>
@@ -38,6 +40,12 @@ export default {
 <style scoped>
 .cont-content{
   display: flex;
+  height: 100vh;
+}
+
+.panel {
+  display: flex;
+
 }
 
 @media screen and (max-width: 950px) {
