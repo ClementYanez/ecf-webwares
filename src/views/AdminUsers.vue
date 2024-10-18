@@ -447,5 +447,33 @@ p {
   .contain {
     flex-direction: column;
   }
+
+  .list {
+    padding: 20px 60px;
+  }
+}
+
+@media screen and (max-width: 645px) {
+
+  .contain,
+  .leading {
+    flex-direction: column;
+  }
+
+  .img {
+    width: auto;
+    padding: 0 5px;
+  }
+
+  .list {
+    padding: 20px 40px;
+  }
+
+}
+
+@media screen and (max-width: 460px) {
+  .list {
+    padding: 20px 10px;
+  }
 }
 </style>
