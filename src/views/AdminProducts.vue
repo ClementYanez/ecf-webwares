@@ -34,6 +34,9 @@
               <label for="moq">Quantité minimum (MOQ):</label>
               <input type="number" v-model="newProduct.moq" id="moq" required>
 
+              <!-- <input type="file" @change="handleFileUpload" accept="image/*"> -->
+
+
               <div class="add-product-buttons">
               <button class="ajout-prod-btn-enregistrer" type="submit">Enregistrer le produit</button>
               <button class="ajout-prod-btn-annuler" type="button" @click="toggleForm">Annuler</button>
@@ -102,7 +105,7 @@
   <div v-else>
               <div class="infos-actions">
                 <div class="product-info">
-                  <img :src="require(`@/assets/${product.image}`)" alt="Product Image"
+                  <img :src="getImageSource(product.image)" alt="Product Image"
                     class="product-image" />
                   <!-- <p v-else>Aucune image disponible</p> -->
                   <h5>{{ product.titre }}</h5>
@@ -169,7 +172,7 @@ export default {
         categorieId: '',
         prix: null,
         moq: null,
-        image: "no-image.png",
+        image: "",
       },
       showForm: false,
       editingProduct: null,
@@ -194,6 +197,28 @@ export default {
   }
   console.log(this.resultSearch);
 },
+
+// handleFileUpload(event) {
+//     const file = event.target.files[0];
+//     if (file) {
+//       const reader = new FileReader();
+
+//       reader.onload = (e) => {
+//         this.newProduct.image = e.target.result; // Utilisez cette image pour l'ajouter à votre produit
+//       };
+
+//       reader.readAsDataURL(file); // Convertir le fichier en URL
+//     }
+//   },
+
+  getImageSource(image) {
+    // Si l'image est une chaîne contenant "data:image", alors c'est une image en base64
+    if (image && image.startsWith('data:image')) {
+      return image; // Retourner l'image en base64
+    } else {
+      return require(`@/assets/${image}`); // Retourner l'image du dossier assets
+    }
+  },
 
 
   toggleForm() {
@@ -229,7 +254,7 @@ export default {
   }, 0);
 
   // Assigner un nouvel ID (ID du dernier produit + 1)
-  const newProduct = { ...product, id: lastProductId + 1 };
+  const newProduct = { ...product, id: lastProductId + 1, image: this.newProduct.image};
 
   // Ajouter le nouveau produit à la liste
   productsList.push(newProduct);
@@ -243,26 +268,9 @@ export default {
   // Fermer le formulaire d'ajout
   this.toggleForm();
 
-  // Relancer la recherche pour rafraîchir l'affichage des produits
-  this.searchProduct();
+
 },
 
-  
-  //   handleSave(product) {
-  //     if (!product.titre || !product.description || product.prix === null || product.moq === null) {
-  //       alert("Veuillez remplir tous les champs obligatoires !");
-  //       return;
-  //     }
-
-  //     this.productsList.push({ ...product });
-  //     localStorage.setItem('productsList', JSON.stringify(this.productsList));
-  //     this.toggleForm(); 
-  //     this.searchProduct();
-  //   },
-
-  //   confirmDelete(product) {
-  //   this.productToDelete = product; 
-  // },
 
   handleDeleteConfirmation() {
   if (this.productToDelete) {
@@ -333,6 +341,12 @@ export default {
     return this.resultSearch.length ? this.resultSearch : this.productsList;
   }
 },
+
+// watch: {
+//   productsList(newList) {
+//     this.searchProduct(newList); // Appelez votre méthode avec la nouvelle liste
+//   },
+// },
 
 
 mounted() {
