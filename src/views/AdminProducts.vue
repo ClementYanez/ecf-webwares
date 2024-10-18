@@ -41,12 +41,12 @@
             </form>
           </div>
 
+          <div class="leading">
+      <FilAriane cat1="Administration" cat2="Produits"/>
+      <input type="text" class="searchbar" placeholder="Rechercher un produit" v-model="search"
+        @input="searchProduct">
+    </div>
           <div class="product-item">
-            <div class="leading">
-        <FilAriane cat1="Administration" cat2="Produits"/>
-        <input type="text" class="searchbar" placeholder="Rechercher un produit" v-model="search"
-          @input="searchProduct">
-      </div>
       
             <div class="titles">
         <span>Liste des produits</span>
@@ -213,21 +213,56 @@ export default {
       }
     },
 
-  
     handleSave(product) {
-      if (!product.titre || !product.description || product.prix === null || product.moq === null) {
-        alert("Veuillez remplir tous les champs obligatoires !");
-        return;
-      }
+  // Vérifier que tous les champs requis sont remplis
+  if (!product.titre || !product.description || product.prix === null || product.moq === null) {
+    alert("Veuillez remplir tous les champs obligatoires !");
+    return;
+  }
 
-      this.productsList.push({ ...product });
-      localStorage.setItem('productsList', JSON.stringify(this.productsList));
-      this.toggleForm(); 
-    },
+  // Récupérer la liste des produits actuelle (depuis localStorage ou le store, selon ce que tu utilises)
+  const productsList = JSON.parse(localStorage.getItem('productsList')) || this.productsList;
 
-    confirmDelete(product) {
-    this.productToDelete = product; 
-  },
+  // Trouver le dernier ID en utilisant reduce (assurer que l'ID est unique)
+  const lastProductId = productsList.reduce((maxId, prod) => {
+    return Math.max(maxId, prod.id);
+  }, 0);
+
+  // Assigner un nouvel ID (ID du dernier produit + 1)
+  const newProduct = { ...product, id: lastProductId + 1 };
+
+  // Ajouter le nouveau produit à la liste
+  productsList.push(newProduct);
+
+  // Mettre à jour le localStorage
+  localStorage.setItem('productsList', JSON.stringify(productsList));
+
+  // Mettre à jour la liste de produits dans le store si nécessaire
+  this.$store.commit('setProductsList', productsList); 
+
+  // Fermer le formulaire d'ajout
+  this.toggleForm();
+
+  // Relancer la recherche pour rafraîchir l'affichage des produits
+  this.searchProduct();
+},
+
+  
+  //   handleSave(product) {
+  //     if (!product.titre || !product.description || product.prix === null || product.moq === null) {
+  //       alert("Veuillez remplir tous les champs obligatoires !");
+  //       return;
+  //     }
+
+  //     this.productsList.push({ ...product });
+  //     localStorage.setItem('productsList', JSON.stringify(this.productsList));
+  //     this.toggleForm(); 
+  //     this.searchProduct();
+  //   },
+
+  //   confirmDelete(product) {
+  //   this.productToDelete = product; 
+  // },
 
   handleDeleteConfirmation() {
   if (this.productToDelete) {
@@ -235,6 +270,12 @@ export default {
 
 
     this.$store.dispatch('deleteProduct', productIdToDelete);
+
+    if (this.resultSearch.length) {
+      this.resultSearch = this.resultSearch.filter(product => product.id !== productIdToDelete);
+    }
+
+    this.$store.commit('setProductsList', this.productsList.filter(product => product.id !== productIdToDelete));
 
     
     this.productToDelete = null;
@@ -253,9 +294,10 @@ export default {
   },
 
   startEditing(product) {
-    console.log('Modification du produit', product);
-    this.editingProduct = { ...product }; 
-  },
+  const originalProduct = this.productsList.find(p => p.id === product.id);
+  this.editingProduct = { ...originalProduct }; // Ici, copie des données originales
+},
+
   
   saveProduct() {
     
@@ -270,6 +312,7 @@ export default {
       
       
       this.editingProduct = null;
+      this.searchProduct(); 
     }
   },
 
@@ -285,6 +328,10 @@ export default {
   productsList() {
     return this.$store.state.productsList;
   },
+
+  productsToDisplay() {
+    return this.resultSearch.length ? this.resultSearch : this.productsList;
+  }
 },
 
 
@@ -315,6 +362,8 @@ mounted() {
   const storedCategories = localStorage.getItem('categories');
   if (storedCategories) {
     this.categories = JSON.parse(storedCategories);
+  } else {
+    this.categories = this.$store.state.categories;
   }
 
 }
