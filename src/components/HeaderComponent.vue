@@ -1,38 +1,19 @@
 <template>
   <nav class="desktop">
-    <svg
-      enable-background="new 0 0 24 24"
-      height="24px"
-      id="Layer_1"
-      version="1.1"
-      viewBox="0 0 24 24"
-      width="24px"
-      xml:space="preserve"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-    >
+    <svg enable-background="new 0 0 24 24" height="24px" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24px"
+      xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g>
         <path
-          d="M19.7,0.5H4.3c-2.1,0-3.8,1.7-3.8,3.8v15.4c0,2.1,1.7,3.8,3.8,3.8h15.4c2.1,0,3.8-1.7,3.8-3.8V4.3   C23.5,2.2,21.8,0.5,19.7,0.5z M19.1,16.9c0,0.3-0.2,0.5-0.5,0.5H8.4c-1.9,0-3.5-1.6-3.5-3.5V7.1c0-0.3,0.2-0.5,0.5-0.5h2.8   c0.3,0,0.5,0.2,0.5,0.5v6.1c0,0.1,0,0.1,0.1,0.1h1.5l0-6.2c0-0.3,0.2-0.5,0.5-0.5h2.6c0.3,0,0.5,0.2,0.5,0.5v6.2h1.6V7.1   c0-0.3,0.2-0.5,0.5-0.5h2.8c0.3,0,0.5,0.2,0.5,0.5V16.9z"
-        />
+          d="M19.7,0.5H4.3c-2.1,0-3.8,1.7-3.8,3.8v15.4c0,2.1,1.7,3.8,3.8,3.8h15.4c2.1,0,3.8-1.7,3.8-3.8V4.3   C23.5,2.2,21.8,0.5,19.7,0.5z M19.1,16.9c0,0.3-0.2,0.5-0.5,0.5H8.4c-1.9,0-3.5-1.6-3.5-3.5V7.1c0-0.3,0.2-0.5,0.5-0.5h2.8   c0.3,0,0.5,0.2,0.5,0.5v6.1c0,0.1,0,0.1,0.1,0.1h1.5l0-6.2c0-0.3,0.2-0.5,0.5-0.5h2.6c0.3,0,0.5,0.2,0.5,0.5v6.2h1.6V7.1   c0-0.3,0.2-0.5,0.5-0.5h2.8c0.3,0,0.5,0.2,0.5,0.5V16.9z" />
       </g>
     </svg>
     <div class="nav-links">
       <router-link to="/" class="nav-link">Accueil</router-link>
-      <router-link
-        to="/products-list"
-        class="nav-link"
-        @click="goToProductsList"
-        >Produits</router-link
-      >
+      <router-link to="/products-list" class="nav-link" @click="goToProductsList">Produits</router-link>
       <div class="categories-contain">
         <div class="categories-btn">
           <span>Catégories</span>
-          <img
-            :src="require('@/assets/icons/arrow-down.svg')"
-            alt="icône flèche vers le bas"
-            class="icon-arrow"
-          />
+          <img :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas" class="icon-arrow" />
         </div>
         <div class="categories">
           <p to="/products-list" class="category-link" @click="setCategory(1)">
@@ -54,163 +35,116 @@
         <div class="line"></div>
         <div class="categories-btn">
           <span>Admin</span>
-          <img
-            :src="require('@/assets/icons/arrow-down.svg')"
-            alt="icône flèche vers le bas"
-            class="icon-arrow"
-          />
+          <img :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas" class="icon-arrow" />
         </div>
         <div class="categories">
-          <router-link to="/admin-users" class="category-link"
-            >Gestion des utilisateurs</router-link
-          >
-          <router-link to="/admin-products" class="category-link"
-            >Gestion des produits</router-link
-          >
-          <router-link to="admin-categories" class="category-link"
-            >Gestion des catégories</router-link
-          >
-          <router-link to="/admin-orders" class="category-link"
-            >Gestion des commandes</router-link
-          >
+          <router-link to="/admin-users" class="category-link">Gestion des utilisateurs</router-link>
+          <router-link to="/admin-products" class="category-link">Gestion des produits</router-link>
+          <router-link to="admin-categories" class="category-link">Gestion des catégories</router-link>
+          <router-link to="/admin-orders" class="category-link">Gestion des commandes</router-link>
         </div>
       </div>
     </div>
     <!-- Gestion de l'utilisateur et du panier -->
     <div v-if="!user" class="buttons">
       <router-link to="/user-connection">
-        <ButtonComponent
-          text="Se connecter"
-          color="#f1f1f1"
-          textColor="#191919"
-        />
+        <ButtonComponent text="Se connecter" color="#f1f1f1" textColor="#191919" />
       </router-link>
       <router-link to="/user-inscription">
-        <ButtonComponent
-          text="S'inscrire"
-          color="#f1f1f1"
-          textColor="#191919"
-        />
+        <ButtonComponent text="S'inscrire" color="#f1f1f1" textColor="#191919" />
       </router-link>
     </div>
     <router-link class="cart" to="/user-cart" v-if="userRole === 'USER'">
-      <img
-        :src="require('@/assets/icons/cart.svg')"
-        alt="icône panier"
-        class="icon"
-      />
+      <img :src="require('@/assets/icons/cart.svg')" alt="icône panier" class="icon" />
     </router-link>
     <div v-if="userRole">
-      <img
-        :src="require('@/assets/icons/user.svg')"
-        alt="icône utilisateur"
-        class="icon"
-        @click="userDropDown"
-      />
+      <img :src="require('@/assets/icons/user.svg')" alt="icône utilisateur" class="icon" @click="userDropDown" />
       <div v-if="openUserDropDown" class="deconnect">
         <p>{{ user.raisonSociale }}</p>
-        <ButtonComponent
-          text="Se déconnecter"
-          color="#f1f1f1"
-          textColor="#191919"
-          @click="deleteUSer"
-        />
+        <ButtonComponent text="Se déconnecter" color="#f1f1f1" textColor="#191919" @click="deleteUSer" />
       </div>
     </div>
   </nav>
-  <!-- <nav class="mobile">
-    <svg
-      enable-background="new 0 0 24 24"
-      height="24px"
-      id="Layer_1"
-      version="1.1"
-      viewBox="0 0 24 24"
-      width="24px"
-      xml:space="preserve"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-    >
+  <nav class="mobile">
+    <svg enable-background="new 0 0 24 24" height="24px" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24px"
+      xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <g>
         <path
-          d="M19.7,0.5H4.3c-2.1,0-3.8,1.7-3.8,3.8v15.4c0,2.1,1.7,3.8,3.8,3.8h15.4c2.1,0,3.8-1.7,3.8-3.8V4.3   C23.5,2.2,21.8,0.5,19.7,0.5z M19.1,16.9c0,0.3-0.2,0.5-0.5,0.5H8.4c-1.9,0-3.5-1.6-3.5-3.5V7.1c0-0.3,0.2-0.5,0.5-0.5h2.8   c0.3,0,0.5,0.2,0.5,0.5v6.1c0,0.1,0,0.1,0.1,0.1h1.5l0-6.2c0-0.3,0.2-0.5,0.5-0.5h2.6c0.3,0,0.5,0.2,0.5,0.5v6.2h1.6V7.1   c0-0.3,0.2-0.5,0.5-0.5h2.8c0.3,0,0.5,0.2,0.5,0.5V16.9z"
-        />
+          d="M19.7,0.5H4.3c-2.1,0-3.8,1.7-3.8,3.8v15.4c0,2.1,1.7,3.8,3.8,3.8h15.4c2.1,0,3.8-1.7,3.8-3.8V4.3   C23.5,2.2,21.8,0.5,19.7,0.5z M19.1,16.9c0,0.3-0.2,0.5-0.5,0.5H8.4c-1.9,0-3.5-1.6-3.5-3.5V7.1c0-0.3,0.2-0.5,0.5-0.5h2.8   c0.3,0,0.5,0.2,0.5,0.5v6.1c0,0.1,0,0.1,0.1,0.1h1.5l0-6.2c0-0.3,0.2-0.5,0.5-0.5h2.6c0.3,0,0.5,0.2,0.5,0.5v6.2h1.6V7.1   c0-0.3,0.2-0.5,0.5-0.5h2.8c0.3,0,0.5,0.2,0.5,0.5V16.9z" />
       </g>
     </svg>
-    <img
-      :src="require('@/assets/icons/burger.svg')"
-      alt="Logo"
-      class="icon"
-      @click="menuDropDown"
-    />
+    <img :src="require('@/assets/icons/burger.svg')" alt="Logo" class="icon" @click="menuDropDown" />
     <div v-if="openMenuDropDown" class="nav-links-mobile">
       <div class="icons-mobile">
-        <img
-          :src="require('@/assets/icons/home.svg')"
-          alt="icône accueil"
-          class="icon"
-        />
+        <img :src="require('@/assets/icons/home.svg')" alt="icône accueil" class="icon" />
         <router-link to="/" class="nav-link">Accueil</router-link>
       </div>
       <div class="icons-mobile">
-        <img
-          :src="require('@/assets/icons/products.svg')"
-          alt="icône accueil"
-          class="icon"
-        />
-        <router-link to="/" class="nav-link">Produits</router-link>
+        <img :src="require('@/assets/icons/product.svg')" alt="icône accueil" class="icon" />
+        <router-link to="/products-list" class="nav-link" @click="goToProductsList">Produits</router-link>
       </div>
-      <div class="categories-container">
-        <div
-          v-if="!openDropDown"
-          class="categories-btn icons-mobile"
-          @click="dropDown"
-        >
-          <img
-            :src="require('@/assets/icons/arrow-down.svg')"
-            alt="icône flèche vers le bas"
-            class="icon-arrow-mobile"
-          />
-          <img
-            :src="require('@/assets/icons/categories.svg')"
-            alt="icône catégories"
-            class="icon"
-          />
+      <div>
+        <div v-if="!openDropDown" class="icons-mobile" @click="dropDown">
+          <img :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas"
+            class="icon-arrow-mobile" />
           <span>Catégories</span>
         </div>
-        <img
-          v-if="openDropDown"
-          :src="require('@/assets/icons/arrow-down.svg')"
-          alt="icône flèche vers le bas"
-          class="icon-arrow-up"
-          @click="dropUp()"
-        />
-        <div v-if="openDropDown" class="categories-mobile">
-          <router-link to="/" class="category-link">Catégorie 1</router-link>
-          <router-link to="/" class="category-link">Catégorie 2</router-link>
-          <router-link to="/" class="category-link">Catégorie 3</router-link>
-          <router-link to="/" class="category-link">Catégorie 4</router-link>
+        <div>
+          <img v-if="openDropDown" :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas"
+            class="icon-arrow-up" @click="dropUp()" />
+          <div v-if="openDropDown" class="categories-mobile">
+            <p to="/products-list" class="category-link" @click="setCategory(1)">
+              Mobilier d'intérieur
+            </p>
+            <p to="/products-list" class="category-link" @click="setCategory(2)">
+              Luminaires
+            </p>
+            <p to="/products-list" class="category-link" @click="setCategory(3)">
+              Tapis
+            </p>
+            <p to="/products-list" class="category-link" @click="setCategory(4)">
+              Objets de décoration
+            </p>
+          </div>
         </div>
       </div>
-      <router-link to="/" class="btn-navbar">Se connecter</router-link>
-      <router-link to="/" class="btn-navbar">S'inscrire</router-link>
-      <div class="icons-mobile">
-        <img
-          :src="require('@/assets/icons/cart.svg')"
-          alt="icône panier"
-          class="icon"
-        />
+      <router-link v-if="!user" to="/user-connection">
+        <ButtonComponent text="Se connecter" color="#f1f1f1" textColor="#191919" />
+      </router-link>
+      <router-link v-if="!user" to="/user-inscription">
+        <ButtonComponent text="S'inscrire" color="#f1f1f1" textColor="#191919" />
+      </router-link>
+      <div v-if="userRole === 'USER'" class="icons-mobile">
+        <img :src="require('@/assets/icons/cart.svg')" alt="icône panier" class="icon" />
         <router-link to="/">Panier</router-link>
       </div>
-      <div class="icons-mobile">
-        <img
-          :src="require('@/assets/icons/user.svg')"
-          alt="icône utilisateur"
-          class="icon"
-        />
-        <router-link to="/">Mon compte</router-link>
+      <div v-if="userRole === 'ADMIN'" class="mobile-line"></div>
+      <div v-if="userRole === 'ADMIN'">
+        <div v-if="!openDropDownAdmin" class="categories-btn icons-mobile" @click="dropDownAdmin">
+          <img :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas" class="icon-arrow" />
+          <span>Admin</span>
+        </div>
+        <div>
+          <img v-if="openDropDownAdmin" :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas"
+            class="icon-arrow-up" @click="dropUpAdmin" />
+          <div v-if="openDropDownAdmin" class="categories-mobile">
+            <router-link to="/admin-users" class="category-link">Gestion des utilisateurs</router-link>
+            <router-link to="/admin-products" class="category-link">Gestion des produits</router-link>
+            <router-link to="admin-categories" class="category-link">Gestion des catégories</router-link>
+            <router-link to="/admin-orders" class="category-link">Gestion des commandes</router-link>
+          </div>
+        </div>
+      </div>
+      <div v-if="userRole" class="icons-mobile" @click="userDropDown">
+        <img :src="require('@/assets/icons/user.svg')" alt="icône utilisateur" class="icon" />
+        <span>Mon compte</span>
+      </div>
+      <div v-if="openUserDropDown" class="deconnect-mobile">
+        <p>{{ user.raisonSociale }}</p>
+        <ButtonComponent text="Se déconnecter" color="#f1f1f1" textColor="#191919" @click="deleteUSer" />
       </div>
     </div>
-  </nav> -->
+  </nav>
 </template>
 
 <script>
@@ -225,6 +159,7 @@ export default {
       openDropDown: false,
       openMenuDropDown: false,
       openUserDropDown: false,
+      openDropDownAdmin: false,
       user: '',
       userRole: '',
     };
@@ -246,6 +181,9 @@ export default {
     dropUp() {
       this.openDropDown = false;
     },
+    dropUpAdmin() {
+      this.openDropDownAdmin = false;
+    },
     menuDropDown() {
       if (this.openMenuDropDown === false) {
         this.openMenuDropDown = true;
@@ -258,6 +196,13 @@ export default {
         this.openUserDropDown = true;
       } else {
         this.openUserDropDown = false;
+      }
+    },
+    dropDownAdmin() {
+      if (this.openDropDownAdmin === false) {
+        this.openDropDownAdmin = true;
+      } else {
+        this.openDropDownAdmin = false;
       }
     },
     ...mapActions(['logOut']),
@@ -285,8 +230,16 @@ export default {
 </script>
 
 <style scoped>
+.mobile {
+  display: none;
+}
+
 .router-link-active {
   color: #d9b596;
+}
+
+.desktop {
+  display: flex;
 }
 
 nav {
@@ -294,7 +247,6 @@ nav {
   width: 100%;
   background-color: #592b02;
   padding: 20px 40px;
-  display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 999;
@@ -328,8 +280,7 @@ span,
 }
 
 .icon:hover {
-  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg)
-    brightness(120%) contrast(80%);
+  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg) brightness(120%) contrast(80%);
 }
 
 .categories-contain {
@@ -377,8 +328,7 @@ span,
 }
 
 .categories-btn:hover img {
-  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg)
-    brightness(120%) contrast(80%);
+  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg) brightness(120%) contrast(80%);
 }
 
 .category-link:hover {
@@ -474,14 +424,11 @@ span,
 
 .icons-mobile:hover {
   color: #d9b596;
-  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg)
-    brightness(120%) contrast(80%);
+  filter: invert(40%) sepia(50%) saturate(350%) hue-rotate(345deg) brightness(120%) contrast(80%);
 }
 
 .icon-arrow-mobile {
   width: 40px;
-  position: absolute;
-  left: -40px;
 }
 
 .icon-arrow-up {
@@ -492,7 +439,8 @@ span,
   cursor: pointer;
 }
 
-.categories-mobile {
+.categories-mobile,
+.deconnect-mobile {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -501,10 +449,11 @@ span,
   padding: 20px 0;
   border-radius: 10px;
   z-index: 999;
+  color: #f1f1f1;
+  font-size: 1.2rem;
 }
 
 svg {
-  /* background-color: white; */
   fill: white;
   width: 60px;
   height: 60px;
@@ -513,5 +462,21 @@ svg {
 .deconnect p {
   color: white;
   text-align: center;
+}
+
+.mobile-line {
+  width: 100%;
+  height: 3px;
+  background-color: #f1f1f1;
+}
+
+@media screen and (max-width: 950px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+  }
 }
 </style>
