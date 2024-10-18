@@ -1,99 +1,69 @@
 <template>
-  <div class="footer py-4 sticky-footer">
-    <div class="container-fluid">
-      <div
-        class="row d-flex align-items-center justify-content-center mb-5 container-fluid"
-      >
-        <FormulaireComponent />
+  <div class="footer">
+    <div>
+      <FormulaireComponent />
+    </div>
+    <div class="columns">
+      <!-- Section des liens légaux -->
+      <div class="column">
+        <h5>Pages Légales</h5>
+        <ul>
+          <li>
+            <router-link to="/legal-disclaimers">Mentions légales</router-link>
+          </li>
+          <li>
+            <router-link to="/legal-privacy">Politique de confidentialité</router-link>
+          </li>
+          <li>
+            <router-link to="/legal-terms">Conditions d'utilisation</router-link>
+          </li>
+        </ul>
       </div>
-      <div
-        class="row d-flex justify-content-around h-100"
-      >
-        <!-- Ajout de h-100 -->
-        <!-- Section des liens légaux -->
-        <div class="col-md-3 mb-3 mb-md-0 w-auto">
-          <h5>Pages Légales</h5>
-          <ul class="list-unstyled d-flex flex-column gap-3">
-            <li>
-              <router-link to="/legal-disclaimers"
-                >Mentions légales</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/legal-privacy"
-                >Politique de confidentialité</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/legal-terms"
-                >Conditions d'utilisation</router-link
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-3 mb-3 mb-md-0 w-auto">
-          <h5>Nous contacter</h5>
-          <ul
-            class="list-unstyled d-flex flex-column justify-content-center gap-3"
-          >
-            <li>web.wares@gmail.com</li>
-            <li>0145454545</li>
-            <li>125 Avenue Jean-Jaurès, 75019 Paris</li>
-          </ul>
-        </div>
-        <div class="col-md-3 mb-3 mb-md-0 w-auto">
-          <h5>Map</h5>
-          <ul
-            class="list-unstyled d-flex flex-column justify-content-center gap-3"
-          >
-            <li>Products</li>
-            <li>Product1</li>
-            <li>Product2</li>
-            <li>Product3</li>
-            <li>Product4</li>
-          </ul>
-        </div>
-        <!-- Section des icônes des réseaux sociaux -->
-        <div class="col-md-3 mb-3 mb-md-0 w-auto">
-          <h5>Nous suivre sur les réseaux</h5>
-          <ul class="list-unstyled d-flex justify-content-center gap-3">
-            <li>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                aria-label="Facebook"
-              >
-                <i class="bi bi-facebook"></i>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                aria-label="LinkedIn"
-              >
-                <i class="bi bi-linkedin"></i>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                aria-label="X (Twitter)"
-              >
-                <i class="bi bi-twitter"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div class="column">
+        <h5>Nous contacter</h5>
+        <ul>
+          <li>web.wares@gmail.com</li>
+          <li>0145454545</li>
+          <li>125 Avenue Jean-Jaurès, 75019 Paris</li>
+        </ul>
       </div>
-      <div class="row text-center">
-        <!-- Section du texte central -->
-        <div class="col-md-12 mb-3 mb-md-0">
-          <p>Site créé avec Vue par la team CLFV</p>
-          <p>Tous droits réservés &copy; {{ new Date().getFullYear() }}</p>
-        </div>
+      <div class="column">
+        <h5>Map</h5>
+        <ul class="links">
+          <li @click="up"><router-link to="/" class="nav-link">Accueil</router-link></li>
+          <li @click="up"><router-link to="/products-list" class="nav-link">Produits</router-link></li>
+          <li @click="setCategory(1)"> Mobilier d'intérieur</li>
+          <li @click="setCategory(2)"> Luminaires </li>
+          <li @click="setCategory(3)"> Tapis </li>
+          <li @click="setCategory(4)"> Objets de décoration </li>
+        </ul>
       </div>
+      <div class=" column">
+        <h5>Nous suivre sur les réseaux</h5>
+        <ul class="social-media">
+          <li>
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com" target="_blank" aria-label="X (Twitter)">
+              <i class="bi bi-twitter"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Section du texte central -->
+
+    <div class="rights">
+      <p>Site créé avec Vue par la team CLFV</p>
+      <p>Tous droits réservés &copy; {{ new Date().getFullYear() }}</p>
     </div>
   </div>
 </template>
@@ -106,35 +76,106 @@ export default {
   components: {
     FormulaireComponent,
   },
+  methods: {
+    setCategory(id) {
+      this.$store.commit('changeCategory', id);
+      this.$store.dispatch('filterProductsByCategory', id);
+      this.$router.push('/products-list');
+      let rootElement = document.documentElement;
+      rootElement.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    },
+    up() {
+      let rootElement = document.documentElement;
+      rootElement.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    }
+  }
 };
 </script>
 
 <style scoped>
+p {
+  margin: 0;
+}
+
 .footer {
   background-color: #d9b596;
-  color: black;
+  color: #191919;
+  /* position: relative; */
+  /* bottom: 0px;
+  left: 0px; */
+  width: 100vw;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 h5 {
-  color: black;
-}
-
-.sticky-footer {
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  /* z-index: 10; */
+  color: #191919;
 }
 
 .footer a {
-  color: black;
+  color: #191919;
 }
 
-.bi {
-  font-size: 25px;
+.columns {
+  width: 70vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+  padding: 30px 0;
 }
 
-.row {
-  width: 100%;
+.column {
+  margin-top: 20px;
+}
+
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-media {
+  display: flex;
+  gap: 20px;
+}
+
+.social-media i {
+  font-size: 2rem;
+}
+
+.links li {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.rights {
+  text-align: center;
+}
+
+button {
+  width: 150px;
+}
+
+@media screen and (max-width: 700px) {
+  .columns {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .column {
+    width: 250px;
+  }
 }
 </style>
