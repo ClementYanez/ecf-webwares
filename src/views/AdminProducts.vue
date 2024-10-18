@@ -28,13 +28,12 @@
               ></textarea>
 
               <label for="categorie">Catégorie:</label>
-              <input
-                type="text"
-                v-model="newProduct.categorieId"
-                id="categorie"
-                required
-              />
-
+              <select v-model="newProduct.categorieId" id="categorie" required>
+                <option value="" disabled>Sélectionnez une catégorie</option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">
+                  {{ category.name }}
+                </option>
+              </select> 
               <label for="prix">Prix:</label>
               <input
                 type="number"
@@ -47,8 +46,10 @@
               <label for="moq">Quantité minimum (MOQ):</label>
               <input type="number" v-model="newProduct.moq" id="moq" required />
 
-              <button type="submit">Enregistrer le produit</button>
-              <button type="button" @click="toggleForm">Annuler</button>
+              <div class="add-product-buttons">
+              <button class="ajout-prod-btn-enregistrer" type="submit">Enregistrer le produit</button>
+              <button class="ajout-prod-btn-annuler" type="button" @click="toggleForm">Annuler</button>
+            </div>
             </form>
           </div>
 
@@ -65,38 +66,75 @@
             </div>
 
             <div class="titles">
-              <span>Liste des produits</span>
-              <div class="title-icons">
-                <span>Modifier</span>
-                <span>Supprimer</span>
-              </div>
-            </div>
-            <div>
-              <ButtonComponent
-                text="Ajouter un produit"
-                color="green"
-                @click="toggleForm"
-              />
-            </div>
-            <div
-              v-for="(product, index) in resultSearch.length
-                ? resultSearch
-                : productsList"
-              :key="index"
-            >
-              <div
-                v-if="editingProduct && editingProduct.id === product.id"
-                class="product-update"
-              >
-                <!-- Formulaire de modification -->
-                <h3>Modifier le produit</h3>
-                <form @submit.prevent="saveProduct">
-                  <div class="form-group">
-                    <label for="edit-titre">Titre:</label>
-                    <input
-                      type="text"
-                      v-model="editingProduct.titre"
-                      class="input-field"
+        <span>Liste des produits</span>
+        <div class="title-icons">
+          <span>Modifier</span>
+          <span>Supprimer</span>
+        </div>
+      </div>
+      <div><ButtonComponent text="Ajouter un produit" color="green" @click="toggleForm" /></div>
+      <div v-for="(product, index) in resultSearch.length ? resultSearch : productsList" :key="index">
+
+              <div  v-if="editingProduct && editingProduct.id === product.id" class="product-update">
+    <!-- Formulaire de modification -->
+    <h3>Modifier le produit</h3>
+    <form @submit.prevent="saveProduct">
+    <div class="form-group">
+      <label for="edit-titre">Titre:</label>
+      <input type="text" v-model="editingProduct.titre" class="input-field">
+    </div>
+    
+    <div class="form-group">
+      <label for="edit-description">Description :</label>
+      <textarea v-model="editingProduct.description" class="input-field"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="edit-categorie">Catégorie :</label>
+      <select v-model="editingProduct.categorieId" class="input-field">
+                <option value="" disabled>Sélectionnez une catégorie</option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">
+                  {{ category.name }}
+                </option>
+              </select> 
+      
+    </div>
+    
+    <div class="form-group">
+      <label for="edit-prix">Prix :</label>
+      <input type="number" v-model="editingProduct.prix" step="0.01" class="input-field">
+    </div>
+    
+    <div class="form-group">
+      <label for="edit-moq">Quantité minimum (MOQ):</label>
+      <input type="number" v-model="editingProduct.moq" class="input-field">
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" class="save-btn">Enregistrer les modifications</button>
+      <button type="button" class="cancel-btn" @click="editingProduct = null">Annuler</button>
+    </div>
+  </form>
+  </div>
+  <div v-else>
+              <div class="infos-actions">
+                <div class="product-info">
+                  <img :src="require(`@/assets/${product.image}`)" alt="Product Image"
+                    class="product-image" />
+                  <!-- <p v-else>Aucune image disponible</p> -->
+                  <h5>{{ product.titre }}</h5>
+                  <p>{{ getFirstSevenWords(product.description) }}</p>
+                  <p><strong>Catégorie</strong> : {{ getCategoryName(product.categorieId) }}</p>
+                  <p><strong>Prix TTC /u</strong> : {{ product.prix }}€</p>
+                  <p><strong>Quantité minimum</strong> : {{ product.moq }}</p>
+                </div>
+                <div class="product-actions">
+                  <svg xmlns="http://www.w3.org/2000/svg" @click="startEditing(product)" height="30px"
+                    viewBox="0 -960 960 960" width="30px" fill="green" class="icons-global">
+                    <path
+                      d="M360-360v-170l382-382q9-9 20-13t22-4q11 0 22.5 4.5T827-911l83 84q9 9 13.5 20t4.5 22q0 11-4.5 22.5T910-742L530-360H360Zm440-355 68-70-84-84-69 69 85 85ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h405L300-555v255h252l288-288v408q0 24-18 42t-42 18H180Z" />
+                  </svg>
+                  <img :src="require('@/assets/icons/deleteicon.svg')" class="delete-icon icons-global" @click="confirmDelete(product)"
                     />
                   </div>
 
@@ -252,6 +290,7 @@ export default {
       showForm: false,
       editingProduct: null,
       productToDelete: null,
+      categories: [],
     };
   },
   methods: {
@@ -352,14 +391,32 @@ export default {
         (p) => p.id === this.editingProduct.id
       );
 
-      if (productIndex !== -1) {
-        this.productsList.splice(productIndex, 1, { ...this.editingProduct });
+  startEditing(product) {
+    console.log('Modification du produit', product);
+    this.editingProduct = { ...product }; 
+  },
+  
+  saveProduct() {
+    
+    const productIndex = this.productsList.findIndex(p => p.id === this.editingProduct.id);
+    
+    if (productIndex !== -1) {
+      
+      this.productsList.splice(productIndex, 1, { ...this.editingProduct });
+      
+      
+      localStorage.setItem('productsList', JSON.stringify(this.productsList));
+      
+      
+      this.editingProduct = null;
+    }
+  },
 
-        localStorage.setItem('productsList', JSON.stringify(this.productsList));
+  getCategoryName(categorieId) {
+    const category = this.categories.find(cat => cat.id === categorieId);
+    return category ? category.name : 'Non spécifié'; // Retourne 'Non spécifié' si aucune catégorie n'est trouvée
+  },
 
-        this.editingProduct = null;
-      }
-    },
   },
 
   computed: {
@@ -376,10 +433,21 @@ export default {
       userLevel = JSON.parse(user).role;
     }
 
-    if (!userLevel || userLevel !== 'ADMIN') {
-      this.$router.push('/');
-      return;
-    }
+ 
+  const storedProducts = localStorage.getItem('productsList');
+  if (localStorage.getItem('productsList')) {
+    const productsList = JSON.parse(storedProducts);
+    this.$store.commit('setProductsList', productsList); 
+  } else {
+    this.$store.commit('setProductsList', []);
+  }
+
+  const storedCategories = localStorage.getItem('categories');
+  if (storedCategories) {
+    this.categories = JSON.parse(storedCategories);
+  }
+
+}
 
     const storedProducts = localStorage.getItem('productsList');
     if (localStorage.getItem('productsList')) {
@@ -397,9 +465,6 @@ export default {
   display: flex;
 }
 
-.side-panel {
-  min-height: 100vh;
-}
 
 .products-container {
   display: flex;
@@ -466,7 +531,7 @@ export default {
   font-size: 1rem;
 }
 
-.delete-buttons {
+.delete-buttons{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -576,7 +641,7 @@ h5 {
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: none;
-  max-height: 40px; /* Limite à 2 lignes pour les input */
+  max-height: 40px; 
   overflow: hidden;
 }
 
@@ -586,8 +651,8 @@ h5 {
 }
 
 textarea {
-  max-height: 80px; /* Limite à 2 lignes pour les textarea */
-  min-height: 40px; /* Taille minimale */
+  max-height: 80px;
+  min-height: 40px; 
 }
 
 .form-actions {
@@ -628,14 +693,17 @@ textarea {
   margin: 0 20px;
 }
 
+@media screen and (max-width: 480px) {
+  .titles{
+    display: none;
+  }
+}
+
 @media screen and (max-width: 950px) {
   .flex-need {
     flex-direction: column;
   }
 
-  .side-panel {
-    height: 10vh;
-  }
 }
 .add-product-form {
   margin: 20px 0;
@@ -668,16 +736,12 @@ textarea {
 
 .add-product-form button {
   padding: 10px 15px;
-  background-color: #ca8465;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.add-product-form button:hover {
-  background-color: #b27257;
-}
 
 .confirmation-dialog {
   position: fixed;
@@ -690,5 +754,14 @@ textarea {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000; /* Pour que la boîte de dialogue soit au-dessus du contenu */
+}
+
+.ajout-prod-btn-enregistrer{
+  background-color: green;
+  margin-right: 10px;
+}
+
+.ajout-prod-btn-annuler{
+  background-color: rgb(51, 51, 51);
 }
 </style>

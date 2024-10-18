@@ -61,12 +61,7 @@
       <img :src="require('@/assets/icons/user.svg')" alt="icône utilisateur" class="icon" @click="userDropDown" />
       <div v-if="openUserDropDown" class="deconnect">
         <p>Bienvenue {{ user.raisonSociale }}</p>
-        <ButtonComponent
-          text="Se déconnecter"
-          color="#f1f1f1"
-          textColor="#191919"
-          @click="deleteUSer"
-        />
+        <ButtonComponent text="Se déconnecter" color="#f1f1f1" textColor="#191919" @click="deleteUSer" />
       </div>
     </div>
   </nav>
@@ -482,6 +477,13 @@ svg {
 
   .mobile {
     display: flex;
+    position: fixed;
+    width: 100%;
+    background-color: #592b02;
+    padding: 20px 40px;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 999;
   }
 }
 </style>
