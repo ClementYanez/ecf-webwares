@@ -4,10 +4,12 @@
     <TitleComponent title="Gestion des produits" />
 
     <div class="flex-need">
-      <SidePanelAdmin class="side-panel" />
-
+      
+      <SidePanelAdmin class="side-panel"/>
+    
       <div class="products-container">
         <div class="product-list">
+
           <!-- Formulaire d'ajout de produit -->
           <div v-if="showForm" class="add-product-form">
             <h3>Ajouter un nouveau produit</h3>
@@ -55,16 +57,10 @@
 
           <div class="product-item">
             <div class="leading">
-              <FilAriane cat1="Administration" cat2="Produits" />
-              <input
-                type="text"
-                class="searchbar"
-                placeholder="Rechercher un produit"
-                v-model="search"
-                @input="searchProduct"
-              />
-            </div>
-
+        <FilAriane cat1="Administration" cat2="Produits"/>
+        <input type="text" class="searchbar" placeholder="Rechercher un produit" v-model="search"
+          @input="searchProduct">
+      </div>
             <div class="titles">
         <span>Liste des produits</span>
         <div class="title-icons">
