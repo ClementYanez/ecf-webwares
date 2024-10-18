@@ -8,6 +8,7 @@
       <SidePanelAdmin class="side-panel"/>
     
       <div class="products-container">
+
         <div class="product-list">
 
           <!-- Formulaire d'ajout de produit -->
@@ -15,19 +16,10 @@
             <h3>Ajouter un nouveau produit</h3>
             <form @submit.prevent="handleSave(newProduct)">
               <label for="titre">Titre:</label>
-              <input
-                type="text"
-                v-model="newProduct.titre"
-                id="titre"
-                required
-              />
+              <input type="text" v-model="newProduct.titre" id="titre" required>
 
               <label for="description">Description:</label>
-              <textarea
-                v-model="newProduct.description"
-                id="description"
-                required
-              ></textarea>
+              <textarea v-model="newProduct.description" id="description" required></textarea>
 
               <label for="categorie">Catégorie:</label>
               <select v-model="newProduct.categorieId" id="categorie" required>
@@ -37,16 +29,10 @@
                 </option>
               </select> 
               <label for="prix">Prix:</label>
-              <input
-                type="number"
-                v-model="newProduct.prix"
-                id="prix"
-                step="0.01"
-                required
-              />
+              <input type="number" v-model="newProduct.prix" id="prix" step="0.01" required>
 
               <label for="moq">Quantité minimum (MOQ):</label>
-              <input type="number" v-model="newProduct.moq" id="moq" required />
+              <input type="number" v-model="newProduct.moq" id="moq" required>
 
               <div class="add-product-buttons">
               <button class="ajout-prod-btn-enregistrer" type="submit">Enregistrer le produit</button>
@@ -61,6 +47,7 @@
         <input type="text" class="searchbar" placeholder="Rechercher un produit" v-model="search"
           @input="searchProduct">
       </div>
+      
             <div class="titles">
         <span>Liste des produits</span>
         <div class="title-icons">
@@ -132,126 +119,27 @@
                   </svg>
                   <img :src="require('@/assets/icons/deleteicon.svg')" class="delete-icon icons-global" @click="confirmDelete(product)"
                     />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="edit-description">Description :</label>
-                    <textarea
-                      v-model="editingProduct.description"
-                      class="input-field"
-                    ></textarea>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="edit-categorie">Catégorie :</label>
-                    <input
-                      type="text"
-                      v-model="editingProduct.categorieId"
-                      class="input-field"
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="edit-prix">Prix :</label>
-                    <input
-                      type="number"
-                      v-model="editingProduct.prix"
-                      step="0.01"
-                      class="input-field"
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="edit-moq">Quantité minimum (MOQ):</label>
-                    <input
-                      type="number"
-                      v-model="editingProduct.moq"
-                      class="input-field"
-                    />
-                  </div>
-
-                  <div class="form-actions">
-                    <button type="submit" class="save-btn">
-                      Enregistrer les modifications
-                    </button>
-                    <button
-                      type="button"
-                      class="cancel-btn"
-                      @click="editingProduct = null"
-                    >
-                      Annuler
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div v-else>
-                <div class="infos-actions">
-                  <div class="product-info">
-                    <img
-                      :src="require(`@/assets/${product.image}`)"
-                      alt="Product Image"
-                      class="product-image"
-                    />
-                    <!-- <p v-else>Aucune image disponible</p> -->
-                    <h5>{{ product.titre }}</h5>
-                    <p>{{ getFirstSevenWords(product.description) }}</p>
-                    <p>
-                      <strong>Catégorie</strong> : {{ product.categorieId }}
-                    </p>
-                    <p><strong>Prix TTC /u</strong> : {{ product.prix }}€</p>
-                    <p><strong>Quantité minimum</strong> : {{ product.moq }}</p>
-                  </div>
-                  <div class="product-actions">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      @click="startEditing(product)"
-                      height="30px"
-                      viewBox="0 -960 960 960"
-                      width="30px"
-                      fill="green"
-                      class="icons-global"
-                    >
-                      <path
-                        d="M360-360v-170l382-382q9-9 20-13t22-4q11 0 22.5 4.5T827-911l83 84q9 9 13.5 20t4.5 22q0 11-4.5 22.5T910-742L530-360H360Zm440-355 68-70-84-84-69 69 85 85ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h405L300-555v255h252l288-288v408q0 24-18 42t-42 18H180Z"
-                      />
-                    </svg>
-                    <img
-                      :src="require('@/assets/icons/deleteicon.svg')"
-                      class="delete-icon icons-global"
-                      @click="confirmDelete(product)"
-                    />
-                  </div>
+                </div>
                 </div>
               </div>
+              </div>
             </div>
-          </div>
-          <!-- Div de confirmation de suppression -->
-          <div v-if="productToDelete" class="confirmation-dialog">
-            <p>
-              Êtes-vous sûr de vouloir supprimer
-              <strong>{{ productToDelete.titre }}</strong> ?
-            </p>
+            <!-- Div de confirmation de suppression -->
+<div v-if="productToDelete" class="confirmation-dialog">
+  <p>Êtes-vous sûr de vouloir supprimer <strong>{{ productToDelete.titre }}</strong> ?</p>
 
-            <div class="delete-buttons">
-              <button
-                class="bton-delete-modal delete-modal-confirm"
-                @click="handleDeleteConfirmation"
-              >
-                Oui, supprimer
-              </button>
-              <button
-                class="bton-delete-modal delete-modal-cancel"
-                @click="cancelDelete"
-              >
-                Non, annuler
-              </button>
-            </div>
+  <div class="delete-buttons">
+  <button class="bton-delete-modal delete-modal-confirm" @click="handleDeleteConfirmation">Oui, supprimer</button>
+  <button class="bton-delete-modal delete-modal-cancel" @click="cancelDelete">Non, annuler</button>
+</div>
+</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+
 </template>
+
 
 <script>
 import HeaderComponent from '@/components/HeaderComponent.vue';
@@ -270,18 +158,18 @@ export default {
   },
   data() {
     return {
-      search: '',
+      search: "",
       resultSearch: [],
-      selectedProduct: null,
-      showModal: false,
-      showAddForm: false,
+      selectedProduct: null, 
+      showModal: false, 
+      showAddForm: false,  
       newProduct: {
         titre: '',
         description: '',
         categorieId: '',
         prix: null,
         moq: null,
-        image: 'no-image.png',
+        image: "no-image.png",
       },
       showForm: false,
       editingProduct: null,
@@ -290,39 +178,29 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['loadProductsList']),
+  ...mapActions(['loadProductsList']),
+  
+  searchProduct() {
+  if (this.search !== "") {
+    this.resultSearch = this.productsList.filter((product) => {
+      const titleMatches = product.titre && product.titre.toLowerCase().includes(this.search.toLowerCase());
+      const descriptionMatches = product.description && product.description.toLowerCase().includes(this.search.toLowerCase());
+      const categoryMatches = product.categorieId && product.categorieId.toString().toLowerCase().includes(this.search.toLowerCase());
 
-    searchProduct() {
-      if (this.search !== '') {
-        this.resultSearch = this.productsList.filter((product) => {
-          const titleMatches =
-            product.titre &&
-            product.titre.toLowerCase().includes(this.search.toLowerCase());
-          const descriptionMatches =
-            product.description &&
-            product.description
-              .toLowerCase()
-              .includes(this.search.toLowerCase());
-          const categoryMatches =
-            product.categorieId &&
-            product.categorieId
-              .toString()
-              .toLowerCase()
-              .includes(this.search.toLowerCase());
+      return titleMatches || descriptionMatches || categoryMatches;
+    });
+  } else {
+    this.resultSearch = this.productsList;
+  }
+  console.log(this.resultSearch);
+},
 
-          return titleMatches || descriptionMatches || categoryMatches;
-        });
-      } else {
-        this.resultSearch = this.productsList;
-      }
-      console.log(this.resultSearch);
-    },
 
-    toggleForm() {
+  toggleForm() {
       this.showForm = !this.showForm;
     },
 
-    toggleAddForm() {
+  toggleAddForm() {
       this.showAddForm = !this.showAddForm;
       if (!this.showAddForm) {
         this.newProduct = {
@@ -335,57 +213,44 @@ export default {
       }
     },
 
+  
     handleSave(product) {
-      if (
-        !product.titre ||
-        !product.description ||
-        product.prix === null ||
-        product.moq === null
-      ) {
-        alert('Veuillez remplir tous les champs obligatoires !');
+      if (!product.titre || !product.description || product.prix === null || product.moq === null) {
+        alert("Veuillez remplir tous les champs obligatoires !");
         return;
       }
 
       this.productsList.push({ ...product });
       localStorage.setItem('productsList', JSON.stringify(this.productsList));
-      this.toggleForm();
+      this.toggleForm(); 
     },
 
     confirmDelete(product) {
-      this.productToDelete = product;
-    },
+    this.productToDelete = product; 
+  },
 
-    handleDeleteConfirmation() {
-      if (this.productToDelete) {
-        const productIdToDelete = this.productToDelete.id;
+  handleDeleteConfirmation() {
+  if (this.productToDelete) {
+    const productIdToDelete = this.productToDelete.id;
 
-        this.$store.dispatch('deleteProduct', productIdToDelete);
 
-        this.productToDelete = null;
-      }
-    },
+    this.$store.dispatch('deleteProduct', productIdToDelete);
 
-    cancelDelete() {
-      this.productToDelete = null;
-    },
+    
+    this.productToDelete = null;
+  }
+},
+
+
+ 
+  cancelDelete() {
+    this.productToDelete = null; 
+  },
 
     getFirstSevenWords(description) {
-      if (!description) return '';
-      return (
-        description.split(' ').slice(0, 7).join(' ') +
-        (description.split(' ').length > 7 ? '...' : '')
-      );
-    },
-
-    startEditing(product) {
-      console.log('Modification du produit', product);
-      this.editingProduct = { ...product };
-    },
-
-    saveProduct() {
-      const productIndex = this.productsList.findIndex(
-        (p) => p.id === this.editingProduct.id
-      );
+    if (!description) return '';
+    return description.split(' ').slice(0, 7).join(' ') + (description.split(' ').length > 7 ? '...' : '');
+  },
 
   startEditing(product) {
     console.log('Modification du produit', product);
@@ -416,18 +281,27 @@ export default {
   },
 
   computed: {
-    productsList() {
-      return this.$store.state.productsList;
-    },
+    
+  productsList() {
+    return this.$store.state.productsList;
   },
+},
 
-  mounted() {
-    let userLevel;
 
-    const user = localStorage.getItem('user');
-    if (user) {
-      userLevel = JSON.parse(user).role;
-    }
+mounted() {
+  let userLevel;
+
+ 
+  const user = localStorage.getItem('user');
+  if (user) {
+    userLevel = JSON.parse(user).role;
+  }
+
+  
+  if (!userLevel || userLevel !== 'ADMIN') {
+    this.$router.push('/');
+    return; 
+  }
 
  
   const storedProducts = localStorage.getItem('productsList');
@@ -445,22 +319,14 @@ export default {
 
 }
 
-    const storedProducts = localStorage.getItem('productsList');
-    if (localStorage.getItem('productsList')) {
-      const productsList = JSON.parse(storedProducts);
-      this.$store.commit('setProductsList', productsList);
-    } else {
-      this.$store.commit('setProductsList', []);
-    }
-  },
 };
 </script>
 
 <style scoped>
 .flex-need {
   display: flex;
-}
 
+}
 
 .products-container {
   display: flex;
@@ -483,7 +349,7 @@ export default {
 .infos-actions {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center;  
 }
 .product-image {
   width: 50px;
@@ -498,7 +364,7 @@ export default {
   gap: 20px;
   padding: 20px;
   margin-bottom: 15px;
-  box-shadow: 0px 0px 10px #33333361;
+  box-shadow: 0px 0px 10px #33333361;  
   border-radius: 8px;
   background-color: #fff;
   max-width: 90%;
@@ -508,6 +374,7 @@ export default {
 .button-container {
   margin-top: 20px;
   align-self: center;
+ 
 }
 
 .leading {
@@ -536,28 +403,29 @@ export default {
   margin-top: 10px;
 }
 
-.bton-delete-modal {
+.bton-delete-modal{
   border: none;
   color: white;
   border-radius: 8px;
 }
 
-.delete-modal-confirm {
+.delete-modal-confirm{
   background-color: rgb(206, 29, 29);
 }
 
-.delete-modal-cancel {
+.delete-modal-cancel{
   background-color: rgb(51, 51, 51);
 }
 
 button {
   width: auto;
-
+  
   padding: 10px 20px;
   margin-bottom: 20px;
 }
 
 .product-image-container {
+
   display: flex;
   align-items: center;
 }
@@ -578,8 +446,8 @@ button {
   align-items: center;
 }
 
-p,
-h5 {
+
+p, h5 {
   margin: 0;
 }
 
@@ -588,14 +456,14 @@ h5 {
   justify-content: space-between;
 }
 
-.product-update {
+.product-update{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
   margin-bottom: 15px;
-  box-shadow: 0px 0px 10px #33333361;
+  box-shadow: 0px 0px 10px #33333361;  
   border-radius: 8px;
   background-color: #fff;
   max-width: 90%;
@@ -680,6 +548,7 @@ textarea {
   opacity: 0.9;
 }
 
+
 .delete-icon {
   width: 30px;
 }
@@ -722,8 +591,7 @@ textarea {
   margin-bottom: 5px;
 }
 
-.add-product-form input,
-.add-product-form textarea {
+.add-product-form input, .add-product-form textarea {
   margin-bottom: 15px;
   padding: 10px;
   border: 1px solid #ccc;
