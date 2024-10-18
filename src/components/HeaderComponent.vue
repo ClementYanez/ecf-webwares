@@ -108,7 +108,7 @@
         @click="userDropDown"
       />
       <div v-if="openUserDropDown" class="deconnect">
-        <p>{{ user.raisonSociale }}</p>
+        <p>Bienvenue {{ user.raisonSociale }}</p>
         <ButtonComponent
           text="Se déconnecter"
           color="#f1f1f1"
