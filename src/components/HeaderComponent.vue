@@ -60,8 +60,13 @@
     <div v-if="userRole">
       <img :src="require('@/assets/icons/user.svg')" alt="icône utilisateur" class="icon" @click="userDropDown" />
       <div v-if="openUserDropDown" class="deconnect">
-        <p>{{ user.raisonSociale }}</p>
-        <ButtonComponent text="Se déconnecter" color="#f1f1f1" textColor="#191919" @click="deleteUSer" />
+        <p>Bienvenue {{ user.raisonSociale }}</p>
+        <ButtonComponent
+          text="Se déconnecter"
+          color="#f1f1f1"
+          textColor="#191919"
+          @click="deleteUSer"
+        />
       </div>
     </div>
   </nav>
