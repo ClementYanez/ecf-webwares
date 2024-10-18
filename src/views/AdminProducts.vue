@@ -52,7 +52,6 @@
 
               <!-- <input type="file" @change="handleFileUpload" accept="image/*"> -->
 
-
               <div class="add-product-buttons">
                 <button class="ajout-prod-btn-enregistrer" type="submit">
                   Enregistrer le produit
@@ -69,82 +68,49 @@
           </div>
 
           <div class="leading">
-      <FilAriane cat1="Administration" cat2="Produits"/>
-      <input type="text" class="searchbar" placeholder="Rechercher un produit" v-model="search"
-        @input="searchProduct">
-    </div>
+            <FilAriane cat1="Administration" cat2="Produits" />
+            <input
+              type="text"
+              class="searchbar"
+              placeholder="Rechercher un produit"
+              v-model="search"
+              @input="searchProduct"
+            />
+          </div>
           <div class="product-item">
-      
             <div class="titles">
-        <span>Liste des produits</span>
-        <div class="title-icons">
-          <span>Modifier</span>
-          <span>Supprimer</span>
-        </div>
-      </div>
-      <div><ButtonComponent text="Ajouter un produit" color="green" @click="toggleForm" /></div>
-      <div v-for="(product, index) in resultSearch.length ? resultSearch : productsList" :key="index">
-
-              <div  v-if="editingProduct && editingProduct.id === product.id" class="product-update">
-    <!-- Formulaire de modification -->
-    <h3>Modifier le produit</h3>
-    <form @submit.prevent="saveProduct">
-    <div class="form-group">
-      <label for="edit-titre">Titre:</label>
-      <input type="text" v-model="editingProduct.titre" class="input-field">
-    </div>
-    
-    <div class="form-group">
-      <label for="edit-description">Description :</label>
-      <textarea v-model="editingProduct.description" class="input-field"></textarea>
-    </div>
-    
-    <div class="form-group">
-      <label for="edit-categorie">Catégorie :</label>
-      <select v-model="editingProduct.categorieId" class="input-field">
-                <option value="" disabled>Sélectionnez une catégorie</option>
-                <option v-for="category in categories" :key="category.id" :value="category.id">
-                  {{ category.name }}
-                </option>
-              </select> 
-      
-    </div>
-    
-    <div class="form-group">
-      <label for="edit-prix">Prix :</label>
-      <input type="number" v-model="editingProduct.prix" step="0.01" class="input-field">
-    </div>
-    
-    <div class="form-group">
-      <label for="edit-moq">Quantité minimum (MOQ):</label>
-      <input type="number" v-model="editingProduct.moq" class="input-field">
-    </div>
-    
-    <div class="form-actions">
-      <button type="submit" class="save-btn">Enregistrer les modifications</button>
-      <button type="button" class="cancel-btn" @click="editingProduct = null">Annuler</button>
-    </div>
-  </form>
-  </div>
-  <div v-else>
-              <div class="infos-actions">
-                <div class="product-info">
-                  <img :src="getImageSource(product.image)" alt="Product Image"
-                    class="product-image" />
-                  <!-- <p v-else>Aucune image disponible</p> -->
-                  <h5>{{ product.titre }}</h5>
-                  <p>{{ getFirstSevenWords(product.description) }}</p>
-                  <p><strong>Catégorie</strong> : {{ getCategoryName(product.categorieId) }}</p>
-                  <p><strong>Prix TTC /u</strong> : {{ product.prix }}€</p>
-                  <p><strong>Quantité minimum</strong> : {{ product.moq }}</p>
-                </div>
-                <div class="product-actions">
-                  <svg xmlns="http://www.w3.org/2000/svg" @click="startEditing(product)" height="30px"
-                    viewBox="0 -960 960 960" width="30px" fill="green" class="icons-global">
-                    <path
-                      d="M360-360v-170l382-382q9-9 20-13t22-4q11 0 22.5 4.5T827-911l83 84q9 9 13.5 20t4.5 22q0 11-4.5 22.5T910-742L530-360H360Zm440-355 68-70-84-84-69 69 85 85ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h405L300-555v255h252l288-288v408q0 24-18 42t-42 18H180Z" />
-                  </svg>
-                  <img :src="require('@/assets/icons/deleteicon.svg')" class="delete-icon icons-global" @click="confirmDelete(product)"
+              <span>Liste des produits</span>
+              <div class="title-icons">
+                <span>Modifier</span>
+                <span>Supprimer</span>
+              </div>
+            </div>
+            <div>
+              <ButtonComponent
+                text="Ajouter un produit"
+                color="green"
+                @click="toggleForm"
+              />
+            </div>
+            <div
+              v-for="(product, index) in resultSearch.length
+                ? resultSearch
+                : productsList"
+              :key="index"
+            >
+              <div
+                v-if="editingProduct && editingProduct.id === product.id"
+                class="product-update"
+              >
+                <!-- Formulaire de modification -->
+                <h3>Modifier le produit</h3>
+                <form @submit.prevent="saveProduct">
+                  <div class="form-group">
+                    <label for="edit-titre">Titre:</label>
+                    <input
+                      type="text"
+                      v-model="editingProduct.titre"
+                      class="input-field"
                     />
                   </div>
 
@@ -212,7 +178,7 @@
                 <div class="infos-actions">
                   <div class="product-info">
                     <img
-                      :src="require(`@/assets/${product.image}`)"
+                      :src="getImageSource(product.image)"
                       alt="Product Image"
                       class="product-image"
                     />
@@ -306,7 +272,7 @@ export default {
         categorieId: '',
         prix: null,
         moq: null,
-        image: "",
+        image: '',
       },
       showForm: false,
       editingProduct: null,
@@ -315,45 +281,55 @@ export default {
     };
   },
   methods: {
-  ...mapActions(['loadProductsList']),
-  
-  searchProduct() {
-  if (this.search !== "") {
-    this.resultSearch = this.productsList.filter((product) => {
-      const titleMatches = product.titre && product.titre.toLowerCase().includes(this.search.toLowerCase());
-      const descriptionMatches = product.description && product.description.toLowerCase().includes(this.search.toLowerCase());
-      const categoryMatches = product.categorieId && product.categorieId.toString().toLowerCase().includes(this.search.toLowerCase());
+    ...mapActions(['loadProductsList']),
 
-      return titleMatches || descriptionMatches || categoryMatches;
-    });
-  } else {
-    this.resultSearch = this.productsList;
-  }
-  console.log(this.resultSearch);
-},
+    searchProduct() {
+      if (this.search !== '') {
+        this.resultSearch = this.productsList.filter((product) => {
+          const titleMatches =
+            product.titre &&
+            product.titre.toLowerCase().includes(this.search.toLowerCase());
+          const descriptionMatches =
+            product.description &&
+            product.description
+              .toLowerCase()
+              .includes(this.search.toLowerCase());
+          const categoryMatches =
+            product.categorieId &&
+            product.categorieId
+              .toString()
+              .toLowerCase()
+              .includes(this.search.toLowerCase());
 
-// handleFileUpload(event) {
-//     const file = event.target.files[0];
-//     if (file) {
-//       const reader = new FileReader();
+          return titleMatches || descriptionMatches || categoryMatches;
+        });
+      } else {
+        this.resultSearch = this.productsList;
+      }
+      console.log(this.resultSearch);
+    },
 
-//       reader.onload = (e) => {
-//         this.newProduct.image = e.target.result; // Utilisez cette image pour l'ajouter à votre produit
-//       };
+    // handleFileUpload(event) {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //       const reader = new FileReader();
 
-//       reader.readAsDataURL(file); // Convertir le fichier en URL
-//     }
-//   },
+    //       reader.onload = (e) => {
+    //         this.newProduct.image = e.target.result; // Utilisez cette image pour l'ajouter à votre produit
+    //       };
 
-  getImageSource(image) {
-    // Si l'image est une chaîne contenant "data:image", alors c'est une image en base64
-    if (image && image.startsWith('data:image')) {
-      return image; // Retourner l'image en base64
-    } else {
-      return require(`@/assets/${image}`); // Retourner l'image du dossier assets
-    }
-  },
+    //       reader.readAsDataURL(file); // Convertir le fichier en URL
+    //     }
+    //   },
 
+    getImageSource(image) {
+      // Si l'image est une chaîne contenant "data:image", alors c'est une image en base64
+      if (image && image.startsWith('data:image')) {
+        return image; // Retourner l'image en base64
+      } else {
+        return require(`@/assets/${image}`); // Retourner l'image du dossier assets
+      }
+    },
 
     toggleForm() {
       this.showForm = !this.showForm;
@@ -373,41 +349,32 @@ export default {
     },
 
     handleSave(product) {
-  // Vérifier que tous les champs requis sont remplis
-  if (!product.titre || !product.description || product.prix === null || product.moq === null) {
-    alert("Veuillez remplir tous les champs obligatoires !");
-    return;
-  }
+      // Vérifier que tous les champs requis sont remplis
+      if (
+        !product.titre ||
+        !product.description ||
+        product.prix === null ||
+        product.moq === null
+      ) {
+        alert('Veuillez remplir tous les champs obligatoires !');
+        return;
+      }
 
-  // Récupérer la liste des produits actuelle (depuis localStorage ou le store, selon ce que tu utilises)
-  const productsList = JSON.parse(localStorage.getItem('productsList')) || this.productsList;
+      // Récupérer la liste des produits actuelle (depuis localStorage ou le store, selon ce que tu utilises)
+      const productsList =
+        JSON.parse(localStorage.getItem('productsList')) || this.productsList;
 
-  // Trouver le dernier ID en utilisant reduce (assurer que l'ID est unique)
-  const lastProductId = productsList.reduce((maxId, prod) => {
-    return Math.max(maxId, prod.id);
-  }, 0);
-
-  // Assigner un nouvel ID (ID du dernier produit + 1)
-  const newProduct = { ...product, id: lastProductId + 1, image: this.newProduct.image};
-
-  // Ajouter le nouveau produit à la liste
-  productsList.push(newProduct);
-
-  // Mettre à jour le localStorage
-  localStorage.setItem('productsList', JSON.stringify(productsList));
-
-  // Mettre à jour la liste de produits dans le store si nécessaire
-  this.$store.commit('setProductsList', productsList); 
-
-  // Fermer le formulaire d'ajout
-  this.toggleForm();
-
-
-},
-
+      // Trouver le dernier ID en utilisant reduce (assurer que l'ID est unique)
+      const lastProductId = productsList.reduce((maxId, prod) => {
+        return Math.max(maxId, prod.id);
+      }, 0);
 
       // Assigner un nouvel ID (ID du dernier produit + 1)
-      const newProduct = { ...product, id: lastProductId + 1 };
+      const newProduct = {
+        ...product,
+        id: lastProductId + 1,
+        image: this.newProduct.image,
+      };
 
       // Ajouter le nouveau produit à la liste
       productsList.push(newProduct);
@@ -415,39 +382,12 @@ export default {
       // Mettre à jour le localStorage
       localStorage.setItem('productsList', JSON.stringify(productsList));
 
-    if (this.resultSearch.length) {
-      this.resultSearch = this.resultSearch.filter(product => product.id !== productIdToDelete);
-    }
-
-    this.$store.commit('setProductsList', this.productsList.filter(product => product.id !== productIdToDelete));
-
-    
-    this.productToDelete = null;
-  }
-},
+      // Mettre à jour la liste de produits dans le store si nécessaire
+      this.$store.commit('setProductsList', productsList);
 
       // Fermer le formulaire d'ajout
       this.toggleForm();
-
-      // Relancer la recherche pour rafraîchir l'affichage des produits
-      this.searchProduct();
     },
-
-    //   handleSave(product) {
-    //     if (!product.titre || !product.description || product.prix === null || product.moq === null) {
-    //       alert("Veuillez remplir tous les champs obligatoires !");
-    //       return;
-    //     }
-
-    //     this.productsList.push({ ...product });
-    //     localStorage.setItem('productsList', JSON.stringify(this.productsList));
-    //     this.toggleForm();
-    //     this.searchProduct();
-    //   },
-
-    //   confirmDelete(product) {
-    //   this.productToDelete = product;
-    // },
 
     handleDeleteConfirmation() {
       if (this.productToDelete) {
@@ -484,28 +424,12 @@ export default {
       );
     },
 
-  startEditing(product) {
-  const originalProduct = this.productsList.find(p => p.id === product.id);
-  this.editingProduct = { ...originalProduct }; // Ici, copie des données originales
-},
-
-  
-  saveProduct() {
-    
-    const productIndex = this.productsList.findIndex(p => p.id === this.editingProduct.id);
-    
-    if (productIndex !== -1) {
-      
-      this.productsList.splice(productIndex, 1, { ...this.editingProduct });
-      
-      
-      localStorage.setItem('productsList', JSON.stringify(this.productsList));
-      
-      
-      this.editingProduct = null;
-      this.searchProduct(); 
-    }
-  },
+    startEditing(product) {
+      const originalProduct = this.productsList.find(
+        (p) => p.id === product.id
+      );
+      this.editingProduct = { ...originalProduct }; // Ici, copie des données originales
+    },
 
     saveProduct() {
       const productIndex = this.productsList.findIndex(
@@ -515,23 +439,12 @@ export default {
       if (productIndex !== -1) {
         this.productsList.splice(productIndex, 1, { ...this.editingProduct });
 
-  computed: {
-    
-  productsList() {
-    return this.$store.state.productsList;
-  },
+        localStorage.setItem('productsList', JSON.stringify(this.productsList));
 
-  productsToDisplay() {
-    return this.resultSearch.length ? this.resultSearch : this.productsList;
-  }
-},
-
-// watch: {
-//   productsList(newList) {
-//     this.searchProduct(newList); // Appelez votre méthode avec la nouvelle liste
-//   },
-// },
-
+        this.editingProduct = null;
+        this.searchProduct();
+      }
+    },
 
     getCategoryName(categorieId) {
       const category = this.categories.find((cat) => cat.id === categorieId);
@@ -549,15 +462,19 @@ export default {
     },
   },
 
+  // watch: {
+  //   productsList(newList) {
+  //     this.searchProduct(newList); // Appelez votre méthode avec la nouvelle liste
+  //   },
+  // },
+
   mounted() {
     let userLevel;
 
-  const storedCategories = localStorage.getItem('categories');
-  if (storedCategories) {
-    this.categories = JSON.parse(storedCategories);
-  } else {
-    this.categories = this.$store.state.categories;
-  }
+    const user = localStorage.getItem('user');
+    if (user) {
+      userLevel = JSON.parse(user).role;
+    }
 
     if (!userLevel || userLevel !== 'ADMIN') {
       this.$router.push('/');
