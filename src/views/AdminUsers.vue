@@ -394,11 +394,11 @@ p {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  margin: 10px 20px;
+  margin: 10px 0;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px #592b027f;
+  padding-right: 20px;
 }
 
 .edit-input {
@@ -424,8 +424,7 @@ p {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  width: 100%;
-  margin: 10px 20px;
+  margin: 10px 0;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px #592b027f;
@@ -492,6 +491,19 @@ p {
     flex-direction: row;
     margin-top: 10px;
     margin-bottom: 50px;
+  }
+
+  .edit-input {
+    width: 80%;
+    margin: 10px 0;
+  }
+
+  .edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 }
 </style>
