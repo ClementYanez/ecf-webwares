@@ -141,11 +141,11 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin: 0;
   padding: 0;
+  padding-bottom: 10px;
   box-sizing: border-box;
   width: 350px;
-  height: 450px;
+  height: auto;
   text-align: center;
-  position: relative;
 }
 
 img {
@@ -159,13 +159,6 @@ img {
 
 p {
   margin: 0px 5px;
-}
-
-button {
-  bottom: 0px;
-  left: auto;
-  right: auto;
-  /* margin-top: 10px; */
 }
 
 input {
@@ -196,15 +189,12 @@ input {
 }
 
 .btns {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 950px) {
