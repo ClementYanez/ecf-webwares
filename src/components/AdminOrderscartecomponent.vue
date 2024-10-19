@@ -15,15 +15,15 @@
 
                 <!-- Dropdown statut -->
                 <div class="box1-statut" @click="dropDownBoolean()">
-                    <span><strong>Statut : </strong> {{ statutAffichage }}</span>
+                    <span><strong>Statut : </strong> {{ statut }}</span>
                     <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke=""><g id="SVGRepo_bgCarrier" stroke-width="0" /><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" /><g id="SVGRepo_iconCarrier"><path d="M17.9188 8.17969H11.6888H6.07877C5.11877 8.17969 4.63877 9.33969 5.31877 10.0197L10.4988 15.1997C11.3288 16.0297 12.6788 16.0297 13.5088 15.1997L15.4788 13.2297L18.6888 10.0197C19.3588 9.33969 18.8788 8.17969 17.9188 8.17969Z" fill="#268000" /></g></svg>
 
                     <div v-if="dropDownFlag" class="dropdown-statut">
-                        <span @click="changeStatut('En cours')" class="dropdown-options">En cours</span>
+                        <span @click="changeStatutEncours(idCommande)" class="dropdown-options">En cours</span>
                         <div class="barre barrestatut"></div>
-                        <span @click="changeStatut('Livrée')" class="dropdown-options">Livrée</span>
+                        <span @click="changeStatutLivree(idCommande)" class="dropdown-options">Livrée</span>
                         <div class="barre barrestatut"></div>
-                        <span @click="changeStatut('Annulée')" class="dropdown-options">Annulée</span>
+                        <span @click="changeStatutAnnulee(idCommande)" class="dropdown-options">Annulée</span>
                     </div>
                 </div>
 
@@ -59,8 +59,7 @@ export default {
         return {
             flagDetails: false,
             dropDownFlag: false,
-            statutDetails: this.statut,
-            statutAffichage: this.statut,
+            listRecherche: this.listeRecherche,
         }
     },
 
@@ -79,6 +78,7 @@ export default {
     totalPrice: String,
     statut: String,
     idCommande: Number,
+    listeRecherche: Array,
   },
 
   methods: {
@@ -103,16 +103,36 @@ export default {
         this.dropDownFlag = !this.dropDownFlag
     },
 
-    changeStatut(nouveauStatut){
-            this.statutDetails = nouveauStatut;
-            let ordersList = JSON.parse(localStorage.getItem('adminOrderList'));
-            ordersList[this.idCommande][3] = nouveauStatut;
-            this.statutAffichage = nouveauStatut;
+    changeStatutEncours(i){
+        this.listRecherche[i].statut = 'En cours';
 
-            localStorage.setItem('adminOrderList',JSON.stringify(ordersList))
-        }
+        let OrderList = JSON.parse(localStorage.getItem('adminOrderList'))
+        OrderList[i][3] = "En cours"
+        localStorage.setItem('adminOrderList', JSON.stringify(OrderList));
+
+        window.location.reload();
     },
-};
+    changeStatutLivree(i){
+        this.listRecherche[i].statut = 'Livrée';
+
+        let OrderList = JSON.parse(localStorage.getItem('adminOrderList'))
+        OrderList[i][3] = "Livrée"
+        localStorage.setItem('adminOrderList', JSON.stringify(OrderList));
+        
+        window.location.reload();
+    },
+    changeStatutAnnulee(i){
+        this.listRecherche[i].statut = 'Annulée';
+
+        let OrderList = JSON.parse(localStorage.getItem('adminOrderList'))
+        OrderList[i][3] = "Annulée"
+        localStorage.setItem('adminOrderList', JSON.stringify(OrderList));
+
+        window.location.reload();
+    },
+
+},
+}
 </script>
 
 <style scoped>
