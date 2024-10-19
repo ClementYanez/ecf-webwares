@@ -391,20 +391,32 @@ export default createStore({
   getters: {
     lastImagesByCategory(state) {
       const lastImages = [];
-
+      let databaseProduits;
+      let databaseCategories;
+      if (localStorage.getItem('productsList')) {
+        databaseProduits = JSON.parse(localStorage.getItem('productsList'));
+      } else {
+        databaseProduits = state.productsList;
+      }
+      if (localStorage.getItem('categories')) {
+        databaseCategories = JSON.parse(localStorage.getItem('categories'));
+      } else {
+        databaseCategories = state.categories;
+      }
       // Boucle sur chaque catégorie
-      state.categories.forEach((category) => {
+      databaseCategories.forEach((category) => {
         // Filtrer les produits par catégorie
-        const productsInCategory = state.productsList.filter(
+        const productsInCategory = databaseProduits.filter(
           (product) => product.categorieId === category.id
         );
+        console.log(productsInCategory);
 
         // Prendre le dernier produit ajouté dans chaque catégorie
         if (productsInCategory.length > 0) {
           lastImages.push(productsInCategory[productsInCategory.length - 1]);
         }
+        console.log(lastImages);
       });
-
       return lastImages;
     },
     filterProductByQuery(state) {
