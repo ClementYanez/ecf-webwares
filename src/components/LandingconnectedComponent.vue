@@ -3,24 +3,12 @@
     <div class="cont-global">
       <div class="cont-list">
         <div class="list" v-for="product in productTendance" :key="product.id">
-          <ProductsComponent
-            :name="product.titre"
-            :price="product.prix"
-            :description="product.description"
-            :image="product.image"
-            :minQte="product.moq"
-            :id="product.id"
-            :product="product"
-            url="product-details"
-          />
+          <ProductsComponent :name="product.titre" :price="product.prix" :description="product.description"
+            :image="product.image" :minQte="product.moq" :id="product.id" :product="product" url="product-details" />
         </div>
       </div>
       <div class="cont-btn">
-        <ButtonComponent
-          color="#592B02"
-          text="Voir plus"
-          @click="goToProductList()"
-        />
+        <ButtonComponent color="#592B02" text="Voir plus" @click="goToProductList()" />
       </div>
     </div>
   </div>
@@ -71,6 +59,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin-bottom: 100px;
+  padding: 0 50px;
 }
 
 .cont-list {
