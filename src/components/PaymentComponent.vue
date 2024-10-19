@@ -73,10 +73,13 @@ export default {
         lastName: '',
         cardNumber: '',
         cvc: '',
+        idCommande: Number,
       },
     };
   },
   methods: {
+
+
     confirmCommand() {
       // Réinitialiser les messages d'erreur
       this.errorMessages = {
@@ -115,17 +118,23 @@ export default {
         let commandeElement = [];
         let orderValue = "";
         let orderStatut = "En cours";
+
         if (localStorage.getItem('adminOrderList')) {
           orderList = JSON.parse(localStorage.getItem('adminOrderList'));
+          this.idCommande = orderList.length;
+        } else {
+          this.idCommande = 0;
         }
+
         user = JSON.parse(localStorage.getItem('user'));
         userOrder = JSON.parse(localStorage.getItem(`panier_${user.id}`));
         orderValue = localStorage.getItem('value')
-        commandeElement.push(userOrder, user, orderValue, orderStatut)
+        commandeElement.push(userOrder, user, orderValue, orderStatut, this.idCommande)
         orderList.push(commandeElement);
         localStorage.setItem('adminOrderList', JSON.stringify(orderList));
 
         localStorage.removeItem(`panier_${user.id}`)
+        
 
         this.$router.push('/')
     },
