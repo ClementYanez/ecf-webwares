@@ -2,20 +2,17 @@
   <HeaderComponent />
   <TitleComponent title="Gestion des catégories" />
   <div class="cont-global">
-    <div class="panel">
+    <div class="cont-panel">
       <SidePanelAdmin />
     </div>
-    <div class="cont-liste">
-      <div class="searchbar">
-        <div class="ariane">
-          <FilAriane cat1="Administration" cat2="Catégories" />
-        </div>
-        <AdminSearch
-          placeholder="Rechercher une catégorie"
-          localstorage="categories"
-        />
+    <div class="cont-core">
+      <div class="cont-searcharianne">
+        <FilAriane cat1="Administration" cat2="Catégories" />
+        <AdminSearch placeholder="Rechercher une catégorie" localstorage="categories" class="searchbar"/>
       </div>
-      <AdminCatlist />
+      <div class="cont-list">
+        <AdminCatlist />
+      </div>
     </div>
   </div>
 </template>
@@ -53,36 +50,56 @@ export default {
 <style scoped>
 .cont-global {
   display: flex;
-  flex-direction: row;
-  min-height: 70vh;
-  /* height: 100%; */
-  /* justify-content: center; */
-  /* align-items: center; */
+  min-height: 68vh;
 }
-.panel {
+.cont-panel{
   display: flex;
 }
-.cont-liste {
-  /* padding-top: 100px; */
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 50px;
-  /* justify-content: center; */
-  /* margin-left: 10%; */
-  width: 80%;
+
+.cont-core{
+  width: 100%
 }
-.searchbar {
-  /* height: 50px; */
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
+.cont-searcharianne{
+  padding: 20px 60px 20px 60px;
+  position: relative;
 }
-.ariane {
-  height: 100%;
+.searchbar{
+  position: absolute;
+  right: 5%;
+  top: -14px;
+}
+
+@media screen and (max-width : 1100px) {
+  .searchbar{
+    top: 30px;
+  }
+  .cont-list{
+    padding-top: 30px;
+  }
+}
+
+@media screen and (max-width : 950px) {
+  .cont-global {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cont-searcharianne{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  flex-direction: column;
+  }
+  .searchbar{
+    position: static;
+  }
+  .cont-list{
+    padding-top: 0px;
+  }
+}
+
+@media screen and (max-width : 460px) {
+  .searchbar{
+    width: 100%;
+  }
 }
 </style>

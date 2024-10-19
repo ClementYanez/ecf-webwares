@@ -36,8 +36,6 @@ export default {
 
 <style scoped>
 input {
-  padding: 10px 10px 10px 20px;
-  margin: 30px 10px;
   width: 300px;
   height: 30px;
   border: 1px solid #d9b596;
