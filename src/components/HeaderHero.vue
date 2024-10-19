@@ -15,7 +15,7 @@ export default {
     return {};
   },
   methods: {},
-  mounted() {},
+  mounted() { },
 };
 </script>
 
@@ -34,11 +34,19 @@ export default {
   height: 400px;
   padding: 310px 0 180px 0;
 }
+
 h1 {
   font-size: 5rem;
 }
+
 h1,
 h4 {
   text-shadow: 2px 2px 10px #5a4a3d;
+}
+
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 3rem;
+  }
 }
 </style>

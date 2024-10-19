@@ -163,10 +163,6 @@ li {
   text-align: center;
 }
 
-button {
-  width: 150px;
-}
-
 @media screen and (max-width: 700px) {
   .columns {
     flex-direction: column;
@@ -175,7 +171,7 @@ button {
   }
 
   .column {
-    width: 250px;
+    width: 200px;
   }
 }
 </style>
