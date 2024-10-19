@@ -8,7 +8,11 @@
     <div class="cont-core">
       <div class="cont-searcharianne">
         <FilAriane cat1="Administration" cat2="Catégories" />
-        <AdminSearch placeholder="Rechercher une catégorie" localstorage="categories" class="searchbar"/>
+        <AdminSearch
+          placeholder="Rechercher une catégorie"
+          localstorage="categories"
+          class="searchbar"
+        />
       </div>
       <div class="cont-list">
         <AdminCatlist />
@@ -50,55 +54,55 @@ export default {
 <style scoped>
 .cont-global {
   display: flex;
-  min-height: 68vh;
+  min-height: 69vh;
 }
-.cont-panel{
+.cont-panel {
   display: flex;
 }
 
-.cont-core{
-  width: 100%
+.cont-core {
+  width: 100%;
 }
-.cont-searcharianne{
+.cont-searcharianne {
   padding: 20px 60px 20px 60px;
   position: relative;
 }
-.searchbar{
+.searchbar {
   position: absolute;
   right: 5%;
   top: -14px;
 }
 
-@media screen and (max-width : 1100px) {
-  .searchbar{
+@media screen and (max-width: 1100px) {
+  .searchbar {
     top: 30px;
   }
-  .cont-list{
+  .cont-list {
     padding-top: 30px;
   }
 }
 
-@media screen and (max-width : 950px) {
+@media screen and (max-width: 950px) {
   .cont-global {
     flex-direction: column;
     align-items: center;
   }
-  .cont-searcharianne{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  .cont-searcharianne {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
-  .searchbar{
+  .searchbar {
     position: static;
   }
-  .cont-list{
+  .cont-list {
     padding-top: 0px;
   }
 }
 
-@media screen and (max-width : 460px) {
-  .searchbar{
+@media screen and (max-width: 460px) {
+  .searchbar {
     width: 100%;
   }
 }

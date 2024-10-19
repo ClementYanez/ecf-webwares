@@ -2,22 +2,26 @@
   <div class="cont-list">
     <div class="add-cat">
       <div class="ajouter-cat">
-      <ButtonComponent
-        text="Ajouter une catégorie"
-        color="green"
-        @click="addCat = !addCat"
-      />
-    </div>
+        <ButtonComponent
+          text="Ajouter une catégorie"
+          color="green"
+          @click="addCat = !addCat"
+        />
+      </div>
       <div v-show="addCat" class="add">
         <input
           type="text"
           placeholder="Nom de la nouvelle catégorie"
           v-model="newCat.name"
         />
-        <ButtonComponent text="Ajouter" color="green" @click="addCategory"/>
+        <ButtonComponent text="Ajouter" color="green" @click="addCategory" />
       </div>
     </div>
-    <div class="cat-list">
+
+    <div class="no-result" v-show="this.adminSearchResult.length === 0">
+      <p>Aucun résultat</p>
+    </div>
+    <div class="cat-list" v-if="this.adminSearchResult.length > 0">
       <h5 class="cat">Catégories</h5>
       <div class="col-end">
         <h5 class="modifier">Modifier</h5>
@@ -294,47 +298,47 @@ input {
   margin-top: 50px;
 }
 
-@media screen and (max-width : 950px) {
-  .ajouter-cat{
+@media screen and (max-width: 950px) {
+  .ajouter-cat {
     display: flex;
     justify-content: center;
   }
 }
-@media screen and (max-width : 460px) {
-  .add{
+@media screen and (max-width: 460px) {
+  .add {
     flex-direction: column;
   }
-.category {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  width: 90%;
-  box-shadow: 0px 0px 10px #8a8a8a7c;
-  border-radius: 5px;
-  padding: 8px;
-}
-.svgs{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-.svg, .svg2 {
+  .category {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    width: 90%;
+    box-shadow: 0px 0px 10px #8a8a8a7c;
+    border-radius: 5px;
+    padding: 8px;
+  }
+  .svgs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .svg,
+  .svg2 {
+    padding-right: 0;
+  }
 
-  padding-right: 0;
-}
-
-.category h6 {
-  margin-left: 0;
-  margin-top: 5px;
-}
-.cat-list{
-  display: none;
-}
-.add input{
-  width: 95%;
-}
+  .category h6 {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+  .cat-list {
+    display: none;
+  }
+  .add input {
+    width: 95%;
+  }
 }
 </style>

@@ -1,25 +1,40 @@
 <template>
   <div class="merdum">
-    <!-- <img :src="require(`@/assets/${image}`)" v-if="!bool" />
-    <img :src="image" v-if="bool" /> -->
     <img :src="localImage" alt="" />
     <h4>{{ name }}</h4>
     <div v-if="userLevel">
       <p>{{ price }}€/u pour {{ minQte }} unités minimum</p>
-      <p>{{ description }}</p>
+      <p v-if="description.length > 60">
+        {{ description.substring(0, 60) + '...' }}
+      </p>
+      <p v-else>{{ description }}</p>
       <div class="btns">
         <ButtonComponent text="Détails" color="#CA8465" @click="getDetails" />
         <input type="number" :min="minQte" v-model="minQuantity" />
-        <img v-if="!selected" :src="require('@/assets/icons/cart.svg')" alt="icône panier" class="icon"
-          @click="addProductToCart(this.product)" />
-        <img v-if="selected" :src="require('@/assets/icons/cart.svg')" alt="icône panier" class="icon-selected" />
+        <img
+          v-if="!selected"
+          :src="require('@/assets/icons/cart.svg')"
+          alt="icône panier"
+          class="icon"
+          @click="addProductToCart(this.product)"
+        />
+        <img
+          v-if="selected"
+          :src="require('@/assets/icons/cart.svg')"
+          alt="icône panier"
+          class="icon-selected"
+        />
       </div>
     </div>
     <div v-else>
       <p>{{ minQte }} unités minimum</p>
-      <p>{{ description }}</p>
+      <p>{{ description.substring(0, 5) }}</p>
       <div class="btns">
-        <ButtonComponent text="Détails du produit" color="#CA8465" @click="getDetails" />
+        <ButtonComponent
+          text="Détails du produit"
+          color="#CA8465"
+          @click="getDetails"
+        />
       </div>
     </div>
   </div>
@@ -70,8 +85,6 @@ export default {
     ...mapActions(['addToCart']),
     ...mapMutations(['addToCart', 'setCarttoLocalStorage']),
     addProductToCart(product) {
-      // let user = JSON.parse(localStorage.getItem('user'));
-      // let userName = user.id;
       if (localStorage.getItem(`panier_${this.user.id}`)) {
         this.panier = JSON.parse(
           localStorage.getItem(`panier_${this.user.id}`)
@@ -89,17 +102,6 @@ export default {
       this.selected = true;
     },
   },
-  // watch: {
-  //   panier: {
-  //     handler() {
-  //       localStorage.setItem(
-  //         `panier_${this.user.id}`,
-  //         JSON.stringify(this.panier)
-  //       );
-  //     },
-  //     deep: true,
-  //   },
-  // },
   mounted() {
     if (localStorage.getItem('user')) {
       this.user = JSON.parse(localStorage.getItem('user'));
@@ -115,14 +117,6 @@ export default {
     }
     this.minQuantity = this.minQte;
     if (this.image.includes('base64')) {
-      // const temp = this.image.replace(/^url\('|'\)$/g, '');
-      // const temp = this.image.replace(/data:image\/jpeg;base64,([^,]+)/, '$1');
-      // const reader = new FileReader();
-      // reader.onload = (e) => {
-      //   this.localImage = e.target.result;
-      // };
-      // reader.readAsDataURL(new Blob([temp], { type: 'image/jpeg' }));
-      // this.localImage = this.image;
       this.localImage = this.image;
       this.bool = true;
       console.log(this.image);
@@ -144,8 +138,9 @@ export default {
   padding-bottom: 10px;
   box-sizing: border-box;
   width: 350px;
-  height: auto;
+  height: 450px;
   text-align: center;
+  position: relative;
 }
 
 img {
@@ -189,6 +184,9 @@ input {
 }
 
 .btns {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
