@@ -2,8 +2,8 @@
   <div>
     <HeaderComponent />
     <HeaderHero />
-    <LandingconnectedComponent v-if="userLevel"/>
-    <LandingComponent v-else/>
+    <LandingconnectedComponent v-if="userLevel" />
+    <LandingComponent v-else />
     <FooterComponent />
   </div>
 </template>
@@ -18,11 +18,11 @@ import LandingconnectedComponent from '@/components/LandingconnectedComponent.vu
 import { mapState } from 'vuex';
 
 export default {
-  data(){
+  data() {
     return {
       user: '',
       userLevel: '',
-    }
+    };
   },
   components: {
     HeaderComponent,
@@ -33,22 +33,19 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'productsList'
-    ])
+    ...mapState(['productsList']),
   },
 
-  mounted(){
-    if(localStorage.getItem('productsList') === null){
-      localStorage.setItem('productsList', JSON.stringify(this.productsList))
+  mounted() {
+    if (localStorage.getItem('productsList') === null) {
+      localStorage.setItem('productsList', JSON.stringify(this.productsList));
     }
 
     if (localStorage.getItem('user')) {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.userLevel = this.user.role;
     }
-
-  }
+  },
 };
 </script>
 
