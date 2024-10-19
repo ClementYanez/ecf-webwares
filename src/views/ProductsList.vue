@@ -2,15 +2,30 @@
   <HeaderComponent />
   <div class="cont-top">
     <!-- <FilAriane cat1="Produits" /> -->
-    <SearchbarComponent placeholder="Rechercher ..." @search="filterProductByQuery" />
+    <SearchbarComponent
+      placeholder="Rechercher ..."
+      @search="filterProductByQuery"
+    />
   </div>
   <div class="cont-global">
     <CategoriesList />
     <div class="cont-list">
-      <div v-show="filteredProductsList.length !== 0" class="list" v-for="product in filteredProductsList"
-        :key="product.id">
-        <ProductsComponent :name="product.titre" :price="product.prix" :description="product.description"
-          :image="product.image" :minQte="product.moq" :id="product.id" :product="product" url="product-details" />
+      <div
+        v-show="filteredProductsList.length !== 0"
+        class="list"
+        v-for="product in filteredProductsList"
+        :key="product.id"
+      >
+        <ProductsComponent
+          :name="product.titre"
+          :price="product.prix"
+          :description="product.description"
+          :image="product.image"
+          :minQte="product.moq"
+          :id="product.id"
+          :product="product"
+          url="product-details"
+        />
       </div>
       <div class="no-result" v-show="filteredProductsList.length === 0">
         Aucun produit ne correspond à votre recherche
@@ -106,7 +121,7 @@ export default {
   justify-content: end;
   align-items: center;
   padding: 0 15%;
-  padding-top: 100px;
+  padding-top: 130px;
 }
 
 .no-result {
