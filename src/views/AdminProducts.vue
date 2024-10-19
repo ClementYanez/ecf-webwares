@@ -751,7 +751,7 @@ textarea {
   .infos-actions {
     flex-direction: column;
     align-items: center; /* Aligner les éléments au début de la colonne */
-    margin-bottom: 15px;
+    margin-bottom: 80px;
   }
 
   .product-actions {
