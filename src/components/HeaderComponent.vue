@@ -292,7 +292,21 @@ span,
 .categories-contain {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+}
+
+.categories-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #592b02;
+  padding: 20px 0;
+  border-radius: 10px;
+  z-index: 999;
+  color: #f1f1f1;
+  font-size: 1.2rem;
 }
 
 .categories {
@@ -313,7 +327,7 @@ span,
 .category-link {
   margin: 0;
   padding: 10px;
-  width: 100%;
+  width: 250px;
   text-align: center;
   color: #f1f1f1;
   cursor: pointer;
