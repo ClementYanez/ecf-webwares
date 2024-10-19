@@ -49,7 +49,7 @@
                 </div>
               </div>
             </div>
-            <div class="contain-line">
+            <div class="contain-btns">
               <div class="img" @click="editUserModal(index)">
                 <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"
                   fill="#268000">
@@ -362,6 +362,12 @@ p {
   justify-content: center;
 }
 
+.contain-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .img {
   display: flex;
   width: 80px;
@@ -466,6 +472,7 @@ p {
     padding: 20px 40px;
   }
 
+
 }
 
 @media screen and (max-width: 460px) {
@@ -475,6 +482,16 @@ p {
 
   .titles {
     display: none;
+  }
+
+  .contain-line {
+    flex-direction: column;
+  }
+
+  .contain-btns {
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 50px;
   }
 }
 </style>
