@@ -1,16 +1,9 @@
 <template>
   <div class="cont-global">
     <div class="cont-image">
-      <div
-        v-for="product in lastImages"
-        :key="product.id"
-        class="image-product"
-      >
-        <img
-          :src="getImagePath(product.image)"
-          :alt="product.titre"
-          class="image-unique"
-        />
+      <div class="color-gradient"></div>
+      <div v-for="product in lastImages" :key="product.id" class="image-product">
+        <img :src="getImagePath(product.image)" :alt="product.titre" class="image-unique" />
         <img />
       </div>
       <div class="fondu"></div>
@@ -18,11 +11,7 @@
 
     <div class="cont-info">
       <h3>Inscrivez-vous dès maintenant et commencez à remplir vos stocks !</h3>
-      <ButtonComponent
-        text="Inscrivez-vous"
-        color="#CA8465"
-        @click="redirectToSignup"
-      />
+      <ButtonComponent text="Inscrivez-vous" color="#CA8465" @click="redirectToSignup" />
       <p>
         Ou connectez-vous
         <u style="cursor: pointer" @click="redirectToLogin">ici</u> et commencez
@@ -91,6 +80,17 @@ export default {
   display: flex;
   flex-direction: column;
   margin-top: 50px;
+  position: relative;
+}
+
+.color-gradient {
+  background: linear-gradient(to bottom, #ffffff00 0%, #ffffff48 50%, #ffffffd7 100%);
+  width: 140px;
+  height: 800px;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .image-unique {
@@ -108,7 +108,6 @@ export default {
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.3s ease;
   text-align: center;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -135,13 +134,35 @@ export default {
 
   .cont-info {
     max-width: 550px;
+    margin: 0 20px;
+  }
+
+  .color-gradient {
+    background: linear-gradient(to right, #ffffff00 0%, #ffffff48 50%, #ffffffd7 100%);
+    width: 600px;
+    height: 200px;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 650px) {
+
   .image-unique {
     width: 80px;
     height: 130px;
+  }
+
+  .color-gradient {
+    width: 320px;
+    height: 130px;
+  }
+
+  .cont-info {
+    max-width: 350px;
+    margin: 0 20px;
   }
 }
 </style>

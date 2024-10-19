@@ -471,6 +471,19 @@ p {
     padding: 20px 40px;
   }
 
+  .edit-input {
+    width: 80%;
+    margin: 10px 0;
+  }
+
+  .edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
 
 }
 
