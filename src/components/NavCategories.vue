@@ -3,14 +3,14 @@
         <div class="category" v-for="category in this.localCategories" :key="category.id">
             <span class="cat" @click="getProductsByCategory(category.id)">{{
                 category.name
-                }}</span>
+            }}</span>
         </div>
     </div>
     <div v-if="mobileOK && !desktopOK" class="cat-list-mobile">
         <div class="category" v-for="category in this.localCategories" :key="category.id">
             <span class="cat" @click="getProductsByCategory(category.id)">{{
                 category.name
-            }}</span>
+                }}</span>
         </div>
     </div>
 </template>
