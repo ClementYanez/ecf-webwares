@@ -3,7 +3,7 @@
   <TitleComponent title="Gestion des commandes" />
   <div class="cont-content">
     <div class="panel">
-      <SidePanelAdmin />
+      <SidePanelAdmin/>
     </div>
     <AdminOrderscore />
   </div>
@@ -40,7 +40,7 @@ export default {
 <style scoped>
 .cont-content {
   display: flex;
-  height: 100vh;
+  height: 100%;
 }
 
 .panel {

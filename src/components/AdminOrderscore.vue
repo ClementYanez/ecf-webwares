@@ -5,6 +5,8 @@
 
         <input type="text" class="searchbar" placeholder="Rechercher une commande" v-model="search" @input="searchUser">
 
+        <AdminStats/>
+
         <div v-for="(order, index) in resultSearch" :key="index">
             <AdminOrderscartecomponent :raisonSociale="order[1].raisonSociale" :siret="order[1].siret"
                 :adresse="order[1].adresse" :codePostal="order[1].codePostal" :ville="order[1].ville"
@@ -16,6 +18,7 @@
 
 <script>
 import AdminOrderscartecomponent from './AdminOrderscartecomponent.vue';
+import AdminStats from './AdminStats.vue';
 import FilAriane from './FilAriane.vue';
 
 export default {
@@ -54,6 +57,7 @@ export default {
     components: {
         AdminOrderscartecomponent,
         FilAriane,
+        AdminStats,
     },
 
 
