@@ -40,7 +40,7 @@ export default {
       }
       this.ratio = (100 - (this.panier / this.commande) * 100).toFixed(2);
     }
-    if (this.ratio.isNaN || this.ratio < 0) {
+    if (isNaN(this.ratio) || this.ratio < 0) {
       this.ratio = 0;
     }
   },
