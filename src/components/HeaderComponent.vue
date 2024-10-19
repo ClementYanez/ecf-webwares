@@ -15,8 +15,9 @@
           <span>Catégories</span>
           <img :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas" class="icon-arrow" />
         </div>
-        <div class="categories">
-          <p to="/products-list" class="category-link" @click="setCategory(1)">
+        <div class="categories1">
+          <NavCategories :desktopOK="isTrue" :mobileOK="isFalse" />
+          <!-- <p to="/products-list" class="category-link" @click="setCategory(1)">
             Mobilier d'intérieur
           </p>
           <p to="/products-list" class="category-link" @click="setCategory(2)">
@@ -27,7 +28,7 @@
           </p>
           <p to="/products-list" class="category-link" @click="setCategory(4)">
             Objets de décoration
-          </p>
+          </p> -->
         </div>
       </div>
       <!-- Section Admin visible si userRole est ADMIN -->
@@ -93,7 +94,8 @@
           <img v-if="openDropDown" :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas"
             class="icon-arrow-up" @click="dropUp()" />
           <div v-if="openDropDown" class="categories-mobile">
-            <p to="/products-list" class="category-link" @click="setCategory(1)">
+            <NavCategories :mobileOK="isTrue" :desktopOK="isFalse" />
+            <!-- <p to="/products-list" class="category-link" @click="setCategory(1)">
               Mobilier d'intérieur
             </p>
             <p to="/products-list" class="category-link" @click="setCategory(2)">
@@ -104,7 +106,7 @@
             </p>
             <p to="/products-list" class="category-link" @click="setCategory(4)">
               Objets de décoration
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
@@ -148,11 +150,13 @@
 </template>
 
 <script>
+import NavCategories from './NavCategories.vue';
 import ButtonComponent from './ButtonComponent.vue';
 import { mapActions } from 'vuex';
 export default {
   components: {
     ButtonComponent,
+    NavCategories
   },
   data() {
     return {
@@ -162,6 +166,8 @@ export default {
       openDropDownAdmin: false,
       user: '',
       userRole: '',
+      isTrue: true,
+      isFalse: false
     };
   },
   methods: {
@@ -174,7 +180,6 @@ export default {
       this.$store.commit('changeCategory', id);
       this.$store.dispatch('filterProductsByCategory', id);
       this.$router.push('/products-list');
-      this.menuDropDown();
     },
     dropDown() {
       this.openDropDown = true;
@@ -287,7 +292,21 @@ span,
 .categories-contain {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+}
+
+.categories-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #592b02;
+  padding: 20px 0;
+  border-radius: 10px;
+  z-index: 999;
+  color: #f1f1f1;
+  font-size: 1.2rem;
 }
 
 .categories {
@@ -308,7 +327,7 @@ span,
 .category-link {
   margin: 0;
   padding: 10px;
-  width: 100%;
+  width: 250px;
   text-align: center;
   color: #f1f1f1;
   cursor: pointer;
@@ -338,6 +357,15 @@ span,
 }
 
 .categories-contain:hover .categories {
+  display: flex;
+  animation: animate 300ms ease-in-out;
+}
+
+.categories1 {
+  display: none;
+}
+
+.categories-contain:hover .categories1 {
   display: flex;
   animation: animate 300ms ease-in-out;
 }
@@ -440,7 +468,7 @@ span,
   cursor: pointer;
 }
 
-.categories-mobile,
+/* .categories-mobile, */
 .deconnect-mobile {
   display: flex;
   flex-direction: column;
