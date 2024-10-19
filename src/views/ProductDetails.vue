@@ -6,9 +6,15 @@
       <img
         class="productimage"
         v-if="productDetails.image"
-        :src="require(`@/assets/${this.productDetails.image}`)"
+        :src="this.localImage"
         alt=""
       />
+      <!-- <img
+        class="productimage"
+        v-if="productDetails.image"
+        :src="require(`@/assets/${this.productDetails.image}`)"
+        alt=""
+      /> -->
       <div class="contentdetails">
         <h3 class="producttitre">{{ this.productDetails.titre }}</h3>
         <p v-if="userLevel">
@@ -57,6 +63,7 @@ export default {
       prixHt: '',
       panier: [],
       selected: false,
+      localImage: '',
     };
   },
   components: {
@@ -124,6 +131,23 @@ export default {
         }
       });
     }
+    if (this.productDetails.image.includes('base64')) {
+      // const temp = this.image.replace(/^url\('|'\)$/g, '');
+      // const temp = this.image.replace(/data:image\/jpeg;base64,([^,]+)/, '$1');
+      // const reader = new FileReader();
+      // reader.onload = (e) => {
+      //   this.localImage = e.target.result;
+      // };
+      // reader.readAsDataURL(new Blob([temp], { type: 'image/jpeg' }));
+      // this.localImage = this.image;
+      this.localImage = this.productDetails.image;
+      this.bool = true;
+      console.log(this.image);
+    } else {
+      this.localImage = require(`@/assets/${this.productDetails.image}`);
+      this.bool = false;
+      console.log(this.image);
+    }
     window.scrollTo({
       top: 0,
       left: 0,
@@ -140,7 +164,6 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
 
 .contentproductdetails {

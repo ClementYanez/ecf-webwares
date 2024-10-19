@@ -1,7 +1,7 @@
 <template>
     <!-- SearchBar -->
     <div class="cont-list">
-        <FilAriane cat1="admin" cat2="Gestion des commandes" class="filarianne" />
+        <FilAriane cat1="Administration" cat2="Gestion des commandes" class="filarianne" />
 
         <input type="text" class="searchbar" placeholder="Rechercher une commande" v-model="search" @input="searchUser">
 
@@ -19,7 +19,6 @@ import AdminOrderscartecomponent from './AdminOrderscartecomponent.vue';
 import FilAriane from './FilAriane.vue';
 
 export default {
-
     data() {
         return {
             globalList: [],

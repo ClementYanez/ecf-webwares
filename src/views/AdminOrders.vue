@@ -1,12 +1,12 @@
 <template>
   <HeaderComponent />
   <TitleComponent title="Gestion des commandes" />
-<div class="cont-content">
-  <div class="panel">
+  <div class="cont-content">
+    <div class="panel">
       <SidePanelAdmin />
     </div>
     <AdminOrderscore />
-</div>
+  </div>
   <div></div>
 </template>
 
@@ -38,20 +38,18 @@ export default {
 </script>
 
 <style scoped>
-.cont-content{
+.cont-content {
   display: flex;
   height: 100vh;
 }
 
 .panel {
   display: flex;
-
 }
 
 @media screen and (max-width: 950px) {
-    .cont-content{
-        flex-direction: column;
-    }
+  .cont-content {
+    flex-direction: column;
+  }
 }
-
 </style>

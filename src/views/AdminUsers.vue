@@ -7,9 +7,9 @@
     </div>
     <div class="list">
       <div class="leading">
-        <FilAriane cat1="Gestion des utilisateurs" />
+        <FilAriane cat1="Administration" cat2="Utilisateurs" />
         <input type="text" class="searchbar" placeholder="Rechercher un utilisateur" v-model="search"
-          @input="searchUser">
+          @input="searchUser" />
       </div>
       <div class="titles">
         <span>Utilisateurs</span>
@@ -110,7 +110,9 @@
           </div>
           <div v-if="modal[index] && !edit[index]">
             <div class="confirm">
-              <p>Êtes-vous sûr de vouloir modifier {{ user.raisonSociale }} ?</p>
+              <p>
+                Êtes-vous sûr de vouloir modifier {{ user.raisonSociale }} ?
+              </p>
               <div class="buttons">
                 <ButtonComponent text="Oui, modifier" color="#268000" textColor="#f1f1f1" @click="editUser(index)" />
                 <ButtonComponent text="Non, annuler" color="#333333" textColor="#f1f1f1" @click="cancelEdit(index)" />
@@ -146,31 +148,26 @@ export default {
       edit: [false],
       deleteModal: [false],
       notAdmin: [false],
-      search: "",
-      resultSearch: []
+      search: '',
+      resultSearch: [],
     };
   },
   methods: {
     searchUser() {
-      if (this.search != "") {
+      if (this.search != '') {
         this.resultSearch = this.userList.filter((searching) => {
           return (
             searching.raisonSociale
               .toLowerCase()
               .includes(this.search.toLowerCase()) ||
-            searching.siret
-              .toLowerCase()
-              .includes(this.search.toLowerCase()) ||
-            searching.email
-              .toLowerCase()
-              .includes(this.search.toLowerCase())
+            searching.siret.toLowerCase().includes(this.search.toLowerCase()) ||
+            searching.email.toLowerCase().includes(this.search.toLowerCase())
           );
         });
       } else {
         this.resultSearch = this.userList;
       }
       console.log(this.resultSearch);
-
     },
     dropDownBoolean(i) {
       if (this.dropDownOpen[i] === false || !this.dropDownOpen[i]) {
@@ -229,7 +226,7 @@ export default {
       this.deleteModal[i] = false;
     },
     editUser(i) {
-      this.search = "";
+      this.search = '';
       this.resultSearch = this.userList;
       localStorage.setItem('user_list', JSON.stringify(this.userList));
       this.$store.dispatch('loadUserDatabase');
@@ -446,6 +443,38 @@ p {
 @media screen and (max-width: 950px) {
   .contain {
     flex-direction: column;
+  }
+
+  .list {
+    padding: 20px 60px;
+  }
+}
+
+@media screen and (max-width: 645px) {
+
+  .contain,
+  .leading {
+    flex-direction: column;
+  }
+
+  .img {
+    width: auto;
+    padding: 0 5px;
+  }
+
+  .list {
+    padding: 20px 40px;
+  }
+
+}
+
+@media screen and (max-width: 460px) {
+  .list {
+    padding: 20px 20px;
+  }
+
+  .titles {
+    display: none;
   }
 }
 </style>
