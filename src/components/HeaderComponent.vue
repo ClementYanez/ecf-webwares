@@ -81,7 +81,7 @@
         <router-link to="/" class="nav-link">Accueil</router-link>
       </div>
       <div class="icons-mobile">
-        <img :src="require('@/assets/icons/product.svg')" alt="icône accueil" class="icon" />
+        <img :src="require('@/assets/icons/product.svg')" alt="icône accueil" class="icon icon-product" />
         <router-link to="/products-list" class="nav-link" @click="goToProductsList">Produits</router-link>
       </div>
       <div>
@@ -93,7 +93,7 @@
         <div>
           <img v-if="openDropDown" :src="require('@/assets/icons/arrow-down.svg')" alt="icône flèche vers le bas"
             class="icon-arrow-up" @click="dropUp()" />
-          <div v-if="openDropDown" class="categories-mobile">
+          <div v-if="openDropDown" class="categories-mobile" @click="menuDropDown">
             <NavCategories :mobileOK="isTrue" :desktopOK="isFalse" />
             <!-- <p to="/products-list" class="category-link" @click="setCategory(1)">
               Mobilier d'intérieur
@@ -292,7 +292,6 @@ span,
 .categories-contain {
   position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
@@ -428,7 +427,7 @@ span,
 
 .nav-links-mobile {
   position: absolute;
-  top: 60px;
+  top: 70px;
   right: 0px;
   display: flex;
   flex-direction: column;
@@ -466,6 +465,11 @@ span,
   transform: rotate(180deg);
   border-radius: 10px;
   cursor: pointer;
+}
+
+.icon-product {
+  width: 38px;
+  margin-left: 5px
 }
 
 /* .categories-mobile, */
