@@ -38,7 +38,10 @@ export default {
         this.commande = this.orders.length;
         console.log(this.orders);
       }
-      this.ratio = ((this.panier / this.commande) * 100).toFixed(2);
+      this.ratio = (100 - (this.panier / this.commande) * 100).toFixed(2);
+    }
+    if (this.ratio.isNaN || this.ratio < 0) {
+      this.ratio = 0;
     }
   },
 };
@@ -65,7 +68,7 @@ export default {
   text-align: center;
 }
 
-.montant{
+.montant {
   font-weight: bold;
 }
 </style>

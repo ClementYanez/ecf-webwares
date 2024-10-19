@@ -2,7 +2,7 @@
   <div class="contain-all-line">
     <div class="contain-global">
       <div class="img">
-        <img :src="require(`@/assets/${image}`)" />
+        <img :src="localImage" />
       </div>
       <div class="contain-infos-line">
         <span class="title-item">{{ title }}</span>
@@ -48,6 +48,7 @@ export default {
       productQuantity: 0,
       totalLine: '',
       prod: {},
+      localImage: '',
     };
   },
   mounted() {
@@ -73,6 +74,11 @@ export default {
         localStorage.setItem(`panier_${user.id}`, JSON.stringify([...panier]));
       }
     });
+    if (this.image.includes('base64')) {
+      this.localImage = this.image;
+    } else {
+      this.localImage = require(`@/assets/${this.image}`);
+    }
   },
 
   watch: {
