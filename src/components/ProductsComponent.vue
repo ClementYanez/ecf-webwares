@@ -10,30 +10,16 @@
       <div class="btns">
         <ButtonComponent text="Détails" color="#CA8465" @click="getDetails" />
         <input type="number" :min="minQte" v-model="minQuantity" />
-        <img
-          v-if="!selected"
-          :src="require('@/assets/icons/cart.svg')"
-          alt="icône panier"
-          class="icon"
-          @click="addProductToCart(this.product)"
-        />
-        <img
-          v-if="selected"
-          :src="require('@/assets/icons/cart.svg')"
-          alt="icône panier"
-          class="icon-selected"
-        />
+        <img v-if="!selected" :src="require('@/assets/icons/cart.svg')" alt="icône panier" class="icon"
+          @click="addProductToCart(this.product)" />
+        <img v-if="selected" :src="require('@/assets/icons/cart.svg')" alt="icône panier" class="icon-selected" />
       </div>
     </div>
     <div v-else>
       <p>{{ minQte }} unités minimum</p>
       <p>{{ description }}</p>
       <div class="btns">
-        <ButtonComponent
-          text="Détails du produit"
-          color="#CA8465"
-          @click="getDetails"
-        />
+        <ButtonComponent text="Détails du produit" color="#CA8465" @click="getDetails" />
       </div>
     </div>
   </div>
@@ -161,23 +147,27 @@ export default {
   text-align: center;
   position: relative;
 }
+
 img {
-  width: 350px;
+  width: 100%;
   height: 250px;
   object-fit: cover;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   margin-bottom: 10px;
 }
+
 p {
   margin: 0px 5px;
 }
+
 button {
   bottom: 0px;
   left: auto;
   right: auto;
   /* margin-top: 10px; */
 }
+
 input {
   padding: 10px 10px 10px 20px;
   width: 70px;
@@ -186,6 +176,7 @@ input {
   border-radius: 5px;
   font-size: 1rem;
 }
+
 .icon {
   width: 45px;
   height: 45px;
@@ -194,6 +185,7 @@ input {
   border-radius: 8px;
   transform: translate(0, 10%);
 }
+
 .icon-selected {
   width: 45px;
   height: 45px;
@@ -202,6 +194,7 @@ input {
   border-radius: 8px;
   transform: translate(0, 10%);
 }
+
 .btns {
   position: absolute;
   bottom: 0;
@@ -212,5 +205,11 @@ input {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+@media screen and (max-width: 950px) {
+  .merdum {
+    width: 300px;
+  }
 }
 </style>

@@ -174,6 +174,7 @@ export default {
       this.$store.commit('changeCategory', id);
       this.$store.dispatch('filterProductsByCategory', id);
       this.$router.push('/products-list');
+      this.menuDropDown();
     },
     dropDown() {
       this.openDropDown = true;
