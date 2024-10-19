@@ -111,6 +111,9 @@ export default {
         return;
       }
 
+      // Push le nombredevente dans la productsList
+
+
       // Récupérer et/ou push orderlist admin dans le LS (avec la commande faite) et renvoie à l'accueil
         let orderList = [];
         let user = {};
@@ -137,6 +140,33 @@ export default {
         
 
         this.$router.push('/')
+
+        let idProductVendus = [];
+        let arrQte = [];
+        userOrder.filter((element) => {
+          idProductVendus.push(element.id)
+          arrQte.push(element.quantity)
+        })
+
+        let productListavantmaj = JSON.parse(localStorage.getItem('productsList'));
+        
+        let productListapresmaj = productListavantmaj.map(product => {
+          let index = idProductVendus.indexOf(product.id);
+
+          if(index !== -1){
+            product.nombreDeVente += arrQte[index];
+          }
+
+          return product;
+        })
+
+        localStorage.setItem('productsList', JSON.stringify(productListapresmaj));
+
+        console.log(productListapresmaj);
+        
+      
+        
+        
     },
   },
 };
