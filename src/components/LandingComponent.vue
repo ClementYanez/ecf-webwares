@@ -90,6 +90,7 @@ export default {
 .cont-image {
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
 }
 
 .image-unique {
