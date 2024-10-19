@@ -3,12 +3,7 @@
     <HeaderComponent />
     <!-- fil d'arianne  -->
     <div class="contentproductdetails">
-      <img
-        class="productimage"
-        v-if="productDetails.image"
-        :src="this.localImage"
-        alt=""
-      />
+      <img class="productimage" v-if="productDetails.image" :src="this.localImage" alt="" />
       <!-- <img
         class="productimage"
         v-if="productDetails.image"
@@ -32,11 +27,7 @@
           <label for="qte">Quantité : </label>
           <input id="qte" type="number" :value="this.productDetails.moq" />
           <div class="btns" v-if="!selected">
-            <ButtonComponent
-              text="Ajouter au panier"
-              color="#CA8465"
-              @click="addProductToCart(productDetails)"
-            />
+            <ButtonComponent text="Ajouter au panier" color="#CA8465" @click="addProductToCart(productDetails)" />
           </div>
           <div class="btns" v-if="selected">
             <ButtonComponent text="Déjà dans le panier" color="#9c9c9c" />
@@ -191,6 +182,7 @@ export default {
   color: black;
   margin-bottom: 10px;
 }
+
 .productmoq {
   color: black;
   margin-bottom: 10px;
@@ -203,13 +195,16 @@ export default {
   border-radius: 2px;
   margin-bottom: 35px;
 }
+
 .prix {
   margin-top: 50px;
   margin-bottom: 100px;
 }
+
 .prix p {
   font-weight: 600;
 }
+
 input {
   padding: 10px 10px 10px 20px;
   width: 70px;
@@ -237,11 +232,17 @@ input {
     object-fit: cover;
     margin-bottom: 10px;
   }
+
   .contentdetails {
     text-align: center;
   }
+
   .barre {
     margin: 0 auto 35px auto;
+  }
+
+  .btns {
+    margin-top: 40px;
   }
 }
 </style>
