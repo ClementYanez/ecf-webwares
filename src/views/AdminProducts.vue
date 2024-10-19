@@ -4,9 +4,10 @@
     <TitleComponent title="Gestion des produits" />
 
     <div class="flex-need">
-      <SidePanelAdmin class="side-panel" />
+      <div class="side-panel">
+      <SidePanelAdmin />
+    </div>
 
-      <div class="products-container">
         <div class="product-list">
           <!-- Formulaire d'ajout de produit -->
           <div v-if="showForm" class="add-product-form">
@@ -239,7 +240,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -506,20 +506,24 @@ export default {
 <style scoped>
 .flex-need {
   display: flex;
+  min-height: 100vh;
 }
 
-.products-container {
+.side-panel{
+  display: flex;
+}
+
+/* .products-container {
   display: flex;
   width: 80%;
   justify-content: center;
   margin: 0 auto;
-}
+} */
 
 .product-list {
   display: flex;
   flex-direction: column;
-  margin: 40px;
-}
+padding: 20px 100px;}
 
 .product-item {
   display: flex;
