@@ -176,11 +176,6 @@ export default {
       this.$store.dispatch('filterProductsByCategory', null);
       this.$router.push('/products-list');
     },
-    setCategory(id) {
-      this.$store.commit('changeCategory', id);
-      this.$store.dispatch('filterProductsByCategory', id);
-      this.$router.push('/products-list');
-    },
     dropDown() {
       this.openDropDown = true;
     },
