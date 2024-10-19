@@ -4,15 +4,15 @@
     <div class="stats">
       <div>
         <p>Paniers</p>
-        <p>{{ panier }}</p>
+        <p class="montant">{{ panier }}</p>
       </div>
       <div>
         <p>Commandes</p>
-        <p>{{ commande }}</p>
+        <p class="montant">{{ commande }}</p>
       </div>
       <div>
         <p>Ratio de conversion</p>
-        <p>{{ ratio }}%</p>
+        <p class="montant">{{ ratio }}%</p>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@ export default {
         this.commande = this.orders.length;
         console.log(this.orders);
       }
-      this.ratio = (this.panier / this.commande) * 100;
+      this.ratio = ((this.panier / this.commande) * 100).toFixed(2);
     }
   },
 };
@@ -52,15 +52,20 @@ export default {
   align-items: center;
   box-shadow: 0px 0px 10px #8a8a8a7c;
   height: 200px;
+  padding: 20px;
+  margin-bottom: 30px;
 }
 .stats {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
   margin-top: 20px;
   gap: 20px;
   text-align: center;
+}
+
+.montant{
+  font-weight: bold;
 }
 </style>
