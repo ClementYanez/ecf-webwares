@@ -510,7 +510,7 @@ export default {
 
 .products-container {
   display: flex;
-  width: 100%;
+  width: 80%;
   justify-content: center;
   margin: 0 auto;
 }
