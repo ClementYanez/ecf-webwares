@@ -2,30 +2,15 @@
   <HeaderComponent />
   <div class="cont-top">
     <!-- <FilAriane cat1="Produits" /> -->
-    <SearchbarComponent
-      placeholder="Rechercher ..."
-      @search="filterProductByQuery"
-    />
+    <SearchbarComponent placeholder="Rechercher ..." @search="filterProductByQuery" />
   </div>
   <div class="cont-global">
     <CategoriesList />
     <div class="cont-list">
-      <div
-        v-show="filteredProductsList.length !== 0"
-        class="list"
-        v-for="product in filteredProductsList"
-        :key="product.id"
-      >
-        <ProductsComponent
-          :name="product.titre"
-          :price="product.prix"
-          :description="product.description"
-          :image="product.image"
-          :minQte="product.moq"
-          :id="product.id"
-          :product="product"
-          url="product-details"
-        />
+      <div v-show="filteredProductsList.length !== 0" class="list" v-for="product in filteredProductsList"
+        :key="product.id">
+        <ProductsComponent :name="product.titre" :price="product.prix" :description="product.description"
+          :image="product.image" :minQte="product.moq" :id="product.id" :product="product" url="product-details" />
       </div>
       <div class="no-result" v-show="filteredProductsList.length === 0">
         Aucun produit ne correspond à votre recherche
@@ -95,7 +80,15 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 20px;
 }
+
+.cat-list {
+  margin-top: 50px;
+  margin-left: calc(10vw - 50px);
+  width: 250px;
+}
+
 .cont-list {
   display: flex;
   flex-direction: row;
@@ -103,9 +96,10 @@ export default {
   justify-content: center;
   align-items: center;
   gap: 50px;
-  margin: 50px;
+  margin: 50px 0;
   width: 80%;
 }
+
 .cont-top {
   width: 100%;
   display: flex;
@@ -114,7 +108,23 @@ export default {
   padding: 0 15%;
   padding-top: 100px;
 }
+
 .no-result {
   font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+  .cont-global {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+
+  .cat-list {
+    margin-top: 20px;
+    margin-left: 0;
+    text-align: center;
+  }
 }
 </style>
