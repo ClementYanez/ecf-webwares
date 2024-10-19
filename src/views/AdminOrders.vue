@@ -40,7 +40,7 @@ export default {
 <style scoped>
 .cont-content {
   display: flex;
-  height: 100%;
+  min-height: 69vh;
 }
 
 .panel {

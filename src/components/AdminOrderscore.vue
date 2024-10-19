@@ -32,7 +32,7 @@ export default {
 
     methods: {
         searchUser() {
-            if (this.search != "") {
+            if (this.search != "" && localStorage.getItem('adminOrderList')) {
                 this.globalList = JSON.parse(localStorage.getItem('adminOrderList'))
                 this.resultSearch = this.globalList.filter((searching) => {
                     return (
