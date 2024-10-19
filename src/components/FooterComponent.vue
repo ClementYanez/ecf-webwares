@@ -106,10 +106,6 @@ p {
 .footer {
   background-color: #d9b596;
   color: #191919;
-  /* position: relative; */
-  /* bottom: 0px;
-  left: 0px; */
-  width: 100vw;
   padding: 50px;
   display: flex;
   flex-direction: column;
