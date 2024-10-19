@@ -85,7 +85,7 @@
                 <span>Supprimer</span>
               </div>
             </div>
-            <div>
+            <div class="bouton-composant">
               <ButtonComponent
                 text="Ajouter un produit"
                 color="green"
@@ -272,7 +272,7 @@ export default {
         categorieId: '',
         prix: null,
         moq: null,
-        image: '',
+        image: "no-image.png",
       },
       showForm: false,
       editingProduct: null,
@@ -373,7 +373,7 @@ export default {
       const newProduct = {
         ...product,
         id: lastProductId + 1,
-        image: this.newProduct.image,
+        // image: this.newProduct.image,
       };
 
       // Ajouter le nouveau produit à la liste
@@ -388,6 +388,10 @@ export default {
       // Fermer le formulaire d'ajout
       this.toggleForm();
     },
+
+    confirmDelete(product) {
+    this.productToDelete = product; 
+  },
 
     handleDeleteConfirmation() {
       if (this.productToDelete) {
@@ -506,7 +510,7 @@ export default {
 
 .products-container {
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: center;
   margin: 0 auto;
 }
@@ -731,9 +735,36 @@ textarea {
   margin: 0 20px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 500px) {
   .titles {
     display: none;
+  }
+  .leading{
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+  .bouton-composant{
+    display: flex;
+    justify-content: center;
+  }
+
+  .infos-actions {
+    flex-direction: column;
+    align-items: center; /* Aligner les éléments au début de la colonne */
+    margin-bottom: 15px;
+  }
+
+  .product-actions {
+    margin-top: 10px; /* Ajouter un petit espacement entre les infos et les actions */
+    align-self: center; /* Prendre toute la largeur */
+  }
+
+  .product-update{
+    margin: 0 auto;
+  }
+
+  .confirmation-dialog{
+    width: 80%;
   }
 }
 
