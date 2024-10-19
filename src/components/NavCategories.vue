@@ -40,6 +40,11 @@ export default {
     },
     methods: {
         ...mapActions(['filterProductsByCategory', 'resetCategory']),
+        setCategory(id) {
+            this.$store.commit('changeCategory', id);
+            this.$store.dispatch('filterProductsByCategory', id);
+            this.$router.push('/products-list');
+        },
         getProductsByCategory(id) {
             // this.$store.commit('changeCategory', id);
             if (id === this.filteredCategory) {
@@ -47,6 +52,7 @@ export default {
             } else {
                 this.$store.dispatch('filterProductsByCategory', id);
             }
+            this.setCategory(id)
         },
         resetCat() {
             // this.$store.dispatch('resetCategory');
