@@ -50,7 +50,7 @@
               <label for="moq">Quantité minimum (MOQ):</label>
               <input type="number" v-model="newProduct.moq" id="moq" required />
 
-              <!-- <input type="file" @change="handleFileUpload" accept="image/*"> -->
+              <input type="file" @change="handleFileUpload" accept="image/*">
 
               <div class="add-product-buttons">
                 <button class="ajout-prod-btn-enregistrer" type="submit">
@@ -309,18 +309,18 @@ export default {
       console.log(this.resultSearch);
     },
 
-    // handleFileUpload(event) {
-    //     const file = event.target.files[0];
-    //     if (file) {
-    //       const reader = new FileReader();
+    handleFileUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
 
-    //       reader.onload = (e) => {
-    //         this.newProduct.image = e.target.result; // Utilisez cette image pour l'ajouter à votre produit
-    //       };
+          reader.onload = (e) => {
+            this.newProduct.image = e.target.result; // Utilisez cette image pour l'ajouter à votre produit
+          };
 
-    //       reader.readAsDataURL(file); // Convertir le fichier en URL
-    //     }
-    //   },
+          reader.readAsDataURL(file); // Convertir le fichier en URL
+        }
+      },
 
     getImageSource(image) {
       // Si l'image est une chaîne contenant "data:image", alors c'est une image en base64
