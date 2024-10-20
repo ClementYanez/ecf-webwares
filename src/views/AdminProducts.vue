@@ -6,10 +6,7 @@
       <div class="side-panel">
       <SidePanelAdmin />
     </div>
-
         <div class="product-list">
-          <!-- Formulaire d'ajout de produit -->
-
           <div class="leading">
             <FilAriane cat1="Administration" cat2="Produits" />
             <input
@@ -20,22 +17,22 @@
               @input="searchProduct"
             />
           </div>
+          <div class="bouton-composant">
+            <ButtonComponent
+              text="Ajouter un produit"
+              color="green"
+              @click="toggleForm"
+            />
+          </div>
           <div class="product-item">
             <div class="titles">
-              <span>Liste des produits</span>
+              <h5>Liste des produits</h5>
               <div class="title-icons">
-                <span>Modifier</span>
-                <span>Supprimer</span>
+                <h5>Modifier</h5>
+                <h5>Supprimer</h5>
               </div>
             </div>
-            <div class="bouton-composant">
-              <ButtonComponent
-                text="Ajouter un produit"
-                color="green"
-                @click="toggleForm"
-              />
-            </div>
-           
+            
             <div
               v-for="(product, index) in resultSearch.length
                 ? resultSearch
@@ -184,7 +181,8 @@
                       class="product-image"
                     />
                     <!-- <p v-else>Aucune image disponible</p> -->
-                    <h5>{{ product.titre }}</h5>
+                    <h5 v-if="product.titre.length < 24">{{ product.titre }}</h5>
+                    <h5 v-else>{{ product.titre.substring(0, 24) + '...' }}</h5>
                     <p>{{ getFirstSevenWords(product.description) }}</p>
                     <p>
                       <strong>Catégorie</strong> :
@@ -239,8 +237,8 @@
               </button>
             </div>
           </div>
+          </div>  
         </div>
-    </div>
 </template>
 
 <script>
@@ -539,7 +537,8 @@ export default {
 }
 .product-image {
   width: 50px;
-  height: auto;
+  height: 50px;
+  object-fit: cover;
 }
 
 .product-info {
@@ -740,6 +739,12 @@ textarea {
   margin: 0 20px;
 }
 
+.no-result {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 500px) {
   .titles {
     display: none;
@@ -766,6 +771,10 @@ textarea {
 
   .product-update{
     margin: 0 auto;
+  }
+
+  .product-list{
+    padding: 0;
   }
 
   .confirmation-dialog{
