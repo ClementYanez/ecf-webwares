@@ -1,5 +1,4 @@
 <template>
-  <div>
     <HeaderComponent />
     <TitleComponent title="Gestion des produits" />
 
@@ -10,7 +9,40 @@
 
         <div class="product-list">
           <!-- Formulaire d'ajout de produit -->
-          <div v-if="showForm" class="add-product-form">
+
+          <div class="leading">
+            <FilAriane cat1="Administration" cat2="Produits" />
+            <input
+              type="text"
+              class="searchbar"
+              placeholder="Rechercher un produit"
+              v-model="search"
+              @input="searchProduct"
+            />
+          </div>
+          <div class="product-item">
+            <div class="titles">
+              <span>Liste des produits</span>
+              <div class="title-icons">
+                <span>Modifier</span>
+                <span>Supprimer</span>
+              </div>
+            </div>
+            <div class="bouton-composant">
+              <ButtonComponent
+                text="Ajouter un produit"
+                color="green"
+                @click="toggleForm"
+              />
+            </div>
+           
+            <div
+              v-for="(product, index) in resultSearch.length
+                ? resultSearch
+                : productsList"
+              :key="index"
+            >
+            <div v-show="showForm" class="add-product-form">
             <h3>Ajouter un nouveau produit</h3>
             <form @submit.prevent="handleSave(newProduct)">
               <label for="titre">Titre:</label>
@@ -67,38 +99,6 @@
               </div>
             </form>
           </div>
-
-          <div class="leading">
-            <FilAriane cat1="Administration" cat2="Produits" />
-            <input
-              type="text"
-              class="searchbar"
-              placeholder="Rechercher un produit"
-              v-model="search"
-              @input="searchProduct"
-            />
-          </div>
-          <div class="product-item">
-            <div class="titles">
-              <span>Liste des produits</span>
-              <div class="title-icons">
-                <span>Modifier</span>
-                <span>Supprimer</span>
-              </div>
-            </div>
-            <div class="bouton-composant">
-              <ButtonComponent
-                text="Ajouter un produit"
-                color="green"
-                @click="toggleForm"
-              />
-            </div>
-            <div
-              v-for="(product, index) in resultSearch.length
-                ? resultSearch
-                : productsList"
-              :key="index"
-            >
               <div
                 v-if="editingProduct && editingProduct.id === product.id"
                 class="product-update"
@@ -241,7 +241,6 @@
           </div>
         </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -523,7 +522,10 @@ export default {
 .product-list {
   display: flex;
   flex-direction: column;
-padding: 20px 100px;}
+  padding: 20px 100px;
+  width: 100vw;
+
+}
 
 .product-item {
   display: flex;
@@ -564,7 +566,6 @@ padding: 20px 100px;}
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 35px;
 }
 
 .searchbar {
