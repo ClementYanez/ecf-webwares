@@ -61,17 +61,26 @@ export default {
 }
 
 .cont-core {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 100px;
+  width: 100vw;
 }
 .cont-searcharianne {
-  padding: 20px 60px 20px 60px;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.searchbar {
+
+.cont-list{
+  display: flex;
+  flex-direction: column;
+}
+/* .searchbar {
   position: absolute;
   right: 5%;
   top: -14px;
-}
+} */
 
 @media screen and (max-width: 1100px) {
   .searchbar {

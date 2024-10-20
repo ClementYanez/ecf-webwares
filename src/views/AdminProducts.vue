@@ -1,5 +1,4 @@
 <template>
-  <div>
     <HeaderComponent />
     <TitleComponent title="Gestion des produits" />
 
@@ -7,10 +6,40 @@
       <div class="side-panel">
       <SidePanelAdmin />
     </div>
-
         <div class="product-list">
-          <!-- Formulaire d'ajout de produit -->
-          <div v-if="showForm" class="add-product-form">
+          <div class="leading">
+            <FilAriane cat1="Administration" cat2="Produits" />
+            <input
+              type="text"
+              class="searchbar"
+              placeholder="Rechercher un produit"
+              v-model="search"
+              @input="searchProduct"
+            />
+          </div>
+          <div class="bouton-composant">
+            <ButtonComponent
+              text="Ajouter un produit"
+              color="green"
+              @click="toggleForm"
+            />
+          </div>
+          <div class="product-item">
+            <div class="titles">
+              <h5>Liste des produits</h5>
+              <div class="title-icons">
+                <h5>Modifier</h5>
+                <h5>Supprimer</h5>
+              </div>
+            </div>
+            
+            <div
+              v-for="(product, index) in resultSearch.length
+                ? resultSearch
+                : productsList"
+              :key="index"
+            >
+            <div v-show="showForm" class="add-product-form">
             <h3>Ajouter un nouveau produit</h3>
             <form @submit.prevent="handleSave(newProduct)">
               <label for="titre">Titre:</label>
@@ -67,38 +96,6 @@
               </div>
             </form>
           </div>
-
-          <div class="leading">
-            <FilAriane cat1="Administration" cat2="Produits" />
-            <input
-              type="text"
-              class="searchbar"
-              placeholder="Rechercher un produit"
-              v-model="search"
-              @input="searchProduct"
-            />
-          </div>
-          <div class="product-item">
-            <div class="titles">
-              <span>Liste des produits</span>
-              <div class="title-icons">
-                <span>Modifier</span>
-                <span>Supprimer</span>
-              </div>
-            </div>
-            <div class="bouton-composant">
-              <ButtonComponent
-                text="Ajouter un produit"
-                color="green"
-                @click="toggleForm"
-              />
-            </div>
-            <div
-              v-for="(product, index) in resultSearch.length
-                ? resultSearch
-                : productsList"
-              :key="index"
-            >
               <div
                 v-if="editingProduct && editingProduct.id === product.id"
                 class="product-update"
@@ -184,7 +181,8 @@
                       class="product-image"
                     />
                     <!-- <p v-else>Aucune image disponible</p> -->
-                    <h5>{{ product.titre }}</h5>
+                    <h5 v-if="product.titre.length < 24">{{ product.titre }}</h5>
+                    <h5 v-else>{{ product.titre.substring(0, 24) + '...' }}</h5>
                     <p>{{ getFirstSevenWords(product.description) }}</p>
                     <p>
                       <strong>Catégorie</strong> :
@@ -239,9 +237,8 @@
               </button>
             </div>
           </div>
+          </div>  
         </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -523,7 +520,10 @@ export default {
 .product-list {
   display: flex;
   flex-direction: column;
-padding: 20px 100px;}
+  padding: 20px 100px;
+  width: 100vw;
+
+}
 
 .product-item {
   display: flex;
@@ -537,7 +537,8 @@ padding: 20px 100px;}
 }
 .product-image {
   width: 50px;
-  height: auto;
+  height: 50px;
+  object-fit: cover;
 }
 
 .product-info {
@@ -564,7 +565,6 @@ padding: 20px 100px;}
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 35px;
 }
 
 .searchbar {
@@ -739,6 +739,12 @@ textarea {
   margin: 0 20px;
 }
 
+.no-result {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 500px) {
   .titles {
     display: none;
@@ -765,6 +771,10 @@ textarea {
 
   .product-update{
     margin: 0 auto;
+  }
+
+  .product-list{
+    padding: 0;
   }
 
   .confirmation-dialog{
